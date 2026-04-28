@@ -1,0 +1,75 @@
+---
+import type { LandingConfig } from "../config/landing";
+
+interface Props {
+  config: LandingConfig;
+  source?: string;
+  offer?: string;
+  websiteLabel?: string;
+  websitePlaceholder?: string;
+  symptomLabel?: string;
+  symptomPlaceholder?: string;
+}
+
+const {
+  config,
+  source = "automatize-landing",
+  offer = "workflow-automation-diagnostic",
+  websiteLabel = "Empresa o sitio web",
+  websitePlaceholder = "https://tuempresa.cl",
+  symptomLabel = "Flujo de trabajo a automatizar",
+  symptomPlaceholder = "Ej: aprobaciones internas, reportes manuales, correos repetitivos, seguimiento comercial o carga de planillas",
+} = Astro.props;
+const formAction = config.isLeadCaptureConfigured ? config.leadFormAction : "#";
+const buttonLabel = config.isLeadCaptureConfigured ? "Evaluar flujo" : "Preparar evaluacion";
+const formNote = config.isLeadCaptureConfigured
+  ? "Sin spam, solo una respuesta para confirmar fit y siguiente paso"
+  : "Formulario en preparacion. La captura queda bloqueada hasta activar el canal de respuesta";
+---
+
+<form
+  class="lead-form"
+  action={formAction}
+  method="post"
+  data-lead-form
+  data-lead-configured={String(config.isLeadCaptureConfigured)}
+  data-form-provider={config.leadFormProvider}
+  data-analytics-provider={config.analyticsProvider}
+  data-submit-label={buttonLabel}
+  novalidate
+>
+  <input type="hidden" name="source" value={source} />
+  <input type="hidden" name="offer" value={offer} />
+
+  <label>
+    <span>Nombre</span>
+    <input name="name" type="text" autocomplete="name" placeholder="Tu nombre" required />
+  </label>
+
+  <label>
+    <span>Email</span>
+    <input name="email" type="email" autocomplete="email" placeholder="nombre@empresa.cl" required />
+  </label>
+
+  <label>
+    <span>{websiteLabel}</span>
+    <input name="website" type="url" inputmode="url" placeholder={websitePlaceholder} required />
+  </label>
+
+  <label>
+    <span>{symptomLabel}</span>
+    <textarea
+      name="symptom"
+      rows="4"
+      placeholder={symptomPlaceholder}
+      required></textarea>
+  </label>
+
+  <button class="button button-primary form-button" type="submit">
+    {buttonLabel}
+    <span aria-hidden="true">-&gt;</span>
+  </button>
+
+  <p class="form-note">{formNote}</p>
+  <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+</form>

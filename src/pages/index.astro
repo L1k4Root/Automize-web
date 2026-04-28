@@ -1,0 +1,242 @@
+---
+import CardGrid from "../components/CardGrid.astro";
+import LeadForm from "../components/LeadForm.astro";
+import { landingConfig } from "../config/landing";
+import { heroSignals, integrationLogos, outcomes, principles, problems, steps } from "../data/automatize";
+import "../styles/global.css";
+
+const metadata = {
+  title: "Automatize | Automatizacion premium de flujos de trabajo",
+  description:
+    "Automatize disena automatizaciones premium para flujos de trabajo: procesos manuales, aprobaciones, datos dispersos e integraciones operativas.",
+};
+const integrationLoop = [...integrationLogos, ...integrationLogos];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content={metadata.description}
+    />
+    <link rel="icon" type="image/png" href="/automatize-icon.png" />
+    <link rel="apple-touch-icon" href="/automatize-icon.png" />
+    <meta name="theme-color" content="#07110f" />
+    <title>{metadata.title}</title>
+  </head>
+  <body class="automatize-page">
+    <header class="site-header automatize-header" data-nav>
+      <a class="brand" href="#home" aria-label="Automatize">
+        <img class="brand-mark" src="/automatize-icon.png" alt="" width="48" height="48" />
+        <span class="brand-copy"><strong>Automatize</strong></span>
+      </a>
+      <nav class="nav-links" aria-label="Navegacion principal">
+        <a href="#problema">Problema</a>
+        <a href="#entregable">Entregable</a>
+        <a href="#oferta">Oferta</a>
+        <a href="#proceso">Proceso</a>
+      </nav>
+      <a class="header-cta" href="#contacto" data-track-click="automatize_header_cta">
+        {landingConfig.isLeadCaptureConfigured ? "Evaluar flujo" : "Preparar evaluacion"}
+      </a>
+    </header>
+
+    <main>
+      <section id="home" class="hero automatize-hero">
+        <div class="automate-visual" aria-hidden="true">
+          <img class="automation-emblem" src="/automatize-icon.png" alt="" width="220" height="220" />
+          <div class="flow-map">
+            <span class="flow-node node-input">Input</span>
+            <span class="flow-line line-one"></span>
+            <span class="flow-node node-decision">Decision</span>
+            <span class="flow-line line-two"></span>
+            <span class="flow-node node-output">Output</span>
+            <span class="flow-branch branch-alert"></span>
+            <span class="flow-node node-review">Revision</span>
+          </div>
+          <div class="signal-stack">
+            {
+              heroSignals.map((signal) => (
+                <div class={`automation-signal ${signal.tone}`}>
+                  <span>{signal.label}</span>
+                  <strong>{signal.value}</strong>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="hero-content automatize-hero-content">
+          <p class="eyebrow">Automatizacion de flujos de trabajo</p>
+          <h1>Automatize convierte procesos manuales en flujos controlados</h1>
+          <p class="hero-subtitle">
+            Ordenamos tareas repetidas, datos dispersos y aprobaciones manuales para crear automatizaciones pequenas,
+            medibles y operables.
+          </p>
+          <div class="hero-actions" aria-label="Acciones principales">
+            <a class="button button-primary" href="#contacto" data-track-click="automatize_lead_cta">
+              Evaluar flujo
+            </a>
+            <a class="button button-secondary" href="#entregable" data-track-click="automatize_deliverable_cta">
+              Ver entregable
+            </a>
+          </div>
+          <p class="hero-commitment">
+            No automatizamos desorden. Primero definimos proceso, datos, responsables y limites.
+          </p>
+          <div class="premium-strip" aria-label="Oferta resumida">
+            <span>Workflow audit</span>
+            <strong>Blueprint + piloto priorizado</strong>
+            <em>Desde USD 900</em>
+          </div>
+        </div>
+      </section>
+
+      <section class="integration-strip" aria-label="Apps con las que trabajamos">
+        <div class="integration-copy">
+          <p class="eyebrow">Apps con las que trabajamos</p>
+          <h2>IA, automatizacion e integraciones en un mismo flujo</h2>
+        </div>
+        <div class="integration-carousel" aria-hidden="true">
+          <div class="integration-track">
+            {
+              integrationLoop.map((logo) => (
+                <span class={`integration-logo ${logo.tone}`}>
+                  <span class="integration-logo-mark">
+                    {
+                      logo.logoUrl ? (
+                        <img
+                          src={logo.logoUrl}
+                          alt={logo.logoAlt ?? logo.name}
+                          loading="lazy"
+                          decoding="async"
+                          width="28"
+                          height="28"
+                        />
+                      ) : (
+                        <strong>{logo.mark}</strong>
+                      )
+                    }
+                  </span>
+                  <em>{logo.name}</em>
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section id="problema" class="section section-tight">
+        <div class="section-intro">
+          <p class="eyebrow">Donde aporta</p>
+          <h2>La mejor automatizacion parte en tareas pequenas que se repiten mucho</h2>
+          <p>
+            Automatize busca friccion operativa real: trabajo manual frecuente, informacion repartida y pasos que nadie
+            puede seguir con claridad.
+          </p>
+        </div>
+        <CardGrid
+          items={problems}
+          gridClass="automatize-problem-grid"
+          cardClass="scope-card"
+          ariaLabel="Problemas automatizables"
+        />
+      </section>
+
+      <section id="entregable" class="section automatize-outcome-section">
+        <div class="split-copy">
+          <p class="eyebrow">Que queda funcionando</p>
+          <h2>Un flujo acotado, no una promesa generica de IA</h2>
+          <p>
+            La salida debe poder operarse: que entra, que se decide, que se automatiza, que se registra y cuando vuelve
+            a una persona.
+          </p>
+          <ul class="boundary-list" aria-label="Limites de automatizacion">
+            <li>No automatizamos sin proceso definido</li>
+            <li>No reemplazamos criterio humano donde se necesita control</li>
+            <li>No cambiamos toda la operacion para validar una mejora</li>
+          </ul>
+        </div>
+        <div class="automation-outcomes" aria-label="Entregables de Automatize">
+          {
+            outcomes.map((outcome) => (
+              <article class="automation-outcome">
+                <span>{outcome.metric}</span>
+                <h3>{outcome.title}</h3>
+                <p>{outcome.detail}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="oferta" class="section offer-section">
+        <div class="offer-panel">
+          <div>
+            <p class="eyebrow">Oferta inicial</p>
+            <h2>Sprint premium para encontrar un flujo automatizable</h2>
+            <p>
+              Una entrada acotada para equipos que quieren validar automatizacion sin comprometer meses de desarrollo:
+              mapa del flujo, oportunidad priorizada y propuesta de primer piloto.
+            </p>
+          </div>
+          <div class="offer-card" aria-label="Oferta inicial Automatize">
+            <span>Hook premium</span>
+            <strong>Diagnostico + blueprint</strong>
+            <p>Desde USD 900 para mapear un flujo, detectar oportunidad y definir el primer piloto viable.</p>
+            <a class="button button-primary" href="#contacto" data-track-click="automatize_offer_cta">
+              Evaluar fit
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section automatize-principles">
+        <div class="section-intro">
+          <p class="eyebrow">Criterio operativo</p>
+          <h2>La automatizacion debe reducir carga sin perder control</h2>
+        </div>
+        <CardGrid items={principles} gridClass="step-grid" cardClass="step-card" ariaLabel="Principios de automatizacion" />
+      </section>
+
+      <section id="proceso" class="section">
+        <div class="section-intro">
+          <p class="eyebrow">Metodo</p>
+          <h2>De una tarea manual a un flujo automatizado</h2>
+        </div>
+        <CardGrid items={steps} gridClass="step-grid" cardClass="step-card" ariaLabel="Proceso de trabajo" numbered />
+      </section>
+
+      <section id="contacto" class="contact-section automatize-contact">
+        <div class="contact-copy">
+          <p class="eyebrow">Siguiente paso</p>
+          <h2>Evalua un flujo automatizable</h2>
+          <p>
+            Comparte que tarea se repite, donde vive la informacion y que salida necesita el equipo. Si calza, se define
+            un diagnostico acotado.
+          </p>
+          <ul class="contact-points">
+            <li>Fit inicial antes de pedir accesos</li>
+            <li>Alcance pequeno para validar impacto</li>
+            <li>Automatizacion solo si datos y responsables estan claros</li>
+          </ul>
+        </div>
+
+        <LeadForm
+          config={landingConfig}
+          source="automatize-landing"
+          offer="process-automation-evaluation"
+          websiteLabel="Empresa o sitio web"
+          websitePlaceholder="https://tuempresa.cl"
+          symptomLabel="Proceso o tarea a automatizar"
+          symptomPlaceholder="Ej: reportes manuales, correos repetitivos, planillas, solicitudes internas o seguimiento comercial"
+        />
+      </section>
+    </main>
+
+    <script src="../scripts/landing.ts"></script>
+  </body>
+</html>

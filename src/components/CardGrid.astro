@@ -1,0 +1,25 @@
+---
+import type { ContentCard } from "../data/landing";
+
+interface Props {
+  items: ContentCard[];
+  gridClass: string;
+  cardClass: string;
+  ariaLabel?: string;
+  numbered?: boolean;
+}
+
+const { items, gridClass, cardClass, ariaLabel, numbered = false } = Astro.props;
+---
+
+<div class={gridClass} aria-label={ariaLabel}>
+  {
+    items.map((item, index) => (
+      <article class={cardClass}>
+        {numbered && <span>{String(index + 1).padStart(2, "0")}</span>}
+        <h3>{item.title}</h3>
+        <p>{item.detail}</p>
+      </article>
+    ))
+  }
+</div>
