@@ -13,7 +13,7 @@ interface Props {
 
 const {
   config,
-  source = "automatize-landing",
+  source = "automize-landing",
   offer = "workflow-automation-diagnostic",
   websiteLabel = "Empresa o sitio web",
   websitePlaceholder = "https://tuempresa.cl",
@@ -21,10 +21,12 @@ const {
   symptomPlaceholder = "Ej: aprobaciones internas, reportes manuales, correos repetitivos, seguimiento comercial o carga de planillas",
 } = Astro.props;
 const formAction = config.isLeadCaptureConfigured ? config.leadFormAction : "#";
-const buttonLabel = config.isLeadCaptureConfigured ? "Evaluar flujo" : "Preparar evaluacion";
+const buttonLabel = config.isLeadCaptureConfigured ? "Solicitar diagnostico" : "Preparar diagnostico";
+const buttonLabelKey = config.isLeadCaptureConfigured ? "form.submitConfigured" : "form.submitUnconfigured";
 const formNote = config.isLeadCaptureConfigured
-  ? "Sin spam, solo una respuesta para confirmar fit y siguiente paso"
+  ? "Sin spam. Solo una respuesta para confirmar fit y siguiente paso"
   : "Formulario en preparacion. La captura queda bloqueada hasta activar el canal de respuesta";
+const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "form.noteUnconfigured";
 ---
 
 <form
@@ -36,40 +38,48 @@ const formNote = config.isLeadCaptureConfigured
   data-form-provider={config.leadFormProvider}
   data-analytics-provider={config.analyticsProvider}
   data-submit-label={buttonLabel}
+  data-i18n-submit-label={buttonLabelKey}
   novalidate
 >
   <input type="hidden" name="source" value={source} />
   <input type="hidden" name="offer" value={offer} />
+  <div class="form-honeypot" aria-hidden="true">
+    <label>
+      <span>Dejar vacio</span>
+      <input name="company_fax" type="text" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
 
   <label>
-    <span>Nombre</span>
-    <input name="name" type="text" autocomplete="name" placeholder="Tu nombre" required />
+    <span data-i18n="form.nameLabel">Nombre</span>
+    <input name="name" type="text" autocomplete="name" placeholder="Tu nombre" data-i18n-placeholder="form.namePlaceholder" required />
   </label>
 
   <label>
-    <span>Email</span>
-    <input name="email" type="email" autocomplete="email" placeholder="nombre@empresa.cl" required />
+    <span data-i18n="form.emailLabel">Email</span>
+    <input name="email" type="email" autocomplete="email" placeholder="nombre@empresa.cl" data-i18n-placeholder="form.emailPlaceholder" required />
   </label>
 
   <label>
-    <span>{websiteLabel}</span>
-    <input name="website" type="url" inputmode="url" placeholder={websitePlaceholder} required />
+    <span data-i18n="form.websiteLabel">{websiteLabel}</span>
+    <input name="website" type="url" inputmode="url" placeholder={websitePlaceholder} data-i18n-placeholder="form.websitePlaceholder" required />
   </label>
 
   <label>
-    <span>{symptomLabel}</span>
+    <span data-i18n="form.symptomLabel">{symptomLabel}</span>
     <textarea
       name="symptom"
       rows="4"
       placeholder={symptomPlaceholder}
+      data-i18n-placeholder="form.symptomPlaceholder"
       required></textarea>
   </label>
 
   <button class="button button-primary form-button" type="submit">
-    {buttonLabel}
+    <span data-submit-copy data-i18n={buttonLabelKey}>{buttonLabel}</span>
     <span aria-hidden="true">-&gt;</span>
   </button>
 
-  <p class="form-note">{formNote}</p>
+  <p class="form-note" data-i18n={formNoteKey}>{formNote}</p>
   <p class="form-status" role="status" aria-live="polite" data-form-status></p>
 </form>

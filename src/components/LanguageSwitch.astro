@@ -1,0 +1,39 @@
+---
+type LanguageOption = {
+  code: "es" | "en";
+  labelKey: string;
+  shortLabel: string;
+  initialActive?: boolean;
+};
+
+const options: LanguageOption[] = [
+  {
+    code: "es",
+    labelKey: "language.es",
+    shortLabel: "ES",
+    initialActive: true,
+  },
+  {
+    code: "en",
+    labelKey: "language.en",
+    shortLabel: "EN",
+  },
+];
+---
+
+<div class="language-switch" role="group" aria-label="Idioma" data-language-switch data-i18n-aria-label="language.group">
+  {
+    options.map((option) => (
+      <button
+        class:list={["language-option", option.initialActive && "is-active"]}
+        type="button"
+        data-language-option={option.code}
+        aria-pressed={String(Boolean(option.initialActive))}
+        aria-label={option.shortLabel}
+        data-i18n-aria-label={option.labelKey}
+      >
+        {option.shortLabel}
+      </button>
+    ))
+  }
+</div>

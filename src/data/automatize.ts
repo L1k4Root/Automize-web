@@ -1,16 +1,23 @@
 export type ContentCard = {
+  i18nKey?: string;
+  tag?: string;
+  icon?: string;
   title: string;
   detail: string;
+  result?: string;
 };
 
 export type FlowSignal = {
+  i18nKey?: string;
   label: string;
   value: string;
   tone: "manual" | "risk" | "ready";
 };
 
-export type AutomationOutcome = ContentCard & {
-  metric: string;
+export type HeroFlowStep = {
+  i18nKey?: string;
+  title: string;
+  detail: string;
 };
 
 export type IntegrationLogo = {
@@ -23,34 +30,75 @@ export type IntegrationLogo = {
 
 export const heroSignals: FlowSignal[] = [
   {
+    i18nKey: "hero.signal.input",
     label: "Entrada",
     value: "tarea repetida",
     tone: "manual",
   },
   {
+    i18nKey: "hero.signal.risk",
     label: "Riesgo",
-    value: "sin responsable claro",
+    value: "aprobacion manual",
     tone: "risk",
   },
   {
+    i18nKey: "hero.signal.output",
     label: "Salida",
-    value: "flujo priorizado",
+    value: "flujo operable",
     tone: "ready",
+  },
+];
+
+export const heroFlowSteps: HeroFlowStep[] = [
+  {
+    i18nKey: "hero.flow.diagnostic",
+    title: "Diagnostico",
+    detail: "Descubrimos que automatizar primero",
+  },
+  {
+    i18nKey: "hero.flow.build",
+    title: "Build",
+    detail: "Conectamos herramientas, IA y reglas",
+  },
+  {
+    i18nKey: "hero.flow.growth",
+    title: "Growth",
+    detail: "Soportamos, ajustamos y mejoramos",
   },
 ];
 
 export const problems: ContentCard[] = [
   {
-    title: "Operacion por memoria",
-    detail: "Pendientes, respuestas y revisiones viven en mensajes sueltos o planillas sin responsable claro.",
+    i18nKey: "problems.sales",
+    tag: "Ventas",
+    icon: "$",
+    title: "Leads y cotizaciones que se enfrian",
+    detail: "El contacto entra por formulario, WhatsApp o email, pero queda esperando porque el seguimiento depende de alguien.",
+    result: "Automatizamos captura, aviso, CRM y tarea comercial",
   },
   {
-    title: "Informacion dispersa",
-    detail: "Correo, formularios, CRM, planillas y sistemas internos cuentan partes distintas del mismo proceso.",
+    i18nKey: "problems.support",
+    tag: "Soporte",
+    icon: "SOS",
+    title: "Tickets repartidos en canales distintos",
+    detail: "Clientes escriben por correo, WhatsApp o formularios; el equipo responde manual y se pierden estados o responsables.",
+    result: "Ordenamos entrada, prioridad, responsable y alerta",
   },
   {
-    title: "Trabajo repetido",
-    detail: "El equipo copia, revisa, clasifica o reporta lo mismo cada semana sin trazabilidad operativa.",
+    i18nKey: "problems.admin",
+    tag: "Administracion",
+    icon: "DOC",
+    title: "Reportes, cobranza y planillas a mano",
+    detail: "Datos de ventas, pagos o operaciones viven en herramientas separadas y terminan copiandose para cerrar la semana.",
+    result: "Conectamos fuentes, validamos datos y generamos salida",
+  },
+  {
+    i18nKey: "problems.legal",
+    tag: "Legal / RR. HH.",
+    icon: "OK",
+    title: "Documentos y aprobaciones lentas",
+    detail: "Contratos, permisos o solicitudes internas quedan atrapadas entre correos, archivos y revisiones sin trazabilidad.",
+    result: "Creamos flujos con aprobacion, registro y excepciones",
   },
 ];
 
@@ -73,8 +121,8 @@ export const integrationLogos: IntegrationLogo[] = [
     name: "Codex",
     mark: "Cx",
     tone: "ai",
-    logoUrl: "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/openai.svg",
-    logoAlt: "OpenAI",
+    logoUrl: "/codex-macos-template.png",
+    logoAlt: "Codex para macOS",
   },
   {
     name: "OpenAI",
@@ -94,8 +142,6 @@ export const integrationLogos: IntegrationLogo[] = [
     name: "n8n",
     mark: "n8n",
     tone: "flow",
-    logoUrl: "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/n8n.svg",
-    logoAlt: "n8n",
   },
   {
     name: "Zapier",
@@ -141,59 +187,65 @@ export const integrationLogos: IntegrationLogo[] = [
   },
 ];
 
-export const outcomes: AutomationOutcome[] = [
+export const services: ContentCard[] = [
   {
-    metric: "01",
-    title: "Mapa del flujo",
-    detail: "Entradas, decisiones, responsables, datos, excepciones y salida esperada antes de automatizar.",
+    i18nKey: "services.diagnostic",
+    tag: "01",
+    title: "Diagnostico",
+    detail: "Para empresas que saben que hay trabajo manual, pero no tienen claro que automatizar primero.",
+    result: "Mapa del proceso, puntos criticos, prioridad y plan de implementacion",
   },
   {
-    metric: "02",
-    title: "Primer flujo operable",
-    detail: "Automatizacion acotada con validaciones, estados visibles y limites para mantener control humano.",
+    i18nKey: "services.build",
+    tag: "02",
+    title: "Build",
+    detail: "Para equipos que ya tienen un proceso elegido y necesitan dejarlo funcionando con herramientas reales.",
+    result: "Workflow conectado, probado, documentado y listo para operar",
   },
   {
-    metric: "03",
-    title: "Trazabilidad",
-    detail: "Registro de lo que entro, que decision se tomo, que fallo y que queda pendiente.",
-  },
-  {
-    metric: "04",
-    title: "Mejora continua",
-    detail: "Ajustes por uso real, errores encontrados y feedback del equipo que trabaja el flujo.",
+    i18nKey: "services.growth",
+    tag: "03",
+    title: "Growth",
+    detail: "Para mantener los flujos vivos: errores, cambios de reglas, soporte y nuevas automatizaciones.",
+    result: "Monitoreo, ajustes, soporte mensual y mejoras priorizadas",
   },
 ];
 
 export const principles: ContentCard[] = [
   {
-    title: "Proceso antes que IA",
-    detail: "Si el flujo no esta definido, primero se ordena. Automatizar desorden solo acelera el problema.",
+    i18nKey: "principles.limits",
+    tag: "Limites",
+    title: "Lo automatico no decide todo",
+    detail: "Definimos que puede correr solo, que requiere aprobacion y que debe volver a una persona.",
   },
   {
-    title: "Alcance pequeno",
-    detail: "Partimos por una tarea con impacto visible, datos disponibles y riesgo controlado.",
+    i18nKey: "principles.errors",
+    tag: "Errores",
+    title: "Los fallos quedan visibles",
+    detail: "Si una integracion falla o falta informacion, el flujo debe avisar, registrar y permitir correccion.",
   },
   {
-    title: "Control humano",
-    detail: "Las decisiones sensibles quedan con aprobacion, revision o fallback manual claro.",
+    i18nKey: "principles.operation",
+    tag: "Operacion",
+    title: "El equipo entiende el flujo",
+    detail: "La automatizacion se documenta para que no dependa de una caja negra ni de una persona externa.",
   },
 ];
 
-export const steps: ContentCard[] = [
+export const methodSteps: ContentCard[] = [
   {
-    title: "Detectar",
-    detail: "Elegimos un proceso concreto donde hoy se pierde tiempo, control o visibilidad.",
+    i18nKey: "method.critical",
+    title: "Puntos criticos",
+    detail: "Detectamos donde se pierde tiempo, dinero o control antes de automatizar.",
   },
   {
-    title: "Priorizar",
-    detail: "Medimos impacto, esfuerzo, riesgo y datos disponibles para partir por el menor alcance util.",
+    i18nKey: "method.performance",
+    title: "Rendimiento",
+    detail: "Construimos flujos simples, medibles y rapidos de operar, no sistemas pesados.",
   },
   {
-    title: "Automatizar",
-    detail: "Construimos una version inicial con estados, validaciones, excepciones y salida verificable.",
-  },
-  {
-    title: "Ajustar",
-    detail: "Mejoramos el flujo con uso real, errores encontrados y feedback del equipo.",
+    i18nKey: "method.optimization",
+    title: "Optimizacion",
+    detail: "Ajustamos reglas, excepciones y prioridades con uso real, no con supuestos.",
   },
 ];

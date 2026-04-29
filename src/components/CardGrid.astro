@@ -1,24 +1,28 @@
 ---
-import type { ContentCard } from "../data/landing";
+import type { ContentCard } from "../data/automatize";
 
 interface Props {
   items: ContentCard[];
   gridClass: string;
   cardClass: string;
   ariaLabel?: string;
+  ariaLabelKey?: string;
   numbered?: boolean;
 }
 
-const { items, gridClass, cardClass, ariaLabel, numbered = false } = Astro.props;
+const { items, gridClass, cardClass, ariaLabel, ariaLabelKey, numbered = false } = Astro.props;
 ---
 
-<div class={gridClass} aria-label={ariaLabel}>
+<div class={gridClass} aria-label={ariaLabel} data-i18n-aria-label={ariaLabelKey}>
   {
     items.map((item, index) => (
       <article class={cardClass}>
+        {item.icon && <span class="card-icon" aria-hidden="true">{item.icon}</span>}
+        {item.tag && <span class="card-tag" data-i18n={item.i18nKey ? `${item.i18nKey}.tag` : undefined}>{item.tag}</span>}
         {numbered && <span>{String(index + 1).padStart(2, "0")}</span>}
-        <h3>{item.title}</h3>
-        <p>{item.detail}</p>
+        <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.title` : undefined}>{item.title}</h3>
+        <p data-i18n={item.i18nKey ? `${item.i18nKey}.detail` : undefined}>{item.detail}</p>
+        {item.result && <strong class="card-result" data-i18n={item.i18nKey ? `${item.i18nKey}.result` : undefined}>{item.result}</strong>}
       </article>
     ))
   }

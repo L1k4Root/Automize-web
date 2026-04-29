@@ -1,16 +1,19 @@
 ---
 import CardGrid from "../components/CardGrid.astro";
+import LanguageSwitch from "../components/LanguageSwitch.astro";
 import LeadForm from "../components/LeadForm.astro";
 import { landingConfig } from "../config/landing";
-import { heroSignals, integrationLogos, outcomes, principles, problems, steps } from "../data/automatize";
+import { heroFlowSteps, heroSignals, integrationLogos, methodSteps, principles, problems, services } from "../data/automatize";
+import { languageCopy } from "../data/i18n";
 import "../styles/global.css";
 
 const metadata = {
-  title: "Automatize | Automatizacion premium de flujos de trabajo",
-  description:
-    "Automatize disena automatizaciones premium para flujos de trabajo: procesos manuales, aprobaciones, datos dispersos e integraciones operativas.",
+  title: languageCopy.es["meta.title"],
+  description: languageCopy.es["meta.description"],
 };
 const integrationLoop = [...integrationLogos, ...integrationLogos];
+const languagePayload = JSON.stringify(languageCopy).replace(/</g, "\\u003c");
+const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigured" : "cta.headerUnconfigured";
 ---
 
 <!doctype html>
@@ -21,6 +24,7 @@ const integrationLoop = [...integrationLogos, ...integrationLogos];
     <meta
       name="description"
       content={metadata.description}
+      data-i18n-content="meta.description"
     />
     <link rel="icon" type="image/png" href="/automatize-icon.png" />
     <link rel="apple-touch-icon" href="/automatize-icon.png" />
@@ -29,40 +33,78 @@ const integrationLoop = [...integrationLogos, ...integrationLogos];
   </head>
   <body class="automatize-page">
     <header class="site-header automatize-header" data-nav>
-      <a class="brand" href="#home" aria-label="Automatize">
+      <a class="brand" href="#home" aria-label="Automize">
         <img class="brand-mark" src="/automatize-icon.png" alt="" width="48" height="48" />
-        <span class="brand-copy"><strong>Automatize</strong></span>
+        <span class="brand-copy">
+          <strong>Automize</strong>
+          <small data-i18n="brand.subtitle">Diagnostico de automatizacion</small>
+        </span>
       </a>
-      <nav class="nav-links" aria-label="Navegacion principal">
-        <a href="#problema">Problema</a>
-        <a href="#entregable">Entregable</a>
-        <a href="#oferta">Oferta</a>
-        <a href="#proceso">Proceso</a>
+      <nav class="nav-links" aria-label="Navegacion principal" data-i18n-aria-label="nav.label">
+        <a href="#problema" data-i18n="nav.problem">Problema</a>
+        <a href="#servicios" data-i18n="nav.services">Servicios</a>
+        <a href="#metodo" data-i18n="nav.method">Metodo</a>
+        <a href="#contacto" data-i18n="nav.contact">Contacto</a>
       </nav>
-      <a class="header-cta" href="#contacto" data-track-click="automatize_header_cta">
-        {landingConfig.isLeadCaptureConfigured ? "Evaluar flujo" : "Preparar evaluacion"}
-      </a>
+      <div class="header-actions">
+        <LanguageSwitch />
+        <a class="header-cta" href="#contacto" data-track-click="automatize_header_cta" data-i18n={headerCtaKey}>
+          {landingConfig.isLeadCaptureConfigured ? "Solicitar diagnostico" : "Preparar diagnostico"}
+        </a>
+      </div>
     </header>
 
     <main>
       <section id="home" class="hero automatize-hero">
-        <div class="automate-visual" aria-hidden="true">
+        <div class="automate-visual" aria-label="Mapa visual de un workflow automatizado" data-i18n-aria-label="hero.visualLabel">
           <img class="automation-emblem" src="/automatize-icon.png" alt="" width="220" height="220" />
           <div class="flow-map">
-            <span class="flow-node node-input">Input</span>
+            <span
+              class="flow-node node-input"
+              aria-label="Input: datos, formularios, correos, planillas o eventos que inician el flujo"
+              tabindex="0"
+              data-tooltip="Datos, formularios, correos, planillas o eventos que inician el flujo"
+              data-i18n="hero.node.input"
+              data-i18n-aria-label="hero.node.inputLabel"
+              data-i18n-tooltip="hero.node.inputTooltip">Input</span
+            >
             <span class="flow-line line-one"></span>
-            <span class="flow-node node-decision">Decision</span>
+            <span
+              class="flow-node node-decision"
+              aria-label="Decision: reglas, IA o revision humana segun el riesgo"
+              tabindex="0"
+              data-tooltip="Reglas, IA o revision humana segun el riesgo"
+              data-i18n="hero.node.decision"
+              data-i18n-aria-label="hero.node.decisionLabel"
+              data-i18n-tooltip="hero.node.decisionTooltip">Decision</span
+            >
             <span class="flow-line line-two"></span>
-            <span class="flow-node node-output">Output</span>
+            <span
+              class="flow-node node-output"
+              aria-label="Output: CRM actualizado, alerta enviada, reporte creado o tarea asignada"
+              tabindex="0"
+              data-tooltip="CRM actualizado, alerta enviada, reporte creado o tarea asignada"
+              data-i18n="hero.node.output"
+              data-i18n-aria-label="hero.node.outputLabel"
+              data-i18n-tooltip="hero.node.outputTooltip">Output</span
+            >
             <span class="flow-branch branch-alert"></span>
-            <span class="flow-node node-review">Revision</span>
+            <span
+              class="flow-node node-review"
+              aria-label="Revision: control humano para excepciones, errores o decisiones sensibles"
+              tabindex="0"
+              data-tooltip="Control humano para excepciones, errores o decisiones sensibles"
+              data-i18n="hero.node.review"
+              data-i18n-aria-label="hero.node.reviewLabel"
+              data-i18n-tooltip="hero.node.reviewTooltip">Revision</span
+            >
           </div>
           <div class="signal-stack">
             {
               heroSignals.map((signal) => (
                 <div class={`automation-signal ${signal.tone}`}>
-                  <span>{signal.label}</span>
-                  <strong>{signal.value}</strong>
+                  <span data-i18n={signal.i18nKey ? `${signal.i18nKey}.label` : undefined}>{signal.label}</span>
+                  <strong data-i18n={signal.i18nKey ? `${signal.i18nKey}.value` : undefined}>{signal.value}</strong>
                 </div>
               ))
             }
@@ -70,35 +112,46 @@ const integrationLoop = [...integrationLogos, ...integrationLogos];
         </div>
 
         <div class="hero-content automatize-hero-content">
-          <p class="eyebrow">Automatizacion de flujos de trabajo</p>
-          <h1>Automatize convierte procesos manuales en flujos controlados</h1>
-          <p class="hero-subtitle">
-            Ordenamos tareas repetidas, datos dispersos y aprobaciones manuales para crear automatizaciones pequenas,
-            medibles y operables.
+          <p class="eyebrow" data-i18n="hero.eyebrow">Automatizacion de procesos, IA e integraciones</p>
+          <h1 data-i18n="hero.title">Automatizacion, IA y workflows para operar con menos trabajo manual</h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
+            Disenamos e implementamos flujos que conectan tus herramientas, reducen tareas repetidas y dejan trazabilidad
+            para que el equipo pueda operar con mas control.
           </p>
+          <div class="hero-mobile-flow" aria-label="Ruta del diagnostico" data-i18n-aria-label="hero.mobileFlowLabel">
+            {
+              heroFlowSteps.map((step, index) => (
+                <article class="hero-mobile-step">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</strong>
+                  <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
+                </article>
+              ))
+            }
+          </div>
           <div class="hero-actions" aria-label="Acciones principales">
-            <a class="button button-primary" href="#contacto" data-track-click="automatize_lead_cta">
-              Evaluar flujo
+            <a class="button button-primary" href="#contacto" data-track-click="automatize_lead_cta" data-i18n="hero.primaryCta">
+              Solicitar diagnostico
             </a>
-            <a class="button button-secondary" href="#entregable" data-track-click="automatize_deliverable_cta">
-              Ver entregable
+            <a class="button button-secondary" href="#servicios" data-track-click="automatize_services_cta" data-i18n="hero.secondaryCta">
+              Ver servicios
             </a>
           </div>
-          <p class="hero-commitment">
-            No automatizamos desorden. Primero definimos proceso, datos, responsables y limites.
+          <p class="hero-commitment" data-i18n="hero.commitment">
+            Partimos con un diagnostico pagado y lo descontamos si avanzas a implementacion
           </p>
           <div class="premium-strip" aria-label="Oferta resumida">
-            <span>Workflow audit</span>
-            <strong>Blueprint + piloto priorizado</strong>
-            <em>Desde USD 900</em>
+            <span data-i18n="hero.offerLabel">Diagnostico pagado</span>
+            <strong data-i18n="hero.offerDetail">Mapa, prioridad y plan de implementacion</strong>
+            <em data-i18n="hero.offerPrice">Desde USD 900</em>
           </div>
         </div>
       </section>
 
       <section class="integration-strip" aria-label="Apps con las que trabajamos">
         <div class="integration-copy">
-          <p class="eyebrow">Apps con las que trabajamos</p>
-          <h2>IA, automatizacion e integraciones en un mismo flujo</h2>
+          <p class="eyebrow" data-i18n="integrations.label">Apps con las que trabajamos</p>
+          <h2 data-i18n="integrations.title">Conectamos lo que ya usas para que el flujo no dependa de copiar y pegar</h2>
         </div>
         <div class="integration-carousel" aria-hidden="true">
           <div class="integration-track">
@@ -131,112 +184,124 @@ const integrationLoop = [...integrationLogos, ...integrationLogos];
 
       <section id="problema" class="section section-tight">
         <div class="section-intro">
-          <p class="eyebrow">Donde aporta</p>
-          <h2>La mejor automatizacion parte en tareas pequenas que se repiten mucho</h2>
+          <p class="eyebrow" data-i18n="problems.eyebrow">Problemas que resolvemos</p>
+          <h2 data-i18n="problems.title">Trabajo manual que frena ventas, soporte y administracion</h2>
           <p>
-            Automatize busca friccion operativa real: trabajo manual frecuente, informacion repartida y pasos que nadie
-            puede seguir con claridad.
+            <strong class="brand-inline" data-i18n="problems.bodyPrefix">Automize</strong>{" "}
+            <span data-i18n="problems.body">convierte pasos repetidos en flujos conectados: captura datos, actualiza herramientas, avisa al responsable y deja registro.</span>
           </p>
         </div>
         <CardGrid
           items={problems}
           gridClass="automatize-problem-grid"
           cardClass="scope-card"
-          ariaLabel="Problemas automatizables"
+          ariaLabel={languageCopy.es["problems.gridLabel"]}
+          ariaLabelKey="problems.gridLabel"
         />
       </section>
 
-      <section id="entregable" class="section automatize-outcome-section">
-        <div class="split-copy">
-          <p class="eyebrow">Que queda funcionando</p>
-          <h2>Un flujo acotado, no una promesa generica de IA</h2>
-          <p>
-            La salida debe poder operarse: que entra, que se decide, que se automatiza, que se registra y cuando vuelve
-            a una persona.
+      <section class="section services-section">
+        <span id="servicios" class="section-scroll-target" aria-hidden="true"></span>
+        <div class="services-header">
+          <p class="eyebrow" data-i18n="services.eyebrow">Servicios</p>
+          <h2 data-i18n="services.title">Un catalogo simple para avanzar sin sobredisenar</h2>
+          <p data-i18n="services.body">
+            Puedes partir por diagnostico, construir un flujo concreto o mantener un plan mensual para mejorar lo que ya
+            esta funcionando.
           </p>
-          <ul class="boundary-list" aria-label="Limites de automatizacion">
-            <li>No automatizamos sin proceso definido</li>
-            <li>No reemplazamos criterio humano donde se necesita control</li>
-            <li>No cambiamos toda la operacion para validar una mejora</li>
-          </ul>
         </div>
-        <div class="automation-outcomes" aria-label="Entregables de Automatize">
+        <div class="services-visual" aria-label="Servicios de Automize" data-i18n-aria-label="services.visualLabel">
+          <div class="service-catalog">
+            {
+              services.map((service, index) => (
+                <article class={`service-card service-card-${index + 1}`}>
+                  <span>{service.tag}</span>
+                  <h3 data-i18n={service.i18nKey ? `${service.i18nKey}.title` : undefined}>{service.title}</h3>
+                  <p data-i18n={service.i18nKey ? `${service.i18nKey}.detail` : undefined}>{service.detail}</p>
+                  {service.result && <strong data-i18n={service.i18nKey ? `${service.i18nKey}.result` : undefined}>{service.result}</strong>}
+                </article>
+              ))
+            }
+          </div>
+          <div class="service-diagram" aria-label="Flujo de decision de servicios" data-i18n-aria-label="services.diagramLabel">
+            <span class="diagram-pill" data-i18n="services.diagram.diagnostic">Diagnostico</span>
+            <span class="diagram-line"></span>
+            <span class="diagram-pill highlight" data-i18n="services.diagram.build">Build</span>
+            <span class="diagram-line danger"></span>
+            <span class="diagram-pill" data-i18n="services.diagram.growth">Growth</span>
+            <p data-i18n="services.diagram.body">Primero elegimos bien. Luego construimos. Despues medimos, corregimos y ampliamos.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="metodo" class="section method-section">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="method.eyebrow">Metodo</p>
+          <h2 data-i18n="method.title">Trabajamos sobre puntos criticos, rendimiento y mejora real</h2>
+          <p data-i18n="method.body">
+            El metodo no es llenar la empresa de automatizaciones. Es encontrar donde duele, construir algo liviano y
+            optimizarlo con datos de uso.
+          </p>
+        </div>
+        <div class="method-timeline" aria-label="Metodo de trabajo" data-i18n-aria-label="method.label">
           {
-            outcomes.map((outcome) => (
-              <article class="automation-outcome">
-                <span>{outcome.metric}</span>
-                <h3>{outcome.title}</h3>
-                <p>{outcome.detail}</p>
+            methodSteps.map((step, index) => (
+              <article class="method-card">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3 data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</h3>
+                <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
               </article>
             ))
           }
         </div>
       </section>
 
-      <section id="oferta" class="section offer-section">
-        <div class="offer-panel">
-          <div>
-            <p class="eyebrow">Oferta inicial</p>
-            <h2>Sprint premium para encontrar un flujo automatizable</h2>
-            <p>
-              Una entrada acotada para equipos que quieren validar automatizacion sin comprometer meses de desarrollo:
-              mapa del flujo, oportunidad priorizada y propuesta de primer piloto.
-            </p>
-          </div>
-          <div class="offer-card" aria-label="Oferta inicial Automatize">
-            <span>Hook premium</span>
-            <strong>Diagnostico + blueprint</strong>
-            <p>Desde USD 900 para mapear un flujo, detectar oportunidad y definir el primer piloto viable.</p>
-            <a class="button button-primary" href="#contacto" data-track-click="automatize_offer_cta">
-              Evaluar fit
-            </a>
-          </div>
-        </div>
-      </section>
-
       <section class="section automatize-principles">
         <div class="section-intro">
-          <p class="eyebrow">Criterio operativo</p>
-          <h2>La automatizacion debe reducir carga sin perder control</h2>
+          <p class="eyebrow" data-i18n="principles.eyebrow">Automatizacion con control</p>
+          <h2 data-i18n="principles.title">El punto no es automatizar todo, es automatizar sin perder control</h2>
+          <p data-i18n="principles.body">
+            Cada flujo debe tener limites claros: que se ejecuta solo, que vuelve a revision humana y como se detecta un
+            error antes de que afecte al equipo.
+          </p>
         </div>
-        <CardGrid items={principles} gridClass="step-grid" cardClass="step-card" ariaLabel="Principios de automatizacion" />
-      </section>
-
-      <section id="proceso" class="section">
-        <div class="section-intro">
-          <p class="eyebrow">Metodo</p>
-          <h2>De una tarea manual a un flujo automatizado</h2>
-        </div>
-        <CardGrid items={steps} gridClass="step-grid" cardClass="step-card" ariaLabel="Proceso de trabajo" numbered />
+        <CardGrid
+          items={principles}
+          gridClass="step-grid"
+          cardClass="step-card"
+          ariaLabel={languageCopy.es["principles.label"]}
+          ariaLabelKey="principles.label"
+        />
       </section>
 
       <section id="contacto" class="contact-section automatize-contact">
         <div class="contact-copy">
-          <p class="eyebrow">Siguiente paso</p>
-          <h2>Evalua un flujo automatizable</h2>
-          <p>
-            Comparte que tarea se repite, donde vive la informacion y que salida necesita el equipo. Si calza, se define
-            un diagnostico acotado.
+          <p class="eyebrow" data-i18n="contact.eyebrow">Siguiente paso</p>
+          <h2 data-i18n="contact.title">Cuentanos que proceso te esta frenando</h2>
+          <p data-i18n="contact.body">
+            Comparte que tarea se repite, que herramientas usa el equipo y que salida necesitas. Si calza, se define un
+            diagnostico acotado.
           </p>
           <ul class="contact-points">
-            <li>Fit inicial antes de pedir accesos</li>
-            <li>Alcance pequeno para validar impacto</li>
-            <li>Automatizacion solo si datos y responsables estan claros</li>
+            <li data-i18n="contact.point.fit">Fit inicial antes de pedir accesos</li>
+            <li data-i18n="contact.point.price">Diagnostico pagado desde USD 900</li>
+            <li data-i18n="contact.point.discount">Descontable si avanzas a implementacion</li>
           </ul>
         </div>
 
         <LeadForm
           config={landingConfig}
-          source="automatize-landing"
-          offer="process-automation-evaluation"
+          source="automize-landing"
+          offer="workflow-automation-diagnostic"
           websiteLabel="Empresa o sitio web"
           websitePlaceholder="https://tuempresa.cl"
-          symptomLabel="Proceso o tarea a automatizar"
+          symptomLabel="Proceso o tarea a diagnosticar"
           symptomPlaceholder="Ej: reportes manuales, correos repetitivos, planillas, solicitudes internas o seguimiento comercial"
         />
       </section>
     </main>
 
+    <script id="language-copy" type="application/json" set:html={languagePayload}></script>
     <script src="../scripts/landing.ts"></script>
   </body>
 </html>
