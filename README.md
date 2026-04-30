@@ -4,6 +4,8 @@ Landing estatica independiente para `Automize`, enfocada en automatizacion de pr
 
 No es una subruta de Fluxora: este proyecto tiene su propio Astro app, metadata, assets, formulario, Function de contacto y build.
 
+La direccion actual no es reemplazar la landing, sino mejorarla por capas: copy comercial, comportamiento responsive, formulario operativo y una experiencia mas elegante sobre la estructura existente.
+
 ## Stack
 
 - Astro con salida estatica (`output: "static"`)
@@ -29,7 +31,7 @@ El repo incluye `.nvmrc` con `22.12.0`. Si el shell usa una version menor, Astro
 │   └── api/
 │       └── contact.js
 ├── public/
-│   ├── automatize-icon.png
+│   ├── automize-icon.png
 │   └── codex-macos-template.png
 ├── src/
 │   ├── components/
@@ -39,7 +41,7 @@ El repo incluye `.nvmrc` con `22.12.0`. Si el shell usa una version menor, Astro
 │   ├── config/
 │   │   └── landing.ts
 │   ├── data/
-│   │   ├── automatize.ts
+│   │   ├── automize.ts
 │   │   └── i18n.ts
 │   ├── pages/
 │   │   ├── gracias.astro
@@ -84,7 +86,7 @@ pnpm preview
 Si tu shell no esta usando Node `22.12.0`, usa temporalmente:
 
 ```bash
-PATH=/opt/homebrew/bin:$PATH pnpm build
+PATH=$HOME/.nvm/versions/node/v22.12.0/bin:$PATH pnpm build
 ```
 
 ## Configuracion publica
@@ -112,9 +114,11 @@ Para Cloudflare Pages Functions, configura estas variables privadas en Cloudflar
 
 ```bash
 RESEND_API_KEY="re_xxxxxxxxx"
-CONTACT_TO_EMAIL="tu-correo@dominio.com"
-CONTACT_FROM_EMAIL="Automize <contacto@tu-dominio.com>"
+CONTACT_TO_EMAIL="andres@automize.cl"
+CONTACT_FROM_EMAIL="Automize <contacto@automize.cl>"
 ```
+
+`CONTACT_TO_EMAIL` tiene fallback en codigo a `andres@automize.cl`, pero conviene dejarlo tambien en Cloudflare para que el contrato operativo quede explicito. `CONTACT_FROM_EMAIL` debe ser un remitente permitido por Resend; si `automize.cl` no esta verificado en Resend, Resend puede rechazar el envio aunque la Function este correcta.
 
 Flujo:
 
@@ -136,15 +140,15 @@ Usa `.dev.vars` para las variables privadas:
 
 ```bash
 RESEND_API_KEY="re_xxxxxxxxx"
-CONTACT_TO_EMAIL="tu-correo@dominio.com"
-CONTACT_FROM_EMAIL="Automize <contacto@tu-dominio.com>"
+CONTACT_TO_EMAIL="andres@automize.cl"
+CONTACT_FROM_EMAIL="Automize <contacto@automize.cl>"
 ```
 
 ## Idiomas
 
 El HTML base se renderiza en espanol. El switch `ES / EN` cambia texto, metadata, placeholders, tooltips y estados del formulario en cliente.
 
-- Copy estructural de la landing: `src/data/automatize.ts`
+- Copy estructural de la landing: `src/data/automize.ts`
 - Diccionario bilingue: `src/data/i18n.ts`
 - Runtime de cambio de idioma: `src/scripts/i18n.ts`
 - Componente del selector: `src/components/LanguageSwitch.astro`
@@ -155,12 +159,37 @@ Se puede forzar ingles con:
 /?lang=en
 ```
 
+## Copy y mensaje comercial
+
+Mensaje central:
+
+```txt
+Transformamos el trabajo tedioso en procesos automatizados utilizando soluciones de inteligencia artificial.
+```
+
+La landing debe hablar en el lenguaje operativo de cada area:
+
+- Ventas: leads, cotizaciones, CRM, seguimiento y proxima tarea comercial.
+- Soporte: tickets, prioridad, SLA, responsable y estado.
+- Administracion: reportes, cobranza, planillas, conciliacion y validacion.
+- Legal / RR. HH.: contratos, aprobaciones, permisos, onboarding, vencimientos y registro.
+
+El hero actual reduce el mensaje a `Automatizacion, IA y workflows`. El bloque de integraciones vende continuidad entre apps: el trabajo debe avanzar sin depender de copiar, perseguir o recordar manualmente. La seccion de problemas debe mantenerse concreta y orientada a procesos automatizables, no a automatizacion generica.
+
+## UX actual
+
+- Header sticky con estado `is-scrolled` al bajar la pagina.
+- En desktop, el header pasa a una barra flotante con margen lateral, bordes redondeados, sombra y fondo mas solido.
+- La navegacion por anclas calcula offset en base a la altura real del header.
+- El carrusel de integraciones mezcla iconos remotos y assets locales definidos en `src/data/automize.ts`.
+- La version movil todavia requiere refinamiento visual del header; no debe marcarse como cerrada hasta validar que se vea elegante y no tape el hero.
+
 ## Analytics
 
 La pagina emite eventos con:
 
 ```js
-CustomEvent("automatize:analytics")
+CustomEvent("automize:analytics")
 ```
 
 Tambien llama `window.plausible` o `window.gtag` si existen.
@@ -197,3 +226,4 @@ Cada push a GitHub redeploya el proyecto si Pages esta conectado al repo.
 - El formulario debe fallar cerrado cuando no existe `PUBLIC_LEAD_FORM_ACTION`.
 - La captura real usa Cloudflare Pages Functions y Resend.
 - El selector bilingue es client-side para mantener el sitio estatico simple.
+- La mejora del proyecto debe continuar como refinamiento progresivo de la landing actual.

@@ -9,7 +9,7 @@ declare global {
 
 export const track = (eventName: string, props: AnalyticsProps = {}) => {
   window.dispatchEvent(
-    new CustomEvent("automatize:analytics", {
+    new CustomEvent("automize:analytics", {
       detail: { eventName, props },
     }),
   );

@@ -21,7 +21,7 @@ const {
   symptomPlaceholder = "Ej: aprobaciones internas, reportes manuales, correos repetitivos, seguimiento comercial o carga de planillas",
 } = Astro.props;
 const formAction = config.isLeadCaptureConfigured ? config.leadFormAction : "#";
-const buttonLabel = config.isLeadCaptureConfigured ? "Solicitar diagnostico" : "Preparar diagnostico";
+const buttonLabel = "Solicitar diagnostico";
 const buttonLabelKey = config.isLeadCaptureConfigured ? "form.submitConfigured" : "form.submitUnconfigured";
 const formNote = config.isLeadCaptureConfigured
   ? "Sin spam. Solo una respuesta para confirmar fit y siguiente paso"

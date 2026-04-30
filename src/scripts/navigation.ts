@@ -12,7 +12,8 @@ export const initHeaderScrollState = () => {
   };
 
   const syncHeaderState = () => {
-    siteHeader.classList.toggle("is-scrolled", window.scrollY > 12);
+    const compactThreshold = Math.max(32, siteHeader.getBoundingClientRect().height * 0.5);
+    siteHeader.classList.toggle("is-scrolled", window.scrollY > compactThreshold);
     syncHeaderOffset();
     headerFrame = null;
   };

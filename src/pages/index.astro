@@ -3,7 +3,16 @@ import CardGrid from "../components/CardGrid.astro";
 import LanguageSwitch from "../components/LanguageSwitch.astro";
 import LeadForm from "../components/LeadForm.astro";
 import { landingConfig } from "../config/landing";
-import { heroFlowSteps, heroSignals, integrationLogos, methodSteps, principles, problems, services } from "../data/automatize";
+import {
+  heroFlowSteps,
+  heroSignals,
+  impactProofs,
+  integrationLogos,
+  methodSteps,
+  principles,
+  problems,
+  services,
+} from "../data/automize";
 import { languageCopy } from "../data/i18n";
 import "../styles/global.css";
 
@@ -14,6 +23,9 @@ const metadata = {
 const integrationLoop = [...integrationLogos, ...integrationLogos];
 const languagePayload = JSON.stringify(languageCopy).replace(/</g, "\\u003c");
 const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigured" : "cta.headerUnconfigured";
+const headerCtaLabel = landingConfig.isLeadCaptureConfigured
+  ? languageCopy.es["cta.headerConfigured"]
+  : languageCopy.es["cta.headerUnconfigured"];
 ---
 
 <!doctype html>
@@ -26,15 +38,15 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
       content={metadata.description}
       data-i18n-content="meta.description"
     />
-    <link rel="icon" type="image/png" href="/automatize-icon.png" />
-    <link rel="apple-touch-icon" href="/automatize-icon.png" />
+    <link rel="icon" type="image/png" href="/automize-icon.png" />
+    <link rel="apple-touch-icon" href="/automize-icon.png" />
     <meta name="theme-color" content="#07110f" />
     <title>{metadata.title}</title>
   </head>
-  <body class="automatize-page">
-    <header class="site-header automatize-header" data-nav>
+  <body class="automize-page">
+    <header class="site-header automize-header" data-nav>
       <a class="brand" href="#home" aria-label="Automize">
-        <img class="brand-mark" src="/automatize-icon.png" alt="" width="48" height="48" />
+        <img class="brand-mark" src="/automize-icon.png" alt="" width="48" height="48" />
         <span class="brand-copy">
           <strong>Automize</strong>
           <small data-i18n="brand.subtitle">Diagnostico de automatizacion</small>
@@ -48,16 +60,16 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
       </nav>
       <div class="header-actions">
         <LanguageSwitch />
-        <a class="header-cta" href="#contacto" data-track-click="automatize_header_cta" data-i18n={headerCtaKey}>
-          {landingConfig.isLeadCaptureConfigured ? "Solicitar diagnostico" : "Preparar diagnostico"}
+        <a class="header-cta" href="#contacto" data-track-click="automize_header_cta" data-i18n={headerCtaKey}>
+          {headerCtaLabel}
         </a>
       </div>
     </header>
 
     <main>
-      <section id="home" class="hero automatize-hero">
+      <section id="home" class="hero automize-hero">
         <div class="automate-visual" aria-label="Mapa visual de un workflow automatizado" data-i18n-aria-label="hero.visualLabel">
-          <img class="automation-emblem" src="/automatize-icon.png" alt="" width="220" height="220" />
+          <img class="automation-emblem" src="/automize-icon.png" alt="" width="220" height="220" />
           <div class="flow-map">
             <span
               class="flow-node node-input"
@@ -111,12 +123,12 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
           </div>
         </div>
 
-        <div class="hero-content automatize-hero-content">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Automatizacion de procesos, IA e integraciones</p>
-          <h1 data-i18n="hero.title">Automatizacion, IA y workflows para operar con menos trabajo manual</h1>
+        <div class="hero-content automize-hero-content">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Automatizacion de procesos con IA</p>
+          <h1 data-i18n="hero.title">Menos trabajo manual, mas control operativo</h1>
           <p class="hero-subtitle" data-i18n="hero.subtitle">
-            Disenamos e implementamos flujos que conectan tus herramientas, reducen tareas repetidas y dejan trazabilidad
-            para que el equipo pueda operar con mas control.
+            Convertimos tareas repetidas en flujos con responsable, estado y registro para que ventas, soporte y
+            administracion avancen sin perseguir planillas.
           </p>
           <div class="hero-mobile-flow" aria-label="Ruta del diagnostico" data-i18n-aria-label="hero.mobileFlowLabel">
             {
@@ -130,10 +142,10 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
             }
           </div>
           <div class="hero-actions" aria-label="Acciones principales">
-            <a class="button button-primary" href="#contacto" data-track-click="automatize_lead_cta" data-i18n="hero.primaryCta">
+            <a class="button button-primary" href="#contacto" data-track-click="automize_lead_cta" data-i18n="hero.primaryCta">
               Solicitar diagnostico
             </a>
-            <a class="button button-secondary" href="#servicios" data-track-click="automatize_services_cta" data-i18n="hero.secondaryCta">
+            <a class="button button-secondary" href="#servicios" data-track-click="automize_services_cta" data-i18n="hero.secondaryCta">
               Ver servicios
             </a>
           </div>
@@ -151,7 +163,7 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
       <section class="integration-strip" aria-label="Apps con las que trabajamos">
         <div class="integration-copy">
           <p class="eyebrow" data-i18n="integrations.label">Apps con las que trabajamos</p>
-          <h2 data-i18n="integrations.title">Conectamos lo que ya usas para que el flujo no dependa de copiar y pegar</h2>
+          <h2 data-i18n="integrations.title">Conectamos tus herramientas operativas y usamos IA donde agrega control</h2>
         </div>
         <div class="integration-carousel" aria-hidden="true">
           <div class="integration-track">
@@ -185,19 +197,47 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
       <section id="problema" class="section section-tight">
         <div class="section-intro">
           <p class="eyebrow" data-i18n="problems.eyebrow">Problemas que resolvemos</p>
-          <h2 data-i18n="problems.title">Trabajo manual que frena ventas, soporte y administracion</h2>
+          <h2 data-i18n="problems.title">Transformamos trabajo tedioso en procesos automatizados con IA</h2>
           <p>
             <strong class="brand-inline" data-i18n="problems.bodyPrefix">Automize</strong>{" "}
-            <span data-i18n="problems.body">convierte pasos repetidos en flujos conectados: captura datos, actualiza herramientas, avisa al responsable y deja registro.</span>
+            <span data-i18n="problems.body">toma tareas repetidas de ventas, soporte, administracion y legal, y las convierte en flujos con responsables, estados y registro.</span>
           </p>
         </div>
         <CardGrid
           items={problems}
-          gridClass="automatize-problem-grid"
+          gridClass="automize-problem-grid"
           cardClass="scope-card"
           ariaLabel={languageCopy.es["problems.gridLabel"]}
           ariaLabelKey="problems.gridLabel"
         />
+        <div class="section-cta">
+          <p data-i18n="problems.ctaBody">Si uno de estos casos se parece a tu operacion, el diagnostico define donde automatizar primero y cuanto riesgo sacar del proceso.</p>
+          <a class="button button-primary" href="#contacto" data-track-click="automize_problem_cta" data-i18n="problems.cta">
+            Solicitar diagnostico
+          </a>
+        </div>
+      </section>
+
+      <section class="section impact-section" aria-label="Prueba de impacto" data-i18n-aria-label="impact.label">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="impact.eyebrow">Impacto esperado</p>
+          <h2 data-i18n="impact.title">El diagnostico debe mostrar retorno antes de construir</h2>
+          <p data-i18n="impact.body">
+            No vendemos automatizar por moda. Buscamos procesos donde el tiempo, el error o la falta de seguimiento
+            justifican la inversion.
+          </p>
+        </div>
+        <div class="impact-grid">
+          {
+            impactProofs.map((proof) => (
+              <article class="impact-card">
+                <span data-i18n={proof.i18nKey ? `${proof.i18nKey}.metric` : undefined}>{proof.metric}</span>
+                <h3 data-i18n={proof.i18nKey ? `${proof.i18nKey}.title` : undefined}>{proof.title}</h3>
+                <p data-i18n={proof.i18nKey ? `${proof.i18nKey}.detail` : undefined}>{proof.detail}</p>
+              </article>
+            ))
+          }
+        </div>
       </section>
 
       <section class="section services-section">
@@ -226,11 +266,17 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
           <div class="service-diagram" aria-label="Flujo de decision de servicios" data-i18n-aria-label="services.diagramLabel">
             <span class="diagram-pill" data-i18n="services.diagram.diagnostic">Diagnostico</span>
             <span class="diagram-line"></span>
-            <span class="diagram-pill highlight" data-i18n="services.diagram.build">Build</span>
+            <span class="diagram-pill highlight" data-i18n="services.diagram.build">Implementacion</span>
             <span class="diagram-line danger"></span>
-            <span class="diagram-pill" data-i18n="services.diagram.growth">Growth</span>
+            <span class="diagram-pill" data-i18n="services.diagram.growth">Mejora continua</span>
             <p data-i18n="services.diagram.body">Primero elegimos bien. Luego construimos. Despues medimos, corregimos y ampliamos.</p>
           </div>
+        </div>
+        <div class="section-cta section-cta-compact">
+          <p data-i18n="services.ctaBody">El primer paso no requiere accesos ni promesas grandes: solo elegir un proceso con dolor real.</p>
+          <a class="button button-primary" href="#contacto" data-track-click="automize_services_mid_cta" data-i18n="services.cta">
+            Evaluar mi proceso
+          </a>
         </div>
       </section>
 
@@ -256,7 +302,7 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
         </div>
       </section>
 
-      <section class="section automatize-principles">
+      <section class="section automize-principles">
         <div class="section-intro">
           <p class="eyebrow" data-i18n="principles.eyebrow">Automatizacion con control</p>
           <h2 data-i18n="principles.title">El punto no es automatizar todo, es automatizar sin perder control</h2>
@@ -274,7 +320,7 @@ const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigur
         />
       </section>
 
-      <section id="contacto" class="contact-section automatize-contact">
+      <section id="contacto" class="contact-section automize-contact">
         <div class="contact-copy">
           <p class="eyebrow" data-i18n="contact.eyebrow">Siguiente paso</p>
           <h2 data-i18n="contact.title">Cuentanos que proceso te esta frenando</h2>

@@ -4,6 +4,7 @@ const MAX_WEBSITE_LENGTH = 240;
 const MAX_SYMPTOM_LENGTH = 3000;
 const DEFAULT_SOURCE = "automize-landing";
 const DEFAULT_OFFER = "workflow-automation-diagnostic";
+const DEFAULT_CONTACT_TO_EMAIL = "andres@automize.cl";
 const THANK_YOU_PATH = "/gracias";
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
@@ -84,7 +85,7 @@ const validateLeadPayload = (payload) => {
 
 const readEmailConfig = (env) => ({
   resendApiKey: trimField(env.RESEND_API_KEY),
-  contactToEmail: trimField(env.CONTACT_TO_EMAIL),
+  contactToEmail: trimField(env.CONTACT_TO_EMAIL) || DEFAULT_CONTACT_TO_EMAIL,
   contactFromEmail: trimField(env.CONTACT_FROM_EMAIL) || "Automize <onboarding@resend.dev>",
 });
 
