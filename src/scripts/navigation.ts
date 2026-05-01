@@ -8,7 +8,8 @@ export const initHeaderScrollState = () => {
 
   const syncHeaderOffset = () => {
     const headerHeight = Math.ceil(siteHeader.getBoundingClientRect().height);
-    document.documentElement.style.setProperty("--header-offset", `${headerHeight + 16}px`);
+    const headerTop = Number.parseFloat(window.getComputedStyle(siteHeader).top) || 0;
+    document.documentElement.style.setProperty("--header-offset", `${headerHeight + headerTop + 16}px`);
   };
 
   const syncHeaderState = () => {

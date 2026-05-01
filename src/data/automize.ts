@@ -4,6 +4,8 @@ export type ContentCard = {
   icon?: string;
   title: string;
   detail: string;
+  fit?: string;
+  includes?: string[];
   result?: string;
 };
 
@@ -18,6 +20,21 @@ export type HeroFlowStep = {
   i18nKey?: string;
   title: string;
   detail: string;
+};
+
+export type ProblemFlowItem = {
+  i18nKey?: string;
+  label: string;
+  detail: string;
+  tone: "leak" | "delay" | "control";
+};
+
+export type SystemStep = {
+  i18nKey?: string;
+  label: string;
+  title: string;
+  detail: string;
+  tone: "input" | "rules" | "owner" | "exception" | "record";
 };
 
 export type IntegrationLogo = {
@@ -39,19 +56,19 @@ export const heroSignals: FlowSignal[] = [
   {
     i18nKey: "hero.signal.input",
     label: "Entrada",
-    value: "tarea repetida",
+    value: "solicitud repetida",
     tone: "manual",
   },
   {
     i18nKey: "hero.signal.risk",
     label: "Riesgo",
-    value: "aprobacion manual",
+    value: "estado invisible",
     tone: "risk",
   },
   {
     i18nKey: "hero.signal.output",
     label: "Salida",
-    value: "flujo operable",
+    value: "responsable y siguiente paso",
     tone: "ready",
   },
 ];
@@ -60,17 +77,76 @@ export const heroFlowSteps: HeroFlowStep[] = [
   {
     i18nKey: "hero.flow.diagnostic",
     title: "Diagnostico",
-    detail: "Descubrimos que automatizar primero",
+    detail: "Elegimos el flujo que mas frena al equipo",
   },
   {
     i18nKey: "hero.flow.build",
     title: "Implementacion",
-    detail: "Conectamos herramientas, IA y reglas",
+    detail: "Lo dejamos corriendo con reglas, IA y responsables",
   },
   {
     i18nKey: "hero.flow.growth",
     title: "Mejora continua",
-    detail: "Soportamos, ajustamos y mejoramos",
+    detail: "Medimos fallos, ajustes y oportunidades nuevas",
+  },
+];
+
+export const problemFlow: ProblemFlowItem[] = [
+  {
+    i18nKey: "problemFlow.scattered",
+    label: "Entrada dispersa",
+    detail: "Correos, formularios, WhatsApp y planillas abren tareas sin un flujo unico.",
+    tone: "leak",
+  },
+  {
+    i18nKey: "problemFlow.manual",
+    label: "Traspaso manual",
+    detail: "Alguien copia datos, pregunta por estado y empuja aprobaciones a mano.",
+    tone: "delay",
+  },
+  {
+    i18nKey: "problemFlow.control",
+    label: "Control perdido",
+    detail: "No queda claro quien responde, que falta, que vencio ni donde se atasco.",
+    tone: "control",
+  },
+];
+
+export const systemSteps: SystemStep[] = [
+  {
+    i18nKey: "system.intake",
+    label: "01",
+    title: "Entrada unica",
+    detail: "El flujo recibe correos, formularios, planillas o eventos desde las herramientas que el equipo ya usa.",
+    tone: "input",
+  },
+  {
+    i18nKey: "system.rules",
+    label: "02",
+    title: "Reglas e IA",
+    detail: "Validamos datos, clasificamos solicitudes y aplicamos criterios claros antes de mover el proceso.",
+    tone: "rules",
+  },
+  {
+    i18nKey: "system.owner",
+    label: "03",
+    title: "Responsable visible",
+    detail: "Cada caso queda asignado con estado, alerta y siguiente paso para que nadie dependa de perseguir avances.",
+    tone: "owner",
+  },
+  {
+    i18nKey: "system.exception",
+    label: "04",
+    title: "Excepcion humana",
+    detail: "Lo sensible, incompleto o riesgoso vuelve a una persona con contexto suficiente para decidir.",
+    tone: "exception",
+  },
+  {
+    i18nKey: "system.record",
+    label: "05",
+    title: "Registro operativo",
+    detail: "La salida queda documentada: CRM actualizado, reporte generado, tarea creada o aprobacion registrada.",
+    tone: "record",
   },
 ];
 
@@ -200,6 +276,8 @@ export const services: ContentCard[] = [
     tag: "01",
     title: "Diagnostico",
     detail: "Para empresas que saben que hay trabajo manual, pero no tienen claro que automatizar primero.",
+    fit: "Cuando hay varios dolores y necesitas elegir el flujo con mejor retorno antes de construir.",
+    includes: ["Mapa del proceso", "Riesgos y excepciones", "Quick wins", "Plan de implementacion"],
     result: "Mapa del proceso, puntos criticos, prioridad y plan de implementacion",
   },
   {
@@ -207,6 +285,8 @@ export const services: ContentCard[] = [
     tag: "02",
     title: "Implementacion",
     detail: "Para equipos que ya tienen un proceso elegido y necesitan dejarlo funcionando con herramientas reales.",
+    fit: "Cuando el proceso ya esta priorizado y el equipo necesita operarlo con reglas, alertas y responsables.",
+    includes: ["Workflow conectado", "Validaciones y reglas", "Excepciones humanas", "Documentacion operativa"],
     result: "Workflow conectado, probado, documentado y listo para operar",
   },
   {
@@ -214,6 +294,8 @@ export const services: ContentCard[] = [
     tag: "03",
     title: "Mejora continua",
     detail: "Para mantener los flujos vivos: errores, cambios de reglas, soporte y nuevas automatizaciones.",
+    fit: "Cuando el flujo ya opera y necesitas soporte, ajustes y nuevas mejoras sin perder control.",
+    includes: ["Monitoreo de fallos", "Ajustes de reglas", "Soporte mensual", "Mejoras priorizadas"],
     result: "Monitoreo, ajustes, soporte mensual y mejoras priorizadas",
   },
 ];
@@ -221,20 +303,20 @@ export const services: ContentCard[] = [
 export const impactProofs: ImpactProof[] = [
   {
     i18nKey: "impact.sales",
-    metric: "15 min",
-    title: "Respuesta comercial mas rapida",
+    metric: "Ventas",
+    title: "Seguimiento sin depender de memoria",
     detail: "Lead entra, se registra, avisa al responsable y crea la proxima tarea sin esperar revision manual.",
   },
   {
     i18nKey: "impact.ops",
-    metric: "1 reporte",
-    title: "Cierre semanal sin copiar datos",
+    metric: "Operacion",
+    title: "Menos copia manual entre herramientas",
     detail: "Ventas, pagos y planillas se consolidan en una salida revisable con errores visibles.",
   },
   {
     i18nKey: "impact.control",
-    metric: "0 cajas negras",
-    title: "Automatizacion con limites",
+    metric: "Control",
+    title: "Excepciones visibles antes de romper el flujo",
     detail: "Las excepciones vuelven a una persona, quedan registradas y no rompen el proceso completo.",
   },
 ];

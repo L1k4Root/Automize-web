@@ -4,7 +4,7 @@ const MAX_WEBSITE_LENGTH = 240;
 const MAX_SYMPTOM_LENGTH = 3000;
 const DEFAULT_SOURCE = "automize-landing";
 const DEFAULT_OFFER = "workflow-automation-diagnostic";
-const DEFAULT_CONTACT_TO_EMAIL = "andres@automize.cl";
+const DEFAULT_CONTACT_TO_EMAIL = "contacto@automize.cl";
 const THANK_YOU_PATH = "/gracias";
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 

@@ -50,7 +50,10 @@ pnpm build
 pnpm preview
 ```
 
-Use Node `22.12.0` from `.nvmrc`. If the ambient shell uses an older Node version, Astro 6 will fail before build.
+Use Node `22.13.0` from `.nvmrc`. If the ambient shell uses an older Node version, Astro 6 will fail before build.
+
+Pending work tracking for this repo lives in `PENDING.md`.
+Within the parent MetricLogic repo, this project lives at `projects/automize/web`.
 
 ## Runtime Contracts
 
@@ -58,7 +61,7 @@ Use Node `22.12.0` from `.nvmrc`. If the ambient shell uses an older Node versio
 - `PUBLIC_LEAD_FORM_ACTION` controls whether lead capture is active.
 - When `PUBLIC_LEAD_FORM_ACTION` is missing, the form must fail closed with `action="#"`.
 - `functions/api/contact.js` owns server-side validation, honeypot handling, Resend delivery, structured logs, and `/gracias` redirects.
-- Lead emails are sent to `CONTACT_TO_EMAIL`, with `andres@automize.cl` as the default operational fallback.
+- Lead emails are sent to `CONTACT_TO_EMAIL`, with `contacto@automize.cl` as the default operational fallback.
 - The lead form fields are `name`, `email`, `website`, `symptom`, `source`, `offer`, and honeypot `company_fax`.
 - The bilingual layer is static-first: Spanish HTML by default, client-side switch for English.
 - Navigation behavior lives in `src/scripts/navigation.ts`: anchor scrolling accounts for sticky header height, click tracking emits analytics events, and the header toggles `is-scrolled` after the user has moved beyond the first part of the viewport.
@@ -71,7 +74,7 @@ Use Node `22.12.0` from `.nvmrc`. If the ambient shell uses an older Node versio
 - Do not add runtime dependencies for logo strips, forms, analytics, or i18n unless explicitly requested.
 - Keep form behavior production-safe: no fake success when capture is unconfigured.
 - Do not log full lead email addresses or secrets. Use request IDs and non-sensitive metadata.
-- Preserve the Cloudflare Pages setup: root `web/automize`, build command `pnpm build`, output `dist`, Node `22.12.0`.
+- Preserve the Cloudflare Pages setup: root `projects/automize/web`, build command `pnpm build`, output `dist`, Node `22.13.0`.
 - Preserve the current improvement path: polish the existing Automize landing, do not restart the page or rename core contracts casually.
 
 ## Copy Direction

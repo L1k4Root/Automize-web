@@ -1,7 +1,7 @@
 # Auditoria movil Automize
 
 Fecha: 2026-04-29  
-Entorno auditado: `http://127.0.0.1:4324/` desde el checkout actual de `web/automize`  
+Entorno auditado: `http://127.0.0.1:4324/` desde el checkout actual de `projects/automize/web`  
 Viewports usados: `390x844` y `320x844` con Chrome DevTools Protocol
 
 ## Estado general

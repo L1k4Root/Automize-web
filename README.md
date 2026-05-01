@@ -6,6 +6,8 @@ No es una subruta de Fluxora: este proyecto tiene su propio Astro app, metadata,
 
 La direccion actual no es reemplazar la landing, sino mejorarla por capas: copy comercial, comportamiento responsive, formulario operativo y una experiencia mas elegante sobre la estructura existente.
 
+El trabajo pendiente de esta web vive en `PENDING.md`. Dentro de `MetricLogic`, este repo queda ubicado en `projects/automize/web/`.
+
 ## Stack
 
 - Astro con salida estatica (`output: "static"`)
@@ -20,7 +22,7 @@ Node esperado:
 nvm use
 ```
 
-El repo incluye `.nvmrc` con `22.12.0`. Si el shell usa una version menor, Astro 6 falla el build.
+El repo incluye `.nvmrc` con `22.13.0`. Si el shell usa una version menor, Astro 6 falla el build.
 
 ## Estructura
 
@@ -83,10 +85,10 @@ Preview Astro:
 pnpm preview
 ```
 
-Si tu shell no esta usando Node `22.12.0`, usa temporalmente:
+Si tu shell no esta usando Node `22.13.0`, usa temporalmente:
 
 ```bash
-PATH=$HOME/.nvm/versions/node/v22.12.0/bin:$PATH pnpm build
+PATH=$HOME/.nvm/versions/node/v22.13.0/bin:$PATH pnpm build
 ```
 
 ## Configuracion publica
@@ -114,11 +116,11 @@ Para Cloudflare Pages Functions, configura estas variables privadas en Cloudflar
 
 ```bash
 RESEND_API_KEY="re_xxxxxxxxx"
-CONTACT_TO_EMAIL="andres@automize.cl"
+CONTACT_TO_EMAIL="contacto@automize.cl"
 CONTACT_FROM_EMAIL="Automize <contacto@automize.cl>"
 ```
 
-`CONTACT_TO_EMAIL` tiene fallback en codigo a `andres@automize.cl`, pero conviene dejarlo tambien en Cloudflare para que el contrato operativo quede explicito. `CONTACT_FROM_EMAIL` debe ser un remitente permitido por Resend; si `automize.cl` no esta verificado en Resend, Resend puede rechazar el envio aunque la Function este correcta.
+`CONTACT_TO_EMAIL` tiene fallback en codigo a `contacto@automize.cl`, pero conviene dejarlo tambien en Cloudflare para que el contrato operativo quede explicito. `CONTACT_FROM_EMAIL` debe ser un remitente permitido por Resend; si `automize.cl` no esta verificado en Resend, Resend puede rechazar el envio aunque la Function este correcta.
 
 Flujo:
 
@@ -140,7 +142,7 @@ Usa `.dev.vars` para las variables privadas:
 
 ```bash
 RESEND_API_KEY="re_xxxxxxxxx"
-CONTACT_TO_EMAIL="andres@automize.cl"
+CONTACT_TO_EMAIL="contacto@automize.cl"
 CONTACT_FROM_EMAIL="Automize <contacto@automize.cl>"
 ```
 
@@ -211,10 +213,10 @@ Configuracion recomendada:
 
 ```txt
 Framework preset: Astro
-Root directory: web/automize
+Root directory: projects/automize/web
 Build command: pnpm build
 Build output directory: dist
-Node.js version: 22.12.0
+Node.js version: 22.13.0
 ```
 
 Cada push a GitHub redeploya el proyecto si Pages esta conectado al repo.
