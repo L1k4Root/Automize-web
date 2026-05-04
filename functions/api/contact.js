@@ -1,9 +1,12 @@
 const MAX_NAME_LENGTH = 120;
 const MAX_EMAIL_LENGTH = 160;
-const MAX_WEBSITE_LENGTH = 240;
+const MAX_COMPANY_LENGTH = 160;
+const MAX_INDUSTRY_LENGTH = 120;
 const MAX_SYMPTOM_LENGTH = 3000;
+const MAX_TOOLS_LENGTH = 2000;
+const MAX_IMPACT_LENGTH = 2000;
 const DEFAULT_SOURCE = "automize-landing";
-const DEFAULT_OFFER = "workflow-automation-diagnostic";
+const DEFAULT_OFFER = "workflow-automation-review";
 const DEFAULT_CONTACT_TO_EMAIL = "contacto@automize.cl";
 const THANK_YOU_PATH = "/gracias";
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
@@ -11,8 +14,11 @@ const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const FIELD_LIMITS = {
   name: MAX_NAME_LENGTH,
   email: MAX_EMAIL_LENGTH,
-  website: MAX_WEBSITE_LENGTH,
+  company: MAX_COMPANY_LENGTH,
+  industry: MAX_INDUSTRY_LENGTH,
   symptom: MAX_SYMPTOM_LENGTH,
+  tools: MAX_TOOLS_LENGTH,
+  impact: MAX_IMPACT_LENGTH,
 };
 
 const jsonError = (message, status = 400, requestId = "") =>
@@ -39,28 +45,22 @@ const escapeHtml = (value) =>
 const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 const getEmailDomain = (value) => value.split("@")[1] || "unknown";
 
-const isValidUrl = (value) => {
-  try {
-    const parsed = new URL(value);
-    return parsed.protocol === "http:" || parsed.protocol === "https:";
-  } catch {
-    return false;
-  }
-};
-
 const redirectToThanks = (request) => Response.redirect(new URL(THANK_YOU_PATH, request.url), 303);
 
 const readLeadPayload = (formData) => ({
   name: trimField(formData.get("name")),
   email: trimField(formData.get("email")),
-  website: trimField(formData.get("website")),
+  company: trimField(formData.get("company")),
+  industry: trimField(formData.get("industry")),
   symptom: trimField(formData.get("symptom")),
+  tools: trimField(formData.get("tools")),
+  impact: trimField(formData.get("impact")),
   source: withDefault(formData.get("source"), DEFAULT_SOURCE),
   offer: withDefault(formData.get("offer"), DEFAULT_OFFER),
 });
 
 const validateLeadPayload = (payload) => {
-  if (!payload.name || !payload.email || !payload.website || !payload.symptom) {
+  if (!payload.name || !payload.email || !payload.company || !payload.industry || !payload.symptom || !payload.tools || !payload.impact) {
     return "Faltan campos obligatorios.";
   }
 
@@ -72,12 +72,24 @@ const validateLeadPayload = (payload) => {
     return "El email no es valido.";
   }
 
-  if (payload.website.length > FIELD_LIMITS.website || !isValidUrl(payload.website)) {
-    return "La URL del sitio debe comenzar con http:// o https://.";
+  if (payload.company.length > FIELD_LIMITS.company) {
+    return "El nombre de la empresa es demasiado largo.";
+  }
+
+  if (payload.industry.length > FIELD_LIMITS.industry) {
+    return "El rubro es demasiado largo.";
   }
 
   if (payload.symptom.length > FIELD_LIMITS.symptom) {
-    return "La descripcion es demasiado larga.";
+    return "La descripcion del proceso es demasiado larga.";
+  }
+
+  if (payload.tools.length > FIELD_LIMITS.tools) {
+    return "La descripcion de herramientas es demasiado larga.";
+  }
+
+  if (payload.impact.length > FIELD_LIMITS.impact) {
+    return "La descripcion del impacto es demasiado larga.";
   }
 
   return "";
@@ -89,29 +101,39 @@ const readEmailConfig = (env) => ({
   contactFromEmail: trimField(env.CONTACT_FROM_EMAIL) || "Automize <onboarding@resend.dev>",
 });
 
-const renderHtmlBody = ({ name, email, website, symptom, source, offer }) =>
+const renderHtmlBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
   [
     "<h2>Nuevo lead desde Automize</h2>",
     `<p><strong>Nombre:</strong> ${escapeHtml(name)}</p>`,
     `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
-    `<p><strong>Empresa o sitio web:</strong> ${escapeHtml(website)}</p>`,
-    `<p><strong>Proceso o tarea a diagnosticar:</strong><br>${escapeHtml(symptom).replace(/\n/g, "<br>")}</p>`,
+    `<p><strong>Empresa:</strong> ${escapeHtml(company)}</p>`,
+    `<p><strong>Rubro:</strong> ${escapeHtml(industry)}</p>`,
+    `<p><strong>Proceso a ordenar:</strong><br>${escapeHtml(symptom).replace(/\n/g, "<br>")}</p>`,
+    `<p><strong>Herramientas actuales:</strong><br>${escapeHtml(tools).replace(/\n/g, "<br>")}</p>`,
+    `<p><strong>Impacto si falla o se atrasa:</strong><br>${escapeHtml(impact).replace(/\n/g, "<br>")}</p>`,
     `<p><strong>Source:</strong> ${escapeHtml(source)}</p>`,
     `<p><strong>Offer:</strong> ${escapeHtml(offer)}</p>`,
   ].join("");
 
-const renderTextBody = ({ name, email, website, symptom, source, offer }) =>
+const renderTextBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
   [
     "Nuevo lead desde Automize",
     "",
     `Nombre: ${name}`,
     `Email: ${email}`,
-    `Empresa o sitio web: ${website}`,
+    `Empresa: ${company}`,
+    `Rubro: ${industry}`,
     `Source: ${source}`,
     `Offer: ${offer}`,
     "",
-    "Proceso o tarea a diagnosticar:",
+    "Proceso a ordenar:",
     symptom,
+    "",
+    "Herramientas actuales:",
+    tools,
+    "",
+    "Impacto si falla o se atrasa:",
+    impact,
   ].join("\n");
 
 const sendLeadEmail = async ({ payload, config, requestId }) =>

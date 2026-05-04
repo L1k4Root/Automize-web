@@ -6,14 +6,16 @@ import { landingConfig } from "../config/landing";
 import {
   heroFlowSteps,
   heroSignals,
-  impactProofs,
   integrationLogos,
   methodSteps,
   problemFlow,
   principles,
   problems,
   services,
+  scopeExcludes,
+  scopeIncludes,
   systemSteps,
+  useCases,
 } from "../data/automize";
 import { languageCopy } from "../data/i18n";
 import "../styles/global.css";
@@ -29,6 +31,7 @@ const headerCtaLabel = landingConfig.isLeadCaptureConfigured
   ? languageCopy.es["cta.headerConfigured"]
   : languageCopy.es["cta.headerUnconfigured"];
 const currentYear = new Date().getFullYear();
+const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${encodeURIComponent(subject)}`;
 ---
 
 <!doctype html>
@@ -63,8 +66,9 @@ const currentYear = new Date().getFullYear();
         </span>
       </a>
       <nav class="nav-links" aria-label="Navegacion principal" data-i18n-aria-label="nav.label">
+        <a href="#servicios" data-i18n="nav.services">Planes</a>
+        <a href="#casos" data-i18n="nav.useCases">Casos</a>
         <a href="#problema" data-i18n="nav.problem">Problema</a>
-        <a href="#servicios" data-i18n="nav.services">Servicios</a>
         <a href="#metodo" data-i18n="nav.method">Metodo</a>
         <a href="#contacto" data-i18n="nav.contact">Contacto</a>
       </nav>
@@ -153,10 +157,10 @@ const currentYear = new Date().getFullYear();
           </div>
           <div class="hero-actions" aria-label="Acciones principales">
             <a class="button button-primary" href="#contacto" data-track-click="automize_lead_cta" data-i18n="hero.primaryCta">
-              Diagnosticar mi proceso
+              Revisar mi proceso
             </a>
             <a class="button button-secondary" href="#servicios" data-track-click="automize_services_cta" data-i18n="hero.secondaryCta">
-              Ver que automatizamos
+              Ver planes de entrada
             </a>
           </div>
           <p class="hero-commitment" data-i18n="hero.commitment">
@@ -177,37 +181,119 @@ const currentYear = new Date().getFullYear();
         </div>
       </section>
 
-      <section class="integration-strip" aria-label="Apps con las que trabajamos">
-        <div class="integration-copy">
-          <p class="eyebrow" data-i18n="integrations.label">Apps con las que trabajamos</p>
-          <h2 data-i18n="integrations.title">Conectamos tus herramientas operativas y usamos IA donde agrega control</h2>
+      <section class="section services-section">
+        <span id="servicios" class="section-scroll-target" aria-hidden="true"></span>
+        <div class="services-header">
+          <p class="eyebrow" data-i18n="services.eyebrow">Elige por donde partir</p>
+          <h2 data-i18n="services.title">Si ya viste el dolor, no esperes a tenerlo perfecto</h2>
+          <p data-i18n="services.body">
+            Mandanos el proceso por email o baja al formulario. Respondemos con el siguiente paso: revisar, construir
+            o acotar un piloto.
+          </p>
         </div>
-        <div class="integration-carousel" aria-hidden="true">
-          <div class="integration-track">
+        <div class="services-action-panel" aria-label="Acciones rapidas para pedir revision" data-i18n-aria-label="services.actionLabel">
+          <div>
+            <strong data-i18n="services.actionTitle">Tienes un proceso repetido en mente?</strong>
+            <p data-i18n="services.actionBody">Escribenos ahora con 3 lineas: tarea, herramientas y que pasa cuando falla.</p>
+          </div>
+          <div class="services-action-buttons">
+            <a
+              class="button button-primary"
+              href={getMailHref("Quiero revisar un proceso automatizable")}
+              data-track-click="automize_services_email_cta"
+              data-i18n="services.emailCta">Escribir ahora</a
+            >
+            <a class="button button-secondary" href="#contacto" data-track-click="automize_services_form_cta" data-i18n="services.formCta">
+              Ir al formulario
+            </a>
+          </div>
+        </div>
+        <div class="services-visual" aria-label="Planes de entrada de Automize" data-i18n-aria-label="services.visualLabel">
+          <div class="service-catalog">
             {
-              integrationLoop.map((logo) => (
-                <span class={`integration-logo ${logo.tone}`}>
-                  <span class="integration-logo-mark">
-                    {
-                      logo.logoUrl ? (
-                        <img
-                          src={logo.logoUrl}
-                          alt={logo.logoAlt ?? logo.name}
-                          loading="lazy"
-                          decoding="async"
-                          width="28"
-                          height="28"
-                        />
-                      ) : (
-                        <strong>{logo.mark}</strong>
-                      )
-                    }
-                  </span>
-                  <em>{logo.name}</em>
-                </span>
+              services.map((service, index) => (
+                <article class={`service-card service-card-${index + 1}`}>
+                  <div class="service-card-topline">
+                    <span>{service.tag}</span>
+                    {service.badge && <em class="service-badge" data-i18n={service.i18nKey ? `${service.i18nKey}.badge` : undefined}>{service.badge}</em>}
+                  </div>
+                  <h3 data-i18n={service.i18nKey ? `${service.i18nKey}.title` : undefined}>{service.title}</h3>
+                  <p data-i18n={service.i18nKey ? `${service.i18nKey}.detail` : undefined}>{service.detail}</p>
+                  {service.fit && (
+                    <p class="service-fit" data-i18n={service.i18nKey ? `${service.i18nKey}.fit` : undefined}>
+                      {service.fit}
+                    </p>
+                  )}
+                  {service.includes && (
+                    <ul class="service-includes" aria-label="Entregas" data-i18n-aria-label="services.includeLabel">
+                      {service.includes.map((item, includeIndex) => (
+                        <li data-i18n={service.i18nKey ? `${service.i18nKey}.include.${includeIndex + 1}` : undefined}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {service.result && <strong data-i18n={service.i18nKey ? `${service.i18nKey}.result` : undefined}>{service.result}</strong>}
+                  <div class="service-card-actions">
+                    <a
+                      class="service-card-mail"
+                      href={getMailHref(`Quiero revisar el plan ${service.title}`)}
+                      data-track-click={`automize_plan_${index + 1}_email`}
+                      data-i18n="services.cardEmailCta">Pedir por email</a
+                    >
+                    <a
+                      class="service-card-form"
+                      href="#contacto"
+                      data-track-click={`automize_plan_${index + 1}_form`}
+                      data-i18n="services.cardFormCta">Enviar proceso</a
+                    >
+                  </div>
+                </article>
               ))
             }
           </div>
+          <div class="service-diagram" aria-label="Flujo gradual de compra" data-i18n-aria-label="services.diagramLabel">
+            <span class="diagram-pill" data-i18n="services.diagram.diagnostic">Revisar</span>
+            <span class="diagram-line"></span>
+            <span class="diagram-pill highlight" data-i18n="services.diagram.build">Construir</span>
+            <span class="diagram-line danger"></span>
+            <span class="diagram-pill" data-i18n="services.diagram.growth">Soporte y mejoras</span>
+            <p data-i18n="services.diagram.body">Primero elegimos bien. Luego construimos. Despues medimos, corregimos y ampliamos.</p>
+          </div>
+        </div>
+        <div class="section-cta section-cta-compact">
+          <p data-i18n="services.ctaBody">No necesitamos acceso a tus sistemas para partir. Si el problema existe, lo podemos revisar con una descripcion corta.</p>
+          <div class="section-cta-actions">
+            <a
+              class="button button-primary"
+              href={getMailHref("Quiero revisar un proceso automatizable")}
+              data-track-click="automize_services_mid_email_cta"
+              data-i18n="services.emailCta">Escribir ahora</a
+            >
+            <a class="button button-secondary" href="#contacto" data-track-click="automize_services_mid_form_cta" data-i18n="services.formCta">
+              Ir al formulario
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="casos" class="section use-cases-section">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="useCases.eyebrow">Casos de uso por problema</p>
+          <h2 data-i18n="useCases.title">Que podriamos automatizar primero</h2>
+          <p data-i18n="useCases.body">
+            Estos son puntos de partida comprables: tareas concretas, repetidas y con perdida visible de seguimiento.
+          </p>
+        </div>
+        <div class="use-case-grid" aria-label="Ejemplos de workflows automatizables" data-i18n-aria-label="useCases.label">
+          {
+            useCases.map((item) => (
+              <article class="use-case-card">
+                <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.problem` : undefined}>{item.problem}</h3>
+                <p data-i18n={item.i18nKey ? `${item.i18nKey}.workflow` : undefined}>{item.workflow}</p>
+              </article>
+            ))
+          }
         </div>
       </section>
 
@@ -243,37 +329,15 @@ const currentYear = new Date().getFullYear();
         <div class="section-cta">
           <p data-i18n="problems.ctaBody">Si esto pasa en tu operacion, el diagnostico aterriza el flujo exacto, el costo del problema y la primera automatizacion viable.</p>
           <a class="button button-primary" href="#contacto" data-track-click="automize_problem_cta" data-i18n="problems.cta">
-            Diagnosticar mi proceso
+            Revisar mi proceso
           </a>
         </div>
       </section>
 
-      <section class="section impact-section" aria-label="Prueba de impacto" data-i18n-aria-label="impact.label">
+      <section class="section system-section" aria-label="Workflow operativo" data-i18n-aria-label="system.label">
         <div class="section-intro">
-          <p class="eyebrow" data-i18n="impact.eyebrow">Costos ocultos</p>
-          <h2 data-i18n="impact.title">La perdida aparece cuando nadie ve el estado del proceso</h2>
-          <p data-i18n="impact.body">
-            No prometemos resultados imposibles. Buscamos tareas donde el tiempo perdido, el error o la falta de
-            seguimiento hacen razonable automatizar.
-          </p>
-        </div>
-        <div class="impact-grid">
-          {
-            impactProofs.map((proof) => (
-              <article class="impact-card">
-                <span data-i18n={proof.i18nKey ? `${proof.i18nKey}.metric` : undefined}>{proof.metric}</span>
-                <h3 data-i18n={proof.i18nKey ? `${proof.i18nKey}.title` : undefined}>{proof.title}</h3>
-                <p data-i18n={proof.i18nKey ? `${proof.i18nKey}.detail` : undefined}>{proof.detail}</p>
-              </article>
-            ))
-          }
-        </div>
-      </section>
-
-      <section class="section system-section" aria-label="Sistema Automize" data-i18n-aria-label="system.label">
-        <div class="section-intro">
-          <p class="eyebrow" data-i18n="system.eyebrow">Sistema Automize</p>
-          <h2 data-i18n="system.title">De tarea manual a proceso operativo controlado</h2>
+          <p class="eyebrow" data-i18n="system.eyebrow">Workflow operativo</p>
+          <h2 data-i18n="system.title">Como convertimos una tarea manual en un workflow operativo</h2>
           <p data-i18n="system.body">
             El valor no esta en sumar mas herramientas. Esta en dejar un flujo con entrada clara, reglas, responsable,
             excepciones y registro para que el equipo pueda operarlo.
@@ -294,57 +358,37 @@ const currentYear = new Date().getFullYear();
         </div>
       </section>
 
-      <section class="section services-section">
-        <span id="servicios" class="section-scroll-target" aria-hidden="true"></span>
-        <div class="services-header">
-          <p class="eyebrow" data-i18n="services.eyebrow">Servicios</p>
-          <h2 data-i18n="services.title">Tres formas de avanzar sin sobredisenar</h2>
-          <p data-i18n="services.body">
-            Cada oferta tiene un momento claro: elegir bien, implementar un flujo o mantenerlo operando con soporte y
-            mejoras.
-          </p>
+      <section class="integration-strip" aria-label="Conectamos las herramientas que tu equipo ya usa" data-i18n-aria-label="integrations.label">
+        <div class="integration-copy">
+          <p class="eyebrow" data-i18n="integrations.label">Conectamos las herramientas que tu equipo ya usa</p>
+          <h2 data-i18n="integrations.title">Unimos tus herramientas operativas y usamos IA donde agrega control</h2>
         </div>
-        <div class="services-visual" aria-label="Servicios de Automize" data-i18n-aria-label="services.visualLabel">
-          <div class="service-catalog">
+        <div class="integration-carousel" aria-hidden="true">
+          <div class="integration-track">
             {
-              services.map((service, index) => (
-                <article class={`service-card service-card-${index + 1}`}>
-                  <span>{service.tag}</span>
-                  <h3 data-i18n={service.i18nKey ? `${service.i18nKey}.title` : undefined}>{service.title}</h3>
-                  <p data-i18n={service.i18nKey ? `${service.i18nKey}.detail` : undefined}>{service.detail}</p>
-                  {service.fit && (
-                    <p class="service-fit" data-i18n={service.i18nKey ? `${service.i18nKey}.fit` : undefined}>
-                      {service.fit}
-                    </p>
-                  )}
-                  {service.includes && (
-                    <ul class="service-includes" aria-label="Incluye" data-i18n-aria-label="services.includeLabel">
-                      {service.includes.map((item, includeIndex) => (
-                        <li data-i18n={service.i18nKey ? `${service.i18nKey}.include.${includeIndex + 1}` : undefined}>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {service.result && <strong data-i18n={service.i18nKey ? `${service.i18nKey}.result` : undefined}>{service.result}</strong>}
-                </article>
+              integrationLoop.map((logo) => (
+                <span class={`integration-logo ${logo.tone}`}>
+                  <span class="integration-logo-mark">
+                    {
+                      logo.logoUrl ? (
+                        <img
+                          src={logo.logoUrl}
+                          alt={logo.logoAlt ?? logo.name}
+                          loading="lazy"
+                          decoding="async"
+                          width="28"
+                          height="28"
+                        />
+                      ) : (
+                        <strong>{logo.mark}</strong>
+                      )
+                    }
+                  </span>
+                  <em>{logo.name}</em>
+                </span>
               ))
             }
           </div>
-          <div class="service-diagram" aria-label="Flujo de decision de servicios" data-i18n-aria-label="services.diagramLabel">
-            <span class="diagram-pill" data-i18n="services.diagram.diagnostic">Diagnostico</span>
-            <span class="diagram-line"></span>
-            <span class="diagram-pill highlight" data-i18n="services.diagram.build">Implementacion</span>
-            <span class="diagram-line danger"></span>
-            <span class="diagram-pill" data-i18n="services.diagram.growth">Mejora continua</span>
-            <p data-i18n="services.diagram.body">Primero elegimos bien. Luego construimos. Despues medimos, corregimos y ampliamos.</p>
-          </div>
-        </div>
-        <div class="section-cta section-cta-compact">
-          <p data-i18n="services.ctaBody">El primer paso no requiere accesos ni promesas grandes: solo elegir un proceso con dolor real y revisar si tiene sentido diagnosticarlo.</p>
-          <a class="button button-primary" href="#contacto" data-track-click="automize_services_mid_cta" data-i18n="services.cta">
-            Diagnosticar mi proceso
-          </a>
         </div>
       </section>
 
@@ -388,29 +432,64 @@ const currentYear = new Date().getFullYear();
         />
       </section>
 
+      <section class="section scope-clarity-section" aria-label="Alcance claro desde el inicio" data-i18n-aria-label="scope.label">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="scope.eyebrow">Alcance claro</p>
+          <h2 data-i18n="scope.title">Alcance claro desde el inicio</h2>
+          <p data-i18n="scope.body">
+            Para partir bien, dejamos claro que entra en la primera etapa y que requiere diagnostico, otra fase o un
+            proyecto distinto.
+          </p>
+        </div>
+        <div class="scope-clarity-grid">
+          <article class="scope-clarity-card">
+            <h3 data-i18n="scope.includeTitle">Que si hacemos</h3>
+            <ul>
+              {
+                scopeIncludes.map((item) => (
+                  <li data-i18n={item.i18nKey ? `${item.i18nKey}.title` : undefined}>{item.title}</li>
+                ))
+              }
+            </ul>
+          </article>
+          <article class="scope-clarity-card is-limited">
+            <h3 data-i18n="scope.excludeTitle">Que no hacemos en la primera etapa</h3>
+            <ul>
+              {
+                scopeExcludes.map((item) => (
+                  <li data-i18n={item.i18nKey ? `${item.i18nKey}.title` : undefined}>{item.title}</li>
+                ))
+              }
+            </ul>
+          </article>
+        </div>
+      </section>
+
       <section id="contacto" class="contact-section automize-contact">
         <div class="contact-copy">
           <p class="eyebrow" data-i18n="contact.eyebrow">Siguiente paso</p>
-          <h2 data-i18n="contact.title">Cuentanos que proceso quieres dejar de perseguir a mano</h2>
+          <h2 data-i18n="contact.title">Revisemos un proceso automatizable</h2>
           <p data-i18n="contact.body">
-            No necesitamos accesos al inicio. Describe el flujo, las herramientas que usa el equipo y la salida
-            esperada; si hay fit, definimos un diagnostico acotado.
+            Cuentanos que tarea se repite, que herramientas usan y donde se pierde seguimiento. Si hay fit, te
+            respondemos con el siguiente paso.
           </p>
           <ul class="contact-points">
             <li data-i18n="contact.point.fit">Fit inicial antes de pedir accesos</li>
             <li data-i18n="contact.point.price">Diagnostico pagado desde USD 900</li>
             <li data-i18n="contact.point.discount">Descontable si avanzas a implementacion</li>
           </ul>
+          <a
+            class="inline-link contact-email-cta"
+            href="mailto:contacto@automize.cl?subject=Quiero%20revisar%20un%20proceso%20automatizable"
+            data-track-click="automize_email_cta"
+            data-i18n="contact.emailCta">Escribir por email</a
+          >
         </div>
 
         <LeadForm
           config={landingConfig}
           source="automize-landing"
-          offer="workflow-automation-diagnostic"
-          websiteLabel="Empresa o sitio web"
-          websitePlaceholder="https://tuempresa.cl"
-          symptomLabel="Proceso o tarea a diagnosticar"
-          symptomPlaceholder="Ej: reportes manuales, correos repetitivos, planillas, solicitudes internas o seguimiento comercial"
+          offer="workflow-automation-review"
         />
       </section>
     </main>
@@ -449,14 +528,16 @@ const currentYear = new Date().getFullYear();
             </a>
           </li>
           <li>
-            <span class="footer-link-disabled" aria-disabled="true">
-              Instagram <small data-i18n="footer.comingSoon">Proximamente</small>
-            </span>
+            <a
+              href="https://www.instagram.com/automize._/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram de Automize Solutions">
+              Instagram
+            </a>
           </li>
           <li>
-            <span class="footer-link-disabled" aria-disabled="true">
-              YouTube <small data-i18n="footer.comingSoon">Proximamente</small>
-            </span>
+            <span class="footer-link-disabled" aria-disabled="true">YouTube</span>
           </li>
         </ul>
       </nav>
@@ -467,19 +548,16 @@ const currentYear = new Date().getFullYear();
           <li>
             <span class="footer-link-disabled" aria-disabled="true">
               <span data-i18n="footer.privacy">Privacidad</span>
-              <small data-i18n="footer.inPreparation">En preparacion</small>
             </span>
           </li>
           <li>
             <span class="footer-link-disabled" aria-disabled="true">
               <span data-i18n="footer.terms">Terminos</span>
-              <small data-i18n="footer.inPreparation">En preparacion</small>
             </span>
           </li>
           <li>
             <span class="footer-link-disabled" aria-disabled="true">
               <span data-i18n="footer.legalNotice">Aviso legal</span>
-              <small data-i18n="footer.inPreparation">En preparacion</small>
             </span>
           </li>
           <li>

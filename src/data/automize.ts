@@ -1,6 +1,7 @@
 export type ContentCard = {
   i18nKey?: string;
   tag?: string;
+  badge?: string;
   icon?: string;
   title: string;
   detail: string;
@@ -52,6 +53,12 @@ export type ImpactProof = {
   detail: string;
 };
 
+export type UseCase = {
+  i18nKey?: string;
+  problem: string;
+  workflow: string;
+};
+
 export const heroSignals: FlowSignal[] = [
   {
     i18nKey: "hero.signal.input",
@@ -86,7 +93,7 @@ export const heroFlowSteps: HeroFlowStep[] = [
   },
   {
     i18nKey: "hero.flow.growth",
-    title: "Mejora continua",
+    title: "Soporte y mejoras",
     detail: "Medimos fallos, ajustes y oportunidades nuevas",
   },
 ];
@@ -274,30 +281,96 @@ export const services: ContentCard[] = [
   {
     i18nKey: "services.diagnostic",
     tag: "01",
-    title: "Diagnostico",
-    detail: "Para empresas que saben que hay trabajo manual, pero no tienen claro que automatizar primero.",
-    fit: "Cuando hay varios dolores y necesitas elegir el flujo con mejor retorno antes de construir.",
-    includes: ["Mapa del proceso", "Riesgos y excepciones", "Quick wins", "Plan de implementacion"],
-    result: "Mapa del proceso, puntos criticos, prioridad y plan de implementacion",
+    badge: "Empieza aqui",
+    title: "Diagnostico operativo",
+    detail: "Ordenamos un proceso manual y te decimos que conviene automatizar primero.",
+    fit: "Para decidir rapido sin comprometer una implementacion completa.",
+    includes: ["Mapa del proceso", "Brechas", "Quick wins", "Primer workflow recomendado"],
+    result: "Duracion: 3-5 dias habiles",
   },
   {
     i18nKey: "services.build",
     tag: "02",
-    title: "Implementacion",
-    detail: "Para equipos que ya tienen un proceso elegido y necesitan dejarlo funcionando con herramientas reales.",
-    fit: "Cuando el proceso ya esta priorizado y el equipo necesita operarlo con reglas, alertas y responsables.",
-    includes: ["Workflow conectado", "Validaciones y reglas", "Excepciones humanas", "Documentacion operativa"],
-    result: "Workflow conectado, probado, documentado y listo para operar",
+    badge: "Mas solicitado",
+    title: "Primer workflow funcionando",
+    detail: "Construimos una automatizacion acotada, probada y lista para operar.",
+    fit: "Para leads, reportes, solicitudes, agenda, documentos o planillas.",
+    includes: ["Workflow conectado", "Pruebas", "Documentacion operativa", "Salida lista para operar"],
+    result: "Duracion: 7-10 dias habiles",
   },
   {
-    i18nKey: "services.growth",
+    i18nKey: "services.tracking",
     tag: "03",
-    title: "Mejora continua",
-    detail: "Para mantener los flujos vivos: errores, cambios de reglas, soporte y nuevas automatizaciones.",
-    fit: "Cuando el flujo ya opera y necesitas soporte, ajustes y nuevas mejoras sin perder control.",
-    includes: ["Monitoreo de fallos", "Ajustes de reglas", "Soporte mensual", "Mejoras priorizadas"],
-    result: "Monitoreo, ajustes, soporte mensual y mejoras priorizadas",
+    badge: "Venta y seguimiento",
+    title: "Sistema de Seguimiento Comercial",
+    detail: "Centralizamos leads, responsable, estado y proxima accion para que nadie quede sin respuesta.",
+    fit: "Para inmobiliarias, B2B, clinicas, agencias y negocios con consultas frecuentes.",
+    includes: ["Registro centralizado", "Responsable", "Estado y proxima accion", "Alertas"],
+    result: "Duracion: 7-12 dias habiles",
   },
+  {
+    i18nKey: "services.agent",
+    tag: "04",
+    badge: "IA con control",
+    title: "Piloto de agente operativo",
+    detail: "Probamos IA en una tarea concreta: clasificar, resumir, extraer o preparar informacion.",
+    fit: "Para correos, documentos, tickets, solicitudes y reportes.",
+    includes: ["Agente acotado a una tarea", "Reglas", "Pruebas", "Revision humana cuando corresponde"],
+    result: "Duracion: 10-15 dias habiles",
+  },
+];
+
+export const useCases: UseCase[] = [
+  {
+    i18nKey: "useCases.leads",
+    problem: "Leads sin seguimiento",
+    workflow: "Lead entra por WhatsApp o formulario, se registra, se asigna responsable y se crea proxima accion.",
+  },
+  {
+    i18nKey: "useCases.schedule",
+    problem: "Agenda manual",
+    workflow: "Paciente o cliente solicita hora, se registra, se confirma y se envia recordatorio.",
+  },
+  {
+    i18nKey: "useCases.reports",
+    problem: "Reportes a mano",
+    workflow: "Datos de ventas o pagos se consolidan, se genera reporte y se envia al responsable.",
+  },
+  {
+    i18nKey: "useCases.requests",
+    problem: "Solicitudes internas",
+    workflow: "Solicitud entra por correo o formulario, se clasifica, se asigna y queda estado visible.",
+  },
+  {
+    i18nKey: "useCases.documents",
+    problem: "Documentos repetitivos",
+    workflow: "Formulario, plantilla, documento, carpeta y aviso quedan conectados en un flujo.",
+  },
+  {
+    i18nKey: "useCases.tickets",
+    problem: "Tickets o consultas",
+    workflow: "Mensaje entra, IA resume o clasifica, se asigna prioridad y el responsable recibe alerta.",
+  },
+];
+
+export const scopeIncludes: ContentCard[] = [
+  { i18nKey: "scope.include.1", title: "Revisamos procesos manuales o repetitivos", detail: "" },
+  { i18nKey: "scope.include.2", title: "Disenamos workflows simples", detail: "" },
+  { i18nKey: "scope.include.3", title: "Conectamos herramientas existentes", detail: "" },
+  { i18nKey: "scope.include.4", title: "Aplicamos IA donde aporta valor", detail: "" },
+  { i18nKey: "scope.include.5", title: "Dejamos responsables, estados y alertas", detail: "" },
+  { i18nKey: "scope.include.6", title: "Documentamos el flujo", detail: "" },
+  { i18nKey: "scope.include.7", title: "Proponemos siguientes mejoras", detail: "" },
+];
+
+export const scopeExcludes: ContentCard[] = [
+  { i18nKey: "scope.exclude.1", title: "Automatizar toda la empresa de una vez", detail: "" },
+  { i18nKey: "scope.exclude.2", title: "Prometer resultados comerciales garantizados", detail: "" },
+  { i18nKey: "scope.exclude.3", title: "Crear SaaS propio", detail: "" },
+  { i18nKey: "scope.exclude.4", title: "Implementar sistemas enterprise complejos", detail: "" },
+  { i18nKey: "scope.exclude.5", title: "Vender agentes autonomos sin control", detail: "" },
+  { i18nKey: "scope.exclude.6", title: "Hacer soporte 24/7", detail: "" },
+  { i18nKey: "scope.exclude.7", title: "Integraciones criticas sin diagnostico previo", detail: "" },
 ];
 
 export const impactProofs: ImpactProof[] = [

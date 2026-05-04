@@ -109,6 +109,7 @@ Contrato en codigo:
 - `src/config/landing.ts` lee las variables `PUBLIC_*`
 - `src/components/LeadForm.astro` renderiza `action="#"` si la captura no esta configurada
 - `src/scripts/lead-form.ts` valida required fields, bloquea doble submit y maneja errores JSON de la Function
+- Campos enviados: `name`, `email`, `company`, `industry`, `symptom`, `tools`, `impact`, `source`, `offer` y honeypot `company_fax`
 
 ## Captura de leads
 
@@ -125,7 +126,7 @@ CONTACT_FROM_EMAIL="Automize <contacto@automize.cl>"
 Flujo:
 
 1. El formulario envia `POST /api/contact`
-2. `functions/api/contact.js` valida campos, URL, email y largos maximos
+2. `functions/api/contact.js` valida campos obligatorios, email y largos maximos
 3. El honeypot `company_fax` redirige a `/gracias` sin enviar email
 4. La Function envia el lead a Resend con `Idempotency-Key`
 5. Si Resend responde OK, la Function redirige a `/gracias`

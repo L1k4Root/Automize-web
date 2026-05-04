@@ -62,7 +62,7 @@ Within the parent MetricLogic repo, this project lives at `projects/automize/web
 - When `PUBLIC_LEAD_FORM_ACTION` is missing, the form must fail closed with `action="#"`.
 - `functions/api/contact.js` owns server-side validation, honeypot handling, Resend delivery, structured logs, and `/gracias` redirects.
 - Lead emails are sent to `CONTACT_TO_EMAIL`, with `contacto@automize.cl` as the default operational fallback.
-- The lead form fields are `name`, `email`, `website`, `symptom`, `source`, `offer`, and honeypot `company_fax`.
+- The lead form fields are `name`, `email`, `company`, `industry`, `symptom`, `tools`, `impact`, `source`, `offer`, and honeypot `company_fax`.
 - The bilingual layer is static-first: Spanish HTML by default, client-side switch for English.
 - Navigation behavior lives in `src/scripts/navigation.ts`: anchor scrolling accounts for sticky header height, click tracking emits analytics events, and the header toggles `is-scrolled` after the user has moved beyond the first part of the viewport.
 

@@ -5,23 +5,15 @@ interface Props {
   config: LandingConfig;
   source?: string;
   offer?: string;
-  websiteLabel?: string;
-  websitePlaceholder?: string;
-  symptomLabel?: string;
-  symptomPlaceholder?: string;
 }
 
 const {
   config,
   source = "automize-landing",
-  offer = "workflow-automation-diagnostic",
-  websiteLabel = "Empresa o sitio web",
-  websitePlaceholder = "https://tuempresa.cl",
-  symptomLabel = "Flujo de trabajo a automatizar",
-  symptomPlaceholder = "Ej: aprobaciones internas, reportes manuales, correos repetitivos, seguimiento comercial o carga de planillas",
+  offer = "workflow-automation-review",
 } = Astro.props;
 const formAction = config.isLeadCaptureConfigured ? config.leadFormAction : "#";
-const buttonLabel = "Diagnosticar mi proceso";
+const buttonLabel = "Enviar proceso para revision";
 const buttonLabelKey = config.isLeadCaptureConfigured ? "form.submitConfigured" : "form.submitUnconfigured";
 const formNote = config.isLeadCaptureConfigured
   ? "Sin spam. Solo una respuesta para confirmar fit y siguiente paso"
@@ -61,17 +53,42 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
   </label>
 
   <label>
-    <span data-i18n="form.websiteLabel">{websiteLabel}</span>
-    <input name="website" type="url" inputmode="url" placeholder={websitePlaceholder} data-i18n-placeholder="form.websitePlaceholder" required />
+    <span data-i18n="form.companyLabel">Empresa</span>
+    <input name="company" type="text" autocomplete="organization" placeholder="Nombre de la empresa" data-i18n-placeholder="form.companyPlaceholder" required />
   </label>
 
   <label>
-    <span data-i18n="form.symptomLabel">{symptomLabel}</span>
+    <span data-i18n="form.industryLabel">Rubro</span>
+    <input name="industry" type="text" autocomplete="organization-title" placeholder="Ej: inmobiliaria, clinica, agencia, B2B" data-i18n-placeholder="form.industryPlaceholder" required />
+  </label>
+
+  <label>
+    <span data-i18n="form.symptomLabel">Que proceso quieres ordenar?</span>
     <textarea
       name="symptom"
       rows="4"
-      placeholder={symptomPlaceholder}
+      placeholder="Ej: seguimiento comercial, agenda, reportes, solicitudes internas o documentos repetitivos"
       data-i18n-placeholder="form.symptomPlaceholder"
+      required></textarea>
+  </label>
+
+  <label>
+    <span data-i18n="form.toolsLabel">Que herramientas usan hoy?</span>
+    <textarea
+      name="tools"
+      rows="3"
+      placeholder="Ej: WhatsApp, email, Google Sheets, CRM, Notion, agenda o formularios"
+      data-i18n-placeholder="form.toolsPlaceholder"
+      required></textarea>
+  </label>
+
+  <label>
+    <span data-i18n="form.impactLabel">Que pasa si ese proceso falla o se atrasa?</span>
+    <textarea
+      name="impact"
+      rows="3"
+      placeholder="Ej: se pierden leads, se atrasan respuestas, aumenta el retrabajo o nadie ve el estado"
+      data-i18n-placeholder="form.impactPlaceholder"
       required></textarea>
   </label>
 
