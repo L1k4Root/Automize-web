@@ -2066,6 +2066,11 @@ h1 {
   min-height: 44px;
 }
 
+.services-action-buttons .button,
+.section-cta-actions .button {
+  min-height: 44px;
+}
+
 .section-cta-compact {
   margin-top: 20px;
 }
