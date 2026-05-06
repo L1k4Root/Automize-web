@@ -3875,6 +3875,48 @@ textarea:focus-visible {
   }
 }
 
+@media (min-width: 761px) and (max-width: 900px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding-inline: 28px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .automize-page .hero {
+    min-height: auto;
+    padding-top: 112px;
+  }
+
+  .automize-hero-content {
+    width: min(680px, 100%);
+  }
+
+  .automize-hero-content h1 {
+    max-width: 680px;
+    font-size: clamp(3rem, 7.2vw, 3.9rem);
+    line-height: 1.01;
+  }
+
+  .automate-visual::before {
+    mask-image: linear-gradient(180deg, black 0%, transparent 86%);
+    opacity: 0.5;
+  }
+
+  .automation-emblem,
+  .flow-map,
+  .signal-stack {
+    display: none;
+  }
+
+  .premium-strip {
+    width: min(610px, 100%);
+  }
+}
+
 @media (max-width: 760px) {
   .site-header {
     --header-inline-inset: 10px;
