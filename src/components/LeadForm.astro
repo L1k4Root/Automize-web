@@ -13,11 +13,11 @@ const {
   offer = "workflow-automation-review",
 } = Astro.props;
 const formAction = config.isLeadCaptureConfigured ? config.leadFormAction : "#";
-const buttonLabel = "Enviar proceso para revision";
+const buttonLabel = "Enviar proceso para revisión";
 const buttonLabelKey = config.isLeadCaptureConfigured ? "form.submitConfigured" : "form.submitUnconfigured";
 const formNote = config.isLeadCaptureConfigured
   ? "Sin spam. Solo una respuesta para confirmar fit y siguiente paso"
-  : "Formulario en preparacion. La captura queda bloqueada hasta activar el canal de respuesta";
+  : "Formulario en preparación. La captura queda bloqueada hasta activar el canal de respuesta";
 const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "form.noteUnconfigured";
 ---
 
@@ -37,7 +37,7 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
   <input type="hidden" name="offer" value={offer} />
   <div class="form-honeypot" aria-hidden="true">
     <label>
-      <span>Dejar vacio</span>
+      <span>Dejar vacío</span>
       <input name="company_fax" type="text" tabindex="-1" autocomplete="off" />
     </label>
   </div>
@@ -63,7 +63,7 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
   </label>
 
   <label>
-    <span data-i18n="form.symptomLabel">Que proceso quieres ordenar?</span>
+    <span data-i18n="form.symptomLabel">¿Qué proceso quieres ordenar?</span>
     <textarea
       name="symptom"
       rows="4"
@@ -73,7 +73,7 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
   </label>
 
   <label>
-    <span data-i18n="form.toolsLabel">Que herramientas usan hoy?</span>
+    <span data-i18n="form.toolsLabel">¿Qué herramientas usan hoy?</span>
     <textarea
       name="tools"
       rows="3"
@@ -83,7 +83,7 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
   </label>
 
   <label>
-    <span data-i18n="form.impactLabel">Que pasa si ese proceso falla o se atrasa?</span>
+    <span data-i18n="form.impactLabel">¿Qué pasa si ese proceso falla o se atrasa?</span>
     <textarea
       name="impact"
       rows="3"

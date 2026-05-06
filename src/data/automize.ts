@@ -84,7 +84,7 @@ export const heroFlowSteps: HeroFlowStep[] = [
   {
     i18nKey: "hero.flow.diagnostic",
     title: "Diagnostico",
-    detail: "Elegimos el flujo que mas frena al equipo",
+    detail: "Elegimos el flujo que más frena al equipo",
   },
   {
     i18nKey: "hero.flow.build",
@@ -114,7 +114,7 @@ export const problemFlow: ProblemFlowItem[] = [
   {
     i18nKey: "problemFlow.control",
     label: "Control perdido",
-    detail: "No queda claro quien responde, que falta, que vencio ni donde se atasco.",
+    detail: "No queda claro quién responde, qué falta, qué venció ni dónde se atascó.",
     tone: "control",
   },
 ];
@@ -152,7 +152,7 @@ export const systemSteps: SystemStep[] = [
     i18nKey: "system.record",
     label: "05",
     title: "Registro operativo",
-    detail: "La salida queda documentada: CRM actualizado, reporte generado, tarea creada o aprobacion registrada.",
+    detail: "La salida queda documentada: CRM actualizado, reporte generado, tarea creada o aprobación registrada.",
     tone: "record",
   },
 ];
@@ -164,7 +164,7 @@ export const problems: ContentCard[] = [
     icon: "$",
     title: "Leads y cotizaciones que pierden seguimiento",
     detail: "El contacto entra por formulario, WhatsApp o email, pero el seguimiento depende de memoria, tiempo disponible o una planilla.",
-    result: "Automatizamos captura, alerta, CRM y proxima tarea comercial",
+    result: "Automatizamos captura, alerta, CRM y próxima tarea comercial",
   },
   {
     i18nKey: "problems.support",
@@ -180,15 +180,15 @@ export const problems: ContentCard[] = [
     icon: "DOC",
     title: "Reportes, cobranza y planillas a mano",
     detail: "Datos de ventas, pagos u operaciones viven en herramientas separadas; alguien los copia para cerrar la semana o cobrar.",
-    result: "Automatizamos conciliacion, validacion y reporte",
+    result: "Automatizamos conciliación, validación y reporte",
   },
   {
     i18nKey: "problems.legal",
     tag: "Legal / RR. HH.",
     icon: "OK",
     title: "Contratos, aprobaciones y onboarding detenidos",
-    detail: "Solicitudes, documentos y permisos se mueven por correo o carpetas; cuesta saber que falta, quien aprueba y que esta vencido.",
-    result: "Automatizamos solicitud, revision, aprobacion y registro",
+    detail: "Solicitudes, documentos y permisos se mueven por correo o carpetas; cuesta saber qué falta, quién aprueba y qué está vencido.",
+    result: "Automatizamos solicitud, revisión, aprobación y registro",
   },
 ];
 
@@ -284,7 +284,7 @@ export const services: ContentCard[] = [
     badge: "Empieza aqui",
     title: "Diagnostico operativo",
     detail: "Ordenamos un proceso manual y te decimos que conviene automatizar primero.",
-    fit: "Para decidir rapido sin comprometer una implementacion completa.",
+    fit: "Para decidir rápido sin comprometer una implementación completa.",
     includes: ["Mapa del proceso", "Brechas", "Quick wins", "Primer workflow recomendado"],
     result: "Duracion: 3-5 dias habiles",
   },
@@ -293,7 +293,7 @@ export const services: ContentCard[] = [
     tag: "02",
     badge: "Mas solicitado",
     title: "Primer workflow funcionando",
-    detail: "Construimos una automatizacion acotada, probada y lista para operar.",
+    detail: "Construimos una automatización acotada, probada y lista para operar.",
     fit: "Para leads, reportes, solicitudes, agenda, documentos o planillas.",
     includes: ["Workflow conectado", "Pruebas", "Documentacion operativa", "Salida lista para operar"],
     result: "Duracion: 7-10 dias habiles",
@@ -303,9 +303,9 @@ export const services: ContentCard[] = [
     tag: "03",
     badge: "Venta y seguimiento",
     title: "Sistema de Seguimiento Comercial",
-    detail: "Centralizamos leads, responsable, estado y proxima accion para que nadie quede sin respuesta.",
+    detail: "Centralizamos leads, responsable, estado y próxima acción para que nadie quede sin respuesta.",
     fit: "Para inmobiliarias, B2B, clinicas, agencias y negocios con consultas frecuentes.",
-    includes: ["Registro centralizado", "Responsable", "Estado y proxima accion", "Alertas"],
+    includes: ["Registro centralizado", "Responsable", "Estado y próxima acción", "Alertas"],
     result: "Duracion: 7-12 dias habiles",
   },
   {
@@ -313,7 +313,7 @@ export const services: ContentCard[] = [
     tag: "04",
     badge: "IA con control",
     title: "Piloto de agente operativo",
-    detail: "Probamos IA en una tarea concreta: clasificar, resumir, extraer o preparar informacion.",
+    detail: "Probamos IA en una tarea concreta: clasificar, resumir, extraer o preparar información.",
     fit: "Para correos, documentos, tickets, solicitudes y reportes.",
     includes: ["Agente acotado a una tarea", "Reglas", "Pruebas", "Revision humana cuando corresponde"],
     result: "Duracion: 10-15 dias habiles",
@@ -324,7 +324,7 @@ export const useCases: UseCase[] = [
   {
     i18nKey: "useCases.leads",
     problem: "Leads sin seguimiento",
-    workflow: "Lead entra por WhatsApp o formulario, se registra, se asigna responsable y se crea proxima accion.",
+    workflow: "Lead entra por WhatsApp o formulario, se registra, se asigna responsable y se crea próxima acción.",
   },
   {
     i18nKey: "useCases.schedule",
@@ -370,7 +370,7 @@ export const scopeExcludes: ContentCard[] = [
   { i18nKey: "scope.exclude.4", title: "Implementar sistemas enterprise complejos", detail: "" },
   { i18nKey: "scope.exclude.5", title: "Vender agentes autonomos sin control", detail: "" },
   { i18nKey: "scope.exclude.6", title: "Hacer soporte 24/7", detail: "" },
-  { i18nKey: "scope.exclude.7", title: "Integraciones criticas sin diagnostico previo", detail: "" },
+  { i18nKey: "scope.exclude.7", title: "Integraciones críticas sin diagnóstico previo", detail: "" },
 ];
 
 export const impactProofs: ImpactProof[] = [
@@ -378,7 +378,7 @@ export const impactProofs: ImpactProof[] = [
     i18nKey: "impact.sales",
     metric: "Ventas",
     title: "Seguimiento sin depender de memoria",
-    detail: "Lead entra, se registra, avisa al responsable y crea la proxima tarea sin esperar revision manual.",
+    detail: "Lead entra, se registra, avisa al responsable y crea la próxima tarea sin esperar revisión manual.",
   },
   {
     i18nKey: "impact.ops",
@@ -399,19 +399,19 @@ export const principles: ContentCard[] = [
     i18nKey: "principles.limits",
     tag: "Limites",
     title: "Lo automatico no decide todo",
-    detail: "Definimos que puede correr solo, que requiere aprobacion y que debe volver a una persona.",
+    detail: "Definimos qué puede correr solo, qué requiere aprobación y qué debe volver a una persona.",
   },
   {
     i18nKey: "principles.errors",
     tag: "Errores",
     title: "Los fallos quedan visibles",
-    detail: "Si una integracion falla o falta informacion, el flujo debe avisar, registrar y permitir correccion.",
+    detail: "Si una integración falla o falta información, el flujo debe avisar, registrar y permitir corrección.",
   },
   {
     i18nKey: "principles.operation",
     tag: "Operacion",
     title: "El equipo entiende el flujo",
-    detail: "La automatizacion se documenta para que no dependa de una caja negra ni de una persona externa.",
+    detail: "La automatización se documenta para que no dependa de una caja negra ni de una persona externa.",
   },
 ];
 
