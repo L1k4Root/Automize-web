@@ -4,10 +4,13 @@ import LanguageSwitch from "../components/LanguageSwitch.astro";
 import LeadForm from "../components/LeadForm.astro";
 import { landingConfig } from "../config/landing";
 import {
+  faqs,
   heroFlowSteps,
   heroSignals,
+  impactProofs,
   integrationLogos,
   methodSteps,
+  mobileIntegrationTools,
   problemFlow,
   principles,
   problems,
@@ -62,14 +65,14 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
         <img class="brand-mark" src="/automize-icon.png" alt="" width="48" height="48" />
         <span class="brand-copy">
           <strong>Automize</strong>
-          <small data-i18n="brand.subtitle">Diagnóstico de automatización</small>
+          <small data-i18n="brand.subtitle">Diagnóstico de procesos</small>
         </span>
       </a>
-      <nav class="nav-links" aria-label="Navegacion principal" data-i18n-aria-label="nav.label">
-        <a href="#servicios" data-i18n="nav.services">Planes</a>
-        <a href="#casos" data-i18n="nav.useCases">Casos</a>
+      <nav class="nav-links" aria-label="Navegación principal" data-i18n-aria-label="nav.label">
         <a href="#problema" data-i18n="nav.problem">Problema</a>
-        <a href="#metodo" data-i18n="nav.method">Metodo</a>
+        <a href="#casos" data-i18n="nav.useCases">Casos</a>
+        <a href="#metodo" data-i18n="nav.method">Método</a>
+        <a href="#servicios" data-i18n="nav.services">Oferta</a>
         <a href="#contacto" data-i18n="nav.contact">Contacto</a>
       </nav>
       <div class="header-actions">
@@ -87,19 +90,19 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
           <div class="flow-map">
             <span
               class="flow-node node-input"
-              aria-label="Entrada manual: datos, formularios, correos, planillas o eventos que inician el flujo"
+              aria-label="Entrada: datos, formularios, correos, planillas o eventos que inician el flujo"
               tabindex="0"
               data-tooltip="Datos, formularios, correos, planillas o eventos que inician el flujo"
               data-i18n="hero.node.input"
               data-i18n-aria-label="hero.node.inputLabel"
-              data-i18n-tooltip="hero.node.inputTooltip">Entrada manual</span
+              data-i18n-tooltip="hero.node.inputTooltip">Entrada</span
             >
             <span class="flow-line line-one"></span>
             <span
               class="flow-node node-decision"
               aria-label="Reglas e IA: validación, clasificación o revisión humana según el riesgo"
               tabindex="0"
-              data-tooltip="Reglas, IA o revisión humana según el riesgo"
+              data-tooltip="Validación, clasificación o revisión humana según el riesgo"
               data-i18n="hero.node.decision"
               data-i18n-aria-label="hero.node.decisionLabel"
               data-i18n-tooltip="hero.node.decisionTooltip">Reglas e IA</span
@@ -117,12 +120,12 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
             <span class="flow-branch branch-alert"></span>
             <span
               class="flow-node node-review"
-              aria-label="Excepcion: control humano para errores, datos incompletos o decisiones sensibles"
+              aria-label="Revisión: control humano para errores, datos incompletos o decisiones sensibles"
               tabindex="0"
-              data-tooltip="Control humano para excepciones, errores o decisiones sensibles"
+              data-tooltip="Control humano para errores, datos incompletos o decisiones sensibles"
               data-i18n="hero.node.review"
               data-i18n-aria-label="hero.node.reviewLabel"
-              data-i18n-tooltip="hero.node.reviewTooltip">Excepcion</span
+              data-i18n-tooltip="hero.node.reviewTooltip">Revisión</span
             >
           </div>
           <div class="signal-stack">
@@ -138,11 +141,11 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
         </div>
 
         <div class="hero-content automize-hero-content">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Automatización de procesos con IA</p>
-          <h1 data-i18n="hero.title">Automatiza el trabajo repetido sin perder control</h1>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Automatización de procesos con IA cuando aporta</p>
+          <h1 data-i18n="hero.title">Automatiza procesos repetidos sin convertir tu operación en una caja negra</h1>
           <p class="hero-subtitle" data-i18n="hero.subtitle">
-            Convertimos solicitudes, aprobaciones, reportes y seguimientos manuales en flujos con responsables, estados
-            visibles y alertas accionables.
+            Revisamos un proceso crítico de tu empresa y lo convertimos en un flujo con persona asignada, estado visible,
+            alertas y revisión humana cuando haga falta.
           </p>
           <div class="hero-mobile-flow" aria-label="Ruta del diagnóstico" data-i18n-aria-label="hero.mobileFlowLabel">
             {
@@ -157,51 +160,235 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
           </div>
           <div class="hero-actions" aria-label="Acciones principales">
             <a class="button button-primary" href="#contacto" data-track-click="automize_lead_cta" data-i18n="hero.primaryCta">
-              Revisar mi proceso
+              Solicitar diagnóstico
             </a>
-            <a class="button button-secondary" href="#servicios" data-track-click="automize_services_cta" data-i18n="hero.secondaryCta">
-              Ver planes de entrada
+            <a class="button button-secondary" href="#casos" data-track-click="automize_use_cases_cta" data-i18n="hero.secondaryCta">
+              Ver casos de uso
             </a>
           </div>
           <p class="hero-commitment" data-i18n="hero.commitment">
-            Primer paso: detectar el flujo con mayor retorno antes de construir
+            Partimos por un proceso crítico, no por toda la empresa
           </p>
           <div class="premium-strip" aria-label="Oferta resumida">
             <div class="premium-strip-header">
               <span data-i18n="hero.offerLabel">Oferta inicial</span>
-              <strong data-i18n="hero.offerDetail">Diagnóstico + mapa + plan de implementación</strong>
-              <em data-i18n="hero.offerPrice">Desde USD 900</em>
+              <strong data-i18n="hero.offerDetail">Diagnóstico operativo + mapa + plan de primer workflow</strong>
+              <em data-i18n="hero.offerPrice">USD 900 -&gt; USD 600 lanzamiento</em>
             </div>
             <ul class="premium-strip-points" aria-label="Entregables de la oferta">
               <li data-i18n="hero.offerPoint.scope">1 proceso crítico priorizado</li>
-              <li data-i18n="hero.offerPoint.output">Mapa de flujo, riesgos y quick wins</li>
-              <li data-i18n="hero.offerPoint.discount">Descontable si pasamos a implementacion</li>
+              <li data-i18n="hero.offerPoint.output">Mapa de flujo, riesgos y quick wins concretos</li>
+              <li data-i18n="hero.offerPoint.discount">Descontable si pasamos a implementación</li>
             </ul>
           </div>
+        </div>
+      </section>
+
+      <section id="problema" class="section section-tight">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="problems.eyebrow">Dolor operativo</p>
+          <h2 data-i18n="problems.title">El costo no es solo hacerlo manual: es perder seguimiento, velocidad y control</h2>
+          <p>
+            <strong class="brand-inline" data-i18n="problems.bodyPrefix">Automize</strong>{" "}
+            <span data-i18n="problems.body">muestra dónde se pierde seguimiento, persona asignada o estado, y convierte ese trabajo repetido en un flujo controlado.</span>
+          </p>
+        </div>
+        <div class="problem-flow" aria-label="Explicación visual del problema operativo" data-i18n-aria-label="problems.visualLabel">
+          {
+            problemFlow.map((item, index) => (
+              <article class={`problem-flow-step ${item.tone}`}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.label` : undefined}>{item.label}</h3>
+                  <p data-i18n={item.i18nKey ? `${item.i18nKey}.detail` : undefined}>{item.detail}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+        <CardGrid
+          items={problems}
+          gridClass="automize-problem-grid"
+          cardClass="scope-card"
+          ariaLabel={languageCopy.es["problems.gridLabel"]}
+          ariaLabelKey="problems.gridLabel"
+        />
+        <div class="section-cta">
+          <p data-i18n="problems.ctaBody">Si esto pasa en tu operación, el diagnóstico aterriza el flujo exacto, el costo del problema y la primera automatización viable.</p>
+          <a class="button button-primary" href="#contacto" data-track-click="automize_problem_cta" data-i18n="problems.cta">
+            Solicitar diagnóstico
+          </a>
+        </div>
+      </section>
+
+      <section class="section impact-section" aria-label="Costo del problema" data-i18n-aria-label="impact.label">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="impact.eyebrow">Costos ocultos</p>
+          <h2 data-i18n="impact.title">La pérdida aparece cuando nadie ve el estado del proceso</h2>
+          <p data-i18n="impact.body">
+            No prometemos resultados imposibles. Buscamos tareas donde el tiempo perdido, el error o la falta de seguimiento hacen razonable automatizar.
+          </p>
+        </div>
+        <div class="impact-grid">
+          {
+            impactProofs.map((item) => (
+              <article class="impact-card">
+                <span data-i18n={item.i18nKey ? `${item.i18nKey}.metric` : undefined}>{item.metric}</span>
+                <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.title` : undefined}>{item.title}</h3>
+                <p data-i18n={item.i18nKey ? `${item.i18nKey}.detail` : undefined}>{item.detail}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="casos" class="section use-cases-section">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="useCases.eyebrow">Casos de uso comprables</p>
+          <h2 data-i18n="useCases.title">No vendemos automatización en abstracto. Ordenamos problemas concretos</h2>
+          <p data-i18n="useCases.body">
+            Elige el caso que más se parece a tu operación. Si no calza perfecto, usa el último: basta con describir el proceso repetido.
+          </p>
+        </div>
+        <div class="use-case-grid" aria-label="Ejemplos de workflows automatizables" data-i18n-aria-label="useCases.label">
+          {
+            useCases.map((item, index) => (
+              <article class={`use-case-card use-case-card-${index + 1}`} data-offer={item.offer}>
+                <span class="use-case-number">{String(index + 1).padStart(2, "0")}</span>
+                <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.problem` : undefined}>{item.problem}</h3>
+                <dl>
+                  <div>
+                    <dt data-i18n="useCases.painLabel">Dolor</dt>
+                    <dd data-i18n={item.i18nKey ? `${item.i18nKey}.pain` : undefined}>{item.pain}</dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="useCases.signalLabel">Te aplica si</dt>
+                    <dd data-i18n={item.i18nKey ? `${item.i18nKey}.signal` : undefined}>{item.signal}</dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="useCases.automationLabel">Qué automatizamos</dt>
+                    <dd data-i18n={item.i18nKey ? `${item.i18nKey}.automation` : undefined}>{item.automation}</dd>
+                  </div>
+                </dl>
+                <p class="use-case-result" data-i18n={item.i18nKey ? `${item.i18nKey}.result` : undefined}>{item.result}</p>
+                <a
+                  class="use-case-cta"
+                  href="#contacto"
+                  data-track-click={`automize_use_case_${item.offer}`}
+                  data-i18n={item.i18nKey ? `${item.i18nKey}.cta` : undefined}>{item.ctaLabel}</a
+                >
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="section system-section" aria-label="Workflow operativo" data-i18n-aria-label="system.label">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="system.eyebrow">Solución Automize</p>
+          <h2 data-i18n="system.title">Convertimos una tarea repetida en un flujo operativo controlado</h2>
+          <p data-i18n="system.body">
+            El valor no está en sumar más herramientas. Está en dejar un flujo con entrada clara, reglas, persona asignada,
+            revisión humana y registro para que el equipo pueda operarlo.
+          </p>
+        </div>
+        <div class="system-map">
+          {
+            systemSteps.map((step) => (
+              <article class={`system-step ${step.tone}`}>
+                <span>{step.label}</span>
+                <div>
+                  <h3 data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</h3>
+                  <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="integration-strip" aria-label="Conectamos las herramientas que tu equipo ya usa" data-i18n-aria-label="integrations.label">
+        <div class="integration-copy">
+          <p class="eyebrow" data-i18n="integrations.label">Herramientas</p>
+          <h2 data-i18n="integrations.title">Conectamos lo que ya usas. Elegimos la herramienta según el proceso</h2>
+          <p class="integration-mobile-copy" data-i18n="integrations.mobileTitle">
+            WhatsApp, planillas, correo, CRM o Notion: partimos desde lo que ya existe.
+          </p>
+          <div class="integration-mobile-tools" aria-hidden="true">
+            {mobileIntegrationTools.map((tool) => <span>{tool}</span>)}
+          </div>
+        </div>
+        <div class="integration-carousel" aria-hidden="true">
+          <div class="integration-track">
+            {
+              integrationLoop.map((logo) => (
+                <span class={`integration-logo ${logo.tone}`}>
+                  <span class="integration-logo-mark">
+                    {
+                      logo.logoUrl ? (
+                        <img
+                          src={logo.logoUrl}
+                          alt={logo.logoAlt ?? logo.name}
+                          loading="lazy"
+                          decoding="async"
+                          width="28"
+                          height="28"
+                        />
+                      ) : (
+                        <strong>{logo.mark}</strong>
+                      )
+                    }
+                  </span>
+                  <em>{logo.name}</em>
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section id="metodo" class="section method-section">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="method.eyebrow">Método</p>
+          <h2 data-i18n="method.title">Diagnosticamos, construimos acotado y mejoramos con uso real</h2>
+          <p data-i18n="method.body">
+            El método no es llenar la empresa de automatizaciones. Es encontrar dónde duele, construir algo liviano y
+            optimizarlo con datos de uso.
+          </p>
+        </div>
+        <div class="method-timeline" aria-label="Método de trabajo" data-i18n-aria-label="method.label">
+          {
+            methodSteps.map((step, index) => (
+              <article class="method-card">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3 data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</h3>
+                <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
+              </article>
+            ))
+          }
         </div>
       </section>
 
       <section class="section services-section">
         <span id="servicios" class="section-scroll-target" aria-hidden="true"></span>
         <div class="services-header">
-          <p class="eyebrow" data-i18n="services.eyebrow">Elige por donde partir</p>
-          <h2 data-i18n="services.title">Si ya viste el dolor, no esperes a tenerlo perfecto</h2>
+          <p class="eyebrow" data-i18n="services.eyebrow">Oferta inicial</p>
+          <h2 data-i18n="services.title">Parte con diagnóstico. Construye solo cuando el flujo tenga sentido</h2>
           <p data-i18n="services.body">
-            Mándanos el proceso por email o baja al formulario. Respondemos con el siguiente paso: revisar, construir
-            o acotar un piloto.
+            La escalera es simple: entender el proceso, construir el primer workflow y luego mejorar con operación real.
           </p>
         </div>
         <div class="services-action-panel" aria-label="Acciones rápidas para pedir revisión" data-i18n-aria-label="services.actionLabel">
           <div>
             <strong data-i18n="services.actionTitle">¿Tienes un proceso repetido en mente?</strong>
-            <p data-i18n="services.actionBody">Escríbenos ahora con 3 líneas: tarea, herramientas y qué pasa cuando falla.</p>
+            <p data-i18n="services.actionBody">Cuéntanos en pocas líneas qué tarea se repite, qué herramientas usas y qué pasa cuando falla.</p>
           </div>
           <div class="services-action-buttons">
             <a
               class="button button-primary"
               href={getMailHref("Quiero revisar un proceso automatizable")}
               data-track-click="automize_services_email_cta"
-              data-i18n="services.emailCta">Escribir ahora</a
+              data-i18n="services.emailCta">Escribir por email</a
             >
             <a class="button button-secondary" href="#contacto" data-track-click="automize_services_form_cta" data-i18n="services.formCta">
               Ir al formulario
@@ -245,7 +432,7 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
                       class="service-card-form"
                       href="#contacto"
                       data-track-click={`automize_plan_${index + 1}_form`}
-                      data-i18n="services.cardFormCta">Enviar proceso</a
+                      data-i18n="services.cardFormCta">Solicitar diagnóstico</a
                     >
                   </div>
                 </article>
@@ -253,170 +440,27 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
             }
           </div>
           <div class="service-diagram" aria-label="Flujo gradual de compra" data-i18n-aria-label="services.diagramLabel">
-            <span class="diagram-pill" data-i18n="services.diagram.diagnostic">Revisar</span>
+            <span class="diagram-pill" data-i18n="services.diagram.diagnostic">Diagnosticar</span>
             <span class="diagram-line"></span>
             <span class="diagram-pill highlight" data-i18n="services.diagram.build">Construir</span>
             <span class="diagram-line danger"></span>
             <span class="diagram-pill" data-i18n="services.diagram.growth">Soporte y mejoras</span>
-            <p data-i18n="services.diagram.body">Primero elegimos bien. Luego construimos. Despues medimos, corregimos y ampliamos.</p>
+            <p data-i18n="services.diagram.body">Primero elegimos bien. Luego construimos. Después medimos, corregimos y ampliamos.</p>
           </div>
         </div>
         <div class="section-cta section-cta-compact">
-          <p data-i18n="services.ctaBody">No necesitamos acceso a tus sistemas para partir. Si el problema existe, lo podemos revisar con una descripcion corta.</p>
+          <p data-i18n="services.ctaBody">No necesitamos acceso a tus sistemas para partir. Si el problema existe, lo podemos revisar con una descripción corta.</p>
           <div class="section-cta-actions">
-            <a
-              class="button button-primary"
-              href={getMailHref("Quiero revisar un proceso automatizable")}
-              data-track-click="automize_services_mid_email_cta"
-              data-i18n="services.emailCta">Escribir ahora</a
-            >
-            <a class="button button-secondary" href="#contacto" data-track-click="automize_services_mid_form_cta" data-i18n="services.formCta">
-              Ir al formulario
+            <a class="button button-primary" href="#contacto" data-track-click="automize_services_mid_form_cta" data-i18n="services.cta">
+              Solicitar diagnóstico
             </a>
           </div>
         </div>
       </section>
 
-      <section id="casos" class="section use-cases-section">
-        <div class="section-intro">
-          <p class="eyebrow" data-i18n="useCases.eyebrow">Casos de uso por problema</p>
-          <h2 data-i18n="useCases.title">Que podriamos automatizar primero</h2>
-          <p data-i18n="useCases.body">
-            Estos son puntos de partida comprables: tareas concretas, repetidas y con perdida visible de seguimiento.
-          </p>
-        </div>
-        <div class="use-case-grid" aria-label="Ejemplos de workflows automatizables" data-i18n-aria-label="useCases.label">
-          {
-            useCases.map((item) => (
-              <article class="use-case-card">
-                <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.problem` : undefined}>{item.problem}</h3>
-                <p data-i18n={item.i18nKey ? `${item.i18nKey}.workflow` : undefined}>{item.workflow}</p>
-              </article>
-            ))
-          }
-        </div>
-      </section>
-
-      <section id="problema" class="section section-tight">
-        <div class="section-intro">
-          <p class="eyebrow" data-i18n="problems.eyebrow">Problemas que resolvemos</p>
-          <h2 data-i18n="problems.title">El problema no es solo hacerlo manual: es operar sin visibilidad</h2>
-          <p>
-            <strong class="brand-inline" data-i18n="problems.bodyPrefix">Automize</strong>{" "}
-            <span data-i18n="problems.body">muestra donde se pierde seguimiento, responsable o estado, y convierte ese trabajo repetido en un flujo controlado.</span>
-          </p>
-        </div>
-        <div class="problem-flow" aria-label="Explicacion visual del problema operativo" data-i18n-aria-label="problems.visualLabel">
-          {
-            problemFlow.map((item, index) => (
-              <article class={`problem-flow-step ${item.tone}`}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.label` : undefined}>{item.label}</h3>
-                  <p data-i18n={item.i18nKey ? `${item.i18nKey}.detail` : undefined}>{item.detail}</p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
-        <CardGrid
-          items={problems}
-          gridClass="automize-problem-grid"
-          cardClass="scope-card"
-          ariaLabel={languageCopy.es["problems.gridLabel"]}
-          ariaLabelKey="problems.gridLabel"
-        />
-        <div class="section-cta">
-          <p data-i18n="problems.ctaBody">Si esto pasa en tu operación, el diagnóstico aterriza el flujo exacto, el costo del problema y la primera automatización viable.</p>
-          <a class="button button-primary" href="#contacto" data-track-click="automize_problem_cta" data-i18n="problems.cta">
-            Revisar mi proceso
-          </a>
-        </div>
-      </section>
-
-      <section class="section system-section" aria-label="Workflow operativo" data-i18n-aria-label="system.label">
-        <div class="section-intro">
-          <p class="eyebrow" data-i18n="system.eyebrow">Workflow operativo</p>
-          <h2 data-i18n="system.title">Como convertimos una tarea manual en un workflow operativo</h2>
-          <p data-i18n="system.body">
-            El valor no está en sumar más herramientas. Está en dejar un flujo con entrada clara, reglas, responsable,
-            excepciones y registro para que el equipo pueda operarlo.
-          </p>
-        </div>
-        <div class="system-map">
-          {
-            systemSteps.map((step) => (
-              <article class={`system-step ${step.tone}`}>
-                <span>{step.label}</span>
-                <div>
-                  <h3 data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</h3>
-                  <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </section>
-
-      <section class="integration-strip" aria-label="Conectamos las herramientas que tu equipo ya usa" data-i18n-aria-label="integrations.label">
-        <div class="integration-copy">
-          <p class="eyebrow" data-i18n="integrations.label">Conectamos las herramientas que tu equipo ya usa</p>
-          <h2 data-i18n="integrations.title">Unimos tus herramientas operativas y usamos IA donde agrega control</h2>
-        </div>
-        <div class="integration-carousel" aria-hidden="true">
-          <div class="integration-track">
-            {
-              integrationLoop.map((logo) => (
-                <span class={`integration-logo ${logo.tone}`}>
-                  <span class="integration-logo-mark">
-                    {
-                      logo.logoUrl ? (
-                        <img
-                          src={logo.logoUrl}
-                          alt={logo.logoAlt ?? logo.name}
-                          loading="lazy"
-                          decoding="async"
-                          width="28"
-                          height="28"
-                        />
-                      ) : (
-                        <strong>{logo.mark}</strong>
-                      )
-                    }
-                  </span>
-                  <em>{logo.name}</em>
-                </span>
-              ))
-            }
-          </div>
-        </div>
-      </section>
-
-      <section id="metodo" class="section method-section">
-        <div class="section-intro">
-          <p class="eyebrow" data-i18n="method.eyebrow">Metodo</p>
-          <h2 data-i18n="method.title">Trabajamos sobre puntos criticos, rendimiento y mejora real</h2>
-          <p data-i18n="method.body">
-            El metodo no es llenar la empresa de automatizaciones. Es encontrar donde duele, construir algo liviano y
-            optimizarlo con datos de uso.
-          </p>
-        </div>
-        <div class="method-timeline" aria-label="Metodo de trabajo" data-i18n-aria-label="method.label">
-          {
-            methodSteps.map((step, index) => (
-              <article class="method-card">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3 data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</h3>
-                <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
-              </article>
-            ))
-          }
-        </div>
-      </section>
-
       <section class="section automize-principles">
         <div class="section-intro">
-          <p class="eyebrow" data-i18n="principles.eyebrow">Automatizacion con control</p>
+          <p class="eyebrow" data-i18n="principles.eyebrow">Automatización con control</p>
           <h2 data-i18n="principles.title">El punto no es automatizar todo, es automatizar sin perder control</h2>
           <p data-i18n="principles.body">
             Cada flujo debe tener límites claros: qué se ejecuta solo, qué vuelve a revisión humana y cómo se detecta un
@@ -435,15 +479,15 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
       <section class="section scope-clarity-section" aria-label="Alcance claro desde el inicio" data-i18n-aria-label="scope.label">
         <div class="section-intro">
           <p class="eyebrow" data-i18n="scope.eyebrow">Alcance claro</p>
-          <h2 data-i18n="scope.title">Alcance claro desde el inicio</h2>
+          <h2 data-i18n="scope.title">Qué entra y qué no entra en la primera etapa</h2>
           <p data-i18n="scope.body">
-            Para partir bien, dejamos claro qué entra en la primera etapa y qué requiere diagnóstico, otra fase o un
-            proyecto distinto.
+            Para partir bien, dejamos claro qué podemos resolver en un primer flujo y qué requiere diagnóstico, otra fase o
+            un proyecto distinto.
           </p>
         </div>
         <div class="scope-clarity-grid">
           <article class="scope-clarity-card">
-            <h3 data-i18n="scope.includeTitle">Que si hacemos</h3>
+            <h3 data-i18n="scope.includeTitle">Qué sí hacemos</h3>
             <ul>
               {
                 scopeIncludes.map((item) => (
@@ -453,7 +497,7 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
             </ul>
           </article>
           <article class="scope-clarity-card is-limited">
-            <h3 data-i18n="scope.excludeTitle">Que no hacemos en la primera etapa</h3>
+            <h3 data-i18n="scope.excludeTitle">Qué no hacemos en la primera etapa</h3>
             <ul>
               {
                 scopeExcludes.map((item) => (
@@ -465,18 +509,37 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
         </div>
       </section>
 
+      <section class="section faq-section" aria-label="Preguntas frecuentes sobre Automize" data-i18n-aria-label="faq.label">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="faq.eyebrow">Preguntas frecuentes</p>
+          <h2 data-i18n="faq.title">Objeciones normales antes de automatizar</h2>
+          <p data-i18n="faq.body">
+            Si algo suena grande o técnico, partimos por hacerlo manejable: un proceso, un flujo, un criterio claro.
+          </p>
+        </div>
+        <div class="faq-list">
+          {
+            faqs.map((item) => (
+              <details>
+                <summary data-i18n={item.i18nKey ? `${item.i18nKey}.question` : undefined}>{item.question}</summary>
+                <p data-i18n={item.i18nKey ? `${item.i18nKey}.answer` : undefined}>{item.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </section>
+
       <section id="contacto" class="contact-section automize-contact">
         <div class="contact-copy">
           <p class="eyebrow" data-i18n="contact.eyebrow">Siguiente paso</p>
-          <h2 data-i18n="contact.title">Revisemos un proceso automatizable</h2>
+          <h2 data-i18n="contact.title">Cuéntanos qué proceso quieres ordenar</h2>
           <p data-i18n="contact.body">
-            Cuéntanos qué tarea se repite, qué herramientas usan y dónde se pierde seguimiento. Si hay fit, te
-            respondemos con el siguiente paso.
+            No necesitas tener el flujo perfecto. Describe la tarea repetida y te respondemos si tiene sentido partir por ahí.
           </p>
           <ul class="contact-points">
             <li data-i18n="contact.point.fit">Fit inicial antes de pedir accesos</li>
-            <li data-i18n="contact.point.price">Diagnostico pagado desde USD 900</li>
-            <li data-i18n="contact.point.discount">Descontable si avanzas a implementacion</li>
+            <li data-i18n="contact.point.price">Diagnóstico de lanzamiento USD 600</li>
+            <li data-i18n="contact.point.discount">Descontable si avanzas a implementación</li>
           </ul>
           <a
             class="inline-link contact-email-cta"
@@ -490,6 +553,7 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
           config={landingConfig}
           source="automize-landing"
           offer="workflow-automation-review"
+          compactOnMobile={true}
         />
       </section>
     </main>
@@ -542,8 +606,8 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
         </ul>
       </nav>
 
-      <nav class="footer-nav" aria-label="Informacion legal" data-i18n-aria-label="footer.legalLabel">
-        <h2 data-i18n="footer.legalTitle">Informacion legal</h2>
+      <nav class="footer-nav" aria-label="Información legal" data-i18n-aria-label="footer.legalLabel">
+        <h2 data-i18n="footer.legalTitle">Información legal</h2>
         <ul class="footer-links footer-legal-links">
           <li>
             <span class="footer-link-disabled" aria-disabled="true">
@@ -552,7 +616,7 @@ const getMailHref = (subject: string) => `mailto:contacto@automize.cl?subject=${
           </li>
           <li>
             <span class="footer-link-disabled" aria-disabled="true">
-              <span data-i18n="footer.terms">Terminos</span>
+              <span data-i18n="footer.terms">Términos</span>
             </span>
           </li>
           <li>

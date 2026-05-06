@@ -47,7 +47,7 @@ const getEmailDomain = (value) => value.split("@")[1] || "unknown";
 
 const redirectToThanks = (request) => Response.redirect(new URL(THANK_YOU_PATH, request.url), 303);
 
-const readLeadPayload = (formData) => ({
+export const readLeadPayload = (formData) => ({
   name: trimField(formData.get("name")),
   email: trimField(formData.get("email")),
   company: trimField(formData.get("company")),
@@ -59,8 +59,8 @@ const readLeadPayload = (formData) => ({
   offer: withDefault(formData.get("offer"), DEFAULT_OFFER),
 });
 
-const validateLeadPayload = (payload) => {
-  if (!payload.name || !payload.email || !payload.company || !payload.industry || !payload.symptom || !payload.tools || !payload.impact) {
+export const validateLeadPayload = (payload) => {
+  if (!payload.name || !payload.email || !payload.company || !payload.symptom) {
     return "Faltan campos obligatorios.";
   }
 
@@ -101,39 +101,40 @@ const readEmailConfig = (env) => ({
   contactFromEmail: trimField(env.CONTACT_FROM_EMAIL) || "Automize <onboarding@resend.dev>",
 });
 
-const renderHtmlBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
+const renderOptionalHtmlField = (label, value) =>
+  value ? [`<p><strong>${label}:</strong><br>${escapeHtml(value).replace(/\n/g, "<br>")}</p>`] : [];
+
+const renderOptionalTextField = (label, value) => (value ? ["", `${label}:`, value] : []);
+
+export const renderHtmlBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
   [
     "<h2>Nuevo lead desde Automize</h2>",
     `<p><strong>Nombre:</strong> ${escapeHtml(name)}</p>`,
     `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
     `<p><strong>Empresa:</strong> ${escapeHtml(company)}</p>`,
-    `<p><strong>Rubro:</strong> ${escapeHtml(industry)}</p>`,
     `<p><strong>Proceso a ordenar:</strong><br>${escapeHtml(symptom).replace(/\n/g, "<br>")}</p>`,
-    `<p><strong>Herramientas actuales:</strong><br>${escapeHtml(tools).replace(/\n/g, "<br>")}</p>`,
-    `<p><strong>Impacto si falla o se atrasa:</strong><br>${escapeHtml(impact).replace(/\n/g, "<br>")}</p>`,
+    ...renderOptionalHtmlField("Rubro", industry),
+    ...renderOptionalHtmlField("Herramientas actuales", tools),
+    ...renderOptionalHtmlField("Impacto si falla o se atrasa", impact),
     `<p><strong>Source:</strong> ${escapeHtml(source)}</p>`,
     `<p><strong>Offer:</strong> ${escapeHtml(offer)}</p>`,
   ].join("");
 
-const renderTextBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
+export const renderTextBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
   [
     "Nuevo lead desde Automize",
     "",
     `Nombre: ${name}`,
     `Email: ${email}`,
     `Empresa: ${company}`,
-    `Rubro: ${industry}`,
     `Source: ${source}`,
     `Offer: ${offer}`,
     "",
     "Proceso a ordenar:",
     symptom,
-    "",
-    "Herramientas actuales:",
-    tools,
-    "",
-    "Impacto si falla o se atrasa:",
-    impact,
+    ...renderOptionalTextField("Rubro", industry),
+    ...renderOptionalTextField("Herramientas actuales", tools),
+    ...renderOptionalTextField("Impacto si falla o se atrasa", impact),
   ].join("\n");
 
 const sendLeadEmail = async ({ payload, config, requestId }) =>

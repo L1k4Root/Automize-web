@@ -1726,6 +1726,11 @@ h1 {
   line-height: 1.08;
 }
 
+.integration-mobile-copy,
+.integration-mobile-tools {
+  display: none;
+}
+
 .integration-carousel {
   position: relative;
   overflow: hidden;
@@ -2571,6 +2576,11 @@ h1 {
 
 .use-case-card h3,
 .use-case-card p,
+.use-case-card dl,
+.use-case-card dt,
+.use-case-card dd,
+.use-case-card a,
+.use-case-number,
 .scope-clarity-card h3,
 .scope-clarity-card li {
   position: relative;
@@ -2586,6 +2596,80 @@ h1 {
 .use-case-card p {
   margin-bottom: 0;
   font-size: 0.94rem;
+}
+
+.use-case-card {
+  display: grid;
+  gap: 14px;
+  min-height: 420px;
+}
+
+.use-case-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #03110c;
+  background: linear-gradient(135deg, #8af3ce, #37d6a3);
+  border-radius: 999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 900;
+  box-shadow: 0 0 0 7px rgba(55, 214, 163, 0.08);
+}
+
+.use-case-card dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.use-case-card dl div {
+  display: grid;
+  gap: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(142, 164, 158, 0.16);
+}
+
+.use-case-card dt {
+  color: #8af3ce;
+  font-size: 0.7rem;
+  font-weight: 880;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.use-case-card dd {
+  margin: 0;
+  color: #cfe0dc;
+  font-size: 0.86rem;
+  line-height: 1.42;
+}
+
+.use-case-result {
+  align-self: end;
+  padding: 10px 12px;
+  color: #dffcf2;
+  background: rgba(55, 214, 163, 0.08);
+  border: 1px solid rgba(138, 243, 206, 0.18);
+  border-radius: 12px;
+  font-weight: 760;
+}
+
+.use-case-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 14px;
+  color: #03110c;
+  background: linear-gradient(135deg, #8af3ce, #37d6a3);
+  border: 1px solid rgba(138, 243, 206, 0.42);
+  border-radius: var(--radius);
+  font-size: 0.84rem;
+  font-weight: 880;
+  text-align: center;
 }
 
 .scope-clarity-section {
@@ -2713,7 +2797,7 @@ h1 {
 .method-timeline {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -3074,6 +3158,34 @@ details p {
   margin: 0;
   padding: 0 20px 20px;
   color: var(--muted);
+}
+
+.automize-page .faq-section .section-intro {
+  border-left-color: rgba(55, 214, 163, 0.24);
+}
+
+.automize-page details {
+  color: #f5fbf8;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 38%),
+    rgba(8, 24, 27, 0.86);
+  border-color: rgba(142, 164, 158, 0.22);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.2);
+}
+
+.automize-page details[open] {
+  border-color: rgba(138, 243, 206, 0.28);
+  box-shadow:
+    0 22px 54px rgba(0, 0, 0, 0.24),
+    inset 0 0 0 1px rgba(55, 214, 163, 0.12);
+}
+
+.automize-page summary {
+  color: #f5fbf8;
+}
+
+.automize-page details p {
+  color: #aebfba;
 }
 
 .contact-section {
@@ -3908,6 +4020,43 @@ textarea:focus-visible {
     min-width: 148px;
   }
 
+  .integration-copy h2 {
+    display: none;
+  }
+
+  .integration-mobile-copy {
+    display: block;
+    max-width: 330px;
+    margin: 0;
+    color: #dffcf2;
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
+  .integration-mobile-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .integration-mobile-tools span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 0 10px;
+    color: #dffcf2;
+    background: rgba(55, 214, 163, 0.08);
+    border: 1px solid rgba(138, 243, 206, 0.18);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 760;
+  }
+
+  .integration-carousel {
+    display: none;
+  }
+
   .offer-card {
     min-height: auto;
   }
@@ -3931,9 +4080,9 @@ textarea:focus-visible {
   }
 
   .automize-hero-content h1 {
-    max-width: 292px;
+    max-width: 330px;
     margin-inline: auto;
-    font-size: clamp(1.8rem, 7.4vw, 2.05rem);
+    font-size: clamp(1.7rem, 7vw, 2rem);
     line-height: 1.01;
     text-align: center;
   }
@@ -4240,8 +4389,33 @@ textarea:focus-visible {
     text-align: right;
   }
 
+  .use-case-grid {
+    gap: 14px;
+  }
+
+  .use-case-card:nth-child(5),
+  .use-case-card:nth-child(6) {
+    display: none;
+  }
+
+  .use-case-card dl {
+    gap: 8px;
+  }
+
+  .use-case-card dl div {
+    padding-top: 8px;
+  }
+
+  .use-case-card dd {
+    font-size: 0.84rem;
+  }
+
   .lead-form {
     gap: 14px;
+  }
+
+  .lead-form-compact-mobile .form-field-optional {
+    display: none;
   }
 
   .lead-form input,
