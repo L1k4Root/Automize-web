@@ -3951,7 +3951,7 @@ textarea:focus-visible {
     width: auto;
     justify-content: flex-start;
     gap: 8px;
-    min-height: 42px;
+    min-height: 44px;
     font-size: 0.94rem;
     text-align: left;
   }
@@ -3978,7 +3978,7 @@ textarea:focus-visible {
     width: min(150px, calc(100vw - 170px));
     min-width: 0;
     max-width: none;
-    min-height: 42px;
+    min-height: 44px;
     padding: 0 10px;
     overflow: hidden;
     font-size: 0.74rem;
