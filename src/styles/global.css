@@ -209,9 +209,9 @@ textarea {
 
 .language-switch {
   display: inline-grid;
-  grid-template-columns: repeat(2, minmax(34px, 1fr));
+  grid-template-columns: repeat(2, minmax(44px, 1fr));
   gap: 2px;
-  min-height: 44px;
+  min-height: 52px;
   padding: 4px;
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(216, 222, 232, 0.86);
@@ -223,8 +223,8 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  min-height: 34px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0 9px;
   color: var(--muted);
   background: transparent;
@@ -2063,6 +2063,7 @@ h1 {
 
 .section-cta .button {
   flex: 0 0 auto;
+  min-height: 44px;
 }
 
 .section-cta-compact {
@@ -2661,7 +2662,7 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
+  min-height: 44px;
   padding: 0 14px;
   color: #03110c;
   background: linear-gradient(135deg, #8af3ce, #37d6a3);
@@ -3429,7 +3430,7 @@ textarea:focus-visible {
 .footer-link-disabled {
   justify-content: flex-start;
   width: fit-content;
-  min-height: 36px;
+  min-height: 44px;
 }
 
 .footer-empty-link {
