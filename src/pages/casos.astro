@@ -1,0 +1,90 @@
+---
+import ContactSection from "../components/ContactSection.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import UseCaseCard from "../components/UseCaseCard.astro";
+import { landingConfig } from "../config/landing";
+import { useCases } from "../data/automize";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const groups = [
+  {
+    title: "Ventas",
+    titleKey: "cases.family.sales",
+    body: "Leads, agenda comercial y seguimiento donde el estado suele depender de memoria o planillas.",
+    bodyKey: "cases.family.sales.body",
+    items: useCases.filter((item) => ["sales-follow-up", "schedule-confirmation"].includes(item.offer)),
+  },
+  {
+    title: "Administración",
+    titleKey: "cases.family.admin",
+    body: "Reportes, cierre operativo y conciliación cuando la información vive repartida.",
+    bodyKey: "cases.family.admin.body",
+    items: useCases.filter((item) => item.offer === "automatic-reports"),
+  },
+  {
+    title: "Solicitudes",
+    titleKey: "cases.family.requests",
+    body: "Permisos, compras, aprobaciones y tareas internas que hoy se persiguen por correo o chat.",
+    bodyKey: "cases.family.requests.body",
+    items: useCases.filter((item) => item.offer === "internal-requests"),
+  },
+  {
+    title: "Documentos",
+    titleKey: "cases.family.documents",
+    body: "Contratos, propuestas, certificados y carpetas donde se repiten datos y revisión.",
+    bodyKey: "cases.family.documents.body",
+    items: useCases.filter((item) => item.offer === "document-workflow"),
+  },
+  {
+    title: "Soporte",
+    titleKey: "cases.family.support",
+    body: "Consultas o tickets con varios canales, prioridades y responsables en disputa.",
+    bodyKey: "cases.family.support.body",
+    items: useCases.filter((item) => item.offer === "ticket-triage" || item.offer === "custom-process"),
+  },
+];
+---
+
+<BaseLayout
+  titleKey="meta.cases.title"
+  descriptionKey="meta.cases.description"
+  currentPath="/casos"
+>
+  <main class="page-main">
+    <section class="section page-intro-section">
+      <SectionIntro
+        eyebrow="Casos de uso"
+        eyebrowKey="cases.eyebrow"
+        title="Flujos concretos organizados por familia de proceso"
+        titleKey="cases.title"
+        body="Esta página agrupa todos los casos actuales para que el visitante vea ejemplos completos sin cargar el Home con demasiados escenarios."
+        bodyKey="cases.body"
+      />
+    </section>
+
+    <section class="section use-case-groups-section">
+      <div class="use-case-groups">
+        {
+          groups.map((group) => (
+            <div class="use-case-group">
+              <div class="section-intro section-intro-compact">
+                <p class="eyebrow" data-i18n={group.titleKey}>{group.title}</p>
+                <p data-i18n={group.bodyKey}>{group.body}</p>
+              </div>
+              <div class="use-case-grid">
+                {group.items.map((item) => <UseCaseCard item={item} />)}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <ContactSection
+      config={landingConfig}
+      source="automize-cases"
+      offer="workflow-use-cases"
+      compactOnMobile={true}
+    />
+  </main>
+</BaseLayout>

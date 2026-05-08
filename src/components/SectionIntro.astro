@@ -1,0 +1,19 @@
+---
+interface Props {
+  eyebrow?: string;
+  eyebrowKey?: string;
+  title: string;
+  titleKey?: string;
+  body?: string;
+  bodyKey?: string;
+  className?: string;
+}
+
+const { eyebrow, eyebrowKey, title, titleKey, body, bodyKey, className } = Astro.props;
+---
+
+<div class:list={["section-intro", className]}>
+  {eyebrow && <p class="eyebrow" data-i18n={eyebrowKey}>{eyebrow}</p>}
+  <h1 class:list={["page-title", !body && "page-title-compact"]} data-i18n={titleKey}>{title}</h1>
+  {body && <p data-i18n={bodyKey}>{body}</p>}
+</div>

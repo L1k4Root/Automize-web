@@ -1,0 +1,104 @@
+---
+import ContactSection from "../components/ContactSection.astro";
+import { landingConfig } from "../config/landing";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = [
+  {
+    badge: "Oferta 01",
+    title: "Piloto de Agente Operativo",
+    detail:
+      "Diseñamos un agente conectado a correo, CRM, planillas o sistemas internos para automatizar una tarea concreta y repetitiva.",
+    fit: "Para tareas donde hoy se revisa, copia, clasifica o prepara información de forma manual.",
+    includes: [
+      "Definición del caso de uso",
+      "Conexión con herramientas clave",
+      "Reglas de control",
+      "Aprobación humana cuando corresponde",
+    ],
+    result: "Partimos con un piloto acotado y verificable",
+  },
+  {
+    badge: "Oferta 02",
+    title: "Memoria Corporativa Inteligente",
+    detail:
+      "Creamos una capa de consulta para que la IA trabaje con documentos, manuales, procesos, respuestas frecuentes y datos internos.",
+    fit: "Para soporte, ventas, operaciones o administración cuando el equipo pierde tiempo buscando contexto.",
+    includes: [
+      "Selección de fuentes confiables",
+      "Consulta con contexto interno",
+      "Respuestas más consistentes",
+      "Límites sobre qué información usar",
+    ],
+    result: "Menos búsqueda manual y menos respuestas improvisadas",
+  },
+  {
+    badge: "Oferta 03",
+    title: "Blindaje de Agentes / Auditoría de IA",
+    detail:
+      "Revisamos sistemas de IA existentes para detectar fallas de confiabilidad, trazabilidad, costos, seguridad y puntos de ruptura.",
+    fit: "Para empresas que ya usan IA y necesitan entender mejor sus riesgos antes de escalar.",
+    includes: [
+      "Revisión de puntos de falla",
+      "Análisis de errores frecuentes",
+      "Evaluación de control y supervisión",
+      "Recomendaciones priorizadas",
+    ],
+    result: "Más control operativo antes de seguir invirtiendo",
+  },
+];
+---
+
+<BaseLayout
+  titleKey="meta.diagnostic.title"
+  descriptionKey="meta.diagnostic.description"
+  currentPath="/servicios"
+  ctaHref="/diagnostico#contacto"
+  footerContactHref="/diagnostico#contacto"
+>
+  <main class="page-main">
+    <section class="section page-intro-section">
+      <div class="section-intro">
+        <p class="eyebrow">Servicios</p>
+        <h1 class="page-title">Servicios concretos para automatizar mejor sin perder control</h1>
+        <p>
+          Ofertas pensadas para resolver una tarea repetitiva, ordenar una fuente de información o revisar un sistema de IA
+          que hoy opera sin suficiente trazabilidad.
+        </p>
+      </div>
+    </section>
+
+    <section class="section services-section">
+      <div class="service-catalog">
+        {
+          services.map((service, index) => (
+            <article class={`service-card service-card-${index + 1}`}>
+              <div class="service-card-topline">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <em class="service-badge">{service.badge}</em>
+              </div>
+              <h2>{service.title}</h2>
+              <p>{service.detail}</p>
+              <p class="service-fit">{service.fit}</p>
+              <ul class="service-includes">
+                {service.includes.map((item) => <li>{item}</li>)}
+              </ul>
+              <strong>{service.result}</strong>
+            </article>
+          ))
+        }
+      </div>
+      <div class="section-cta section-cta-compact">
+        <p>Partimos con una tarea concreta, una integración clara y un resultado verificable.</p>
+        <div class="section-cta-actions">
+          <a class="button button-primary" href="/diagnostico#contacto" data-track-click="automize_services_diagnostic_cta">
+            Solicitar diagnóstico
+          </a>
+          <a class="button button-secondary" href="mailto:contacto@automize.cl?subject=Quiero%20evaluar%20un%20servicio%20de%20Automize">
+            Hablar por correo
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

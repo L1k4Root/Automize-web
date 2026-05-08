@@ -1,0 +1,119 @@
+---
+import CardGrid from "../components/CardGrid.astro";
+import ContactSection from "../components/ContactSection.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { landingConfig } from "../config/landing";
+import { impactProofs, scopeExcludes, scopeIncludes, services } from "../data/automize";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const diagnosticService = services[0];
+---
+
+<BaseLayout
+  titleKey="meta.diagnostic.title"
+  descriptionKey="meta.diagnostic.description"
+  currentPath="/diagnostico"
+  ctaHref="#contacto"
+  footerContactHref="#contacto"
+>
+  <main class="page-main">
+    <section class="section page-intro-section">
+      <SectionIntro
+        eyebrow="Diagnóstico"
+        eyebrowKey="diagnostic.eyebrow"
+        title="Starter Pack Operativo para revisar un proceso y salir con una primera dirección clara"
+        titleKey="diagnostic.title"
+        body="Esta página concentra la oferta de entrada: qué incluye, para quién hace sentido, qué información conviene traer y cuál es el entregable esperado."
+        bodyKey="diagnostic.body"
+      />
+    </section>
+
+    <section class="section services-section">
+      <div class="services-header">
+        <p class="eyebrow" data-i18n="services.eyebrow">Starter Pack Operativo</p>
+        <h2 data-i18n="diagnostic.offer.title">Qué incluye el Starter Pack</h2>
+        <p data-i18n="diagnostic.offer.body">
+          El objetivo no es vender una automatización abstracta. Es dejar claro el proceso, el problema y la primera versión que vale construir.
+        </p>
+      </div>
+      <div class="services-visual">
+        <div class="service-catalog">
+          <article class="service-card service-card-1">
+            <div class="service-card-topline">
+              <span>{diagnosticService.tag}</span>
+              {diagnosticService.badge && <em class="service-badge" data-i18n={`${diagnosticService.i18nKey}.badge`}>{diagnosticService.badge}</em>}
+            </div>
+            <h3 data-i18n={`${diagnosticService.i18nKey}.title`}>{diagnosticService.title}</h3>
+            <p data-i18n={`${diagnosticService.i18nKey}.detail`}>{diagnosticService.detail}</p>
+            <p class="service-fit" data-i18n={`${diagnosticService.i18nKey}.fit`}>{diagnosticService.fit}</p>
+            <ul class="service-includes" aria-label="Entregas" data-i18n-aria-label="services.includeLabel">
+              {diagnosticService.includes?.map((item, index) => <li data-i18n={`${diagnosticService.i18nKey}.include.${index + 1}`}>{item}</li>)}
+            </ul>
+            <strong data-i18n={`${diagnosticService.i18nKey}.result`}>{diagnosticService.result}</strong>
+          </article>
+        </div>
+        <div class="impact-grid">
+          {
+            impactProofs.map((item) => (
+              <article class="impact-card">
+                <span data-i18n={item.i18nKey ? `${item.i18nKey}.metric` : undefined}>{item.metric}</span>
+                <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.title` : undefined}>{item.title}</h3>
+                <p data-i18n={item.i18nKey ? `${item.i18nKey}.detail` : undefined}>{item.detail}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section scope-clarity-section">
+      <div class="section-intro">
+        <p class="eyebrow" data-i18n="scope.eyebrow">Alcance claro</p>
+        <h2 data-i18n="diagnostic.scope.title">Para quién sí y para quién no</h2>
+        <p data-i18n="diagnostic.scope.body">
+          Esta primera etapa funciona mejor cuando hay un proceso repetido, visibles cuellos de botella y voluntad de ordenar antes de escalar complejidad.
+        </p>
+      </div>
+      <div class="scope-clarity-grid">
+        <article class="scope-clarity-card">
+          <h3 data-i18n="scope.includeTitle">Qué sí hacemos</h3>
+          <ul>
+            {scopeIncludes.map((item) => <li data-i18n={item.i18nKey ? `${item.i18nKey}.title` : undefined}>{item.title}</li>)}
+          </ul>
+        </article>
+        <article class="scope-clarity-card is-limited">
+          <h3 data-i18n="scope.excludeTitle">Qué no hacemos en la primera etapa</h3>
+          <ul>
+            {scopeExcludes.map((item) => <li data-i18n={item.i18nKey ? `${item.i18nKey}.title` : undefined}>{item.title}</li>)}
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-intro">
+        <p class="eyebrow" data-i18n="diagnostic.inputs.eyebrow">Antes de partir</p>
+        <h2 data-i18n="diagnostic.inputs.title">Qué necesitamos de tu lado</h2>
+        <p data-i18n="diagnostic.inputs.body">
+          No pedimos documentación perfecta. Solo el mínimo contexto para entender el proceso, las herramientas y el costo del problema.
+        </p>
+      </div>
+      <CardGrid
+        items={[
+          { i18nKey: "diagnostic.inputs.process", title: "Proceso repetido", detail: "Qué tarea se repite, por dónde entra y dónde hoy se pierde seguimiento." },
+          { i18nKey: "diagnostic.inputs.tools", title: "Herramientas actuales", detail: "Qué usan hoy: correo, WhatsApp, planillas, CRM, formularios, agenda o Notion." },
+          { i18nKey: "diagnostic.inputs.impact", title: "Impacto visible", detail: "Qué pasa cuando se atrasa o falla: retrabajo, leads perdidos, excepciones invisibles o bloqueo operativo." },
+        ]}
+        gridClass="automize-problem-grid"
+        cardClass="scope-card"
+      />
+    </section>
+
+    <ContactSection
+      config={landingConfig}
+      source="automize-diagnostic"
+      offer="starter-pack-operativo"
+      compactOnMobile={true}
+    />
+  </main>
+</BaseLayout>

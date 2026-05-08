@@ -102,7 +102,8 @@ const applyLanguage = (language: SupportedLanguage, persist = true) => {
 
   document.documentElement.lang = language;
 
-  const title = dictionary["meta.title"];
+  const pageTitleKey = document.documentElement.dataset.pageTitleKey;
+  const title = pageTitleKey ? getCopyValue(pageTitleKey, language) : dictionary["meta.title"];
   if (title) {
     document.title = title;
   }

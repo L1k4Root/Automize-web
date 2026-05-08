@@ -1,0 +1,20 @@
+---
+import type { FaqItem } from "../data/automize";
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq-list">
+  {
+    items.map((item) => (
+      <details>
+        <summary data-i18n={item.i18nKey ? `${item.i18nKey}.question` : undefined}>{item.question}</summary>
+        <p data-i18n={item.i18nKey ? `${item.i18nKey}.answer` : undefined}>{item.answer}</p>
+      </details>
+    ))
+  }
+</div>

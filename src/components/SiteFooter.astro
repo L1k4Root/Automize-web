@@ -1,0 +1,85 @@
+---
+interface Props {
+  currentYear: number;
+  contactHref: string;
+}
+
+const { currentYear, contactHref } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="footer-brand">
+    <a class="footer-brand-link" href="/" aria-label="Automize Solutions">
+      <img class="footer-brand-mark" src="/automize-icon.png" alt="" width="40" height="40" />
+      <strong>Automize Solutions</strong>
+    </a>
+    <p data-i18n="footer.description">
+      Automatización, software y soluciones digitales para operar procesos repetidos con más control.
+    </p>
+    <a class="footer-email" href="mailto:contacto@automize.cl">contacto@automize.cl</a>
+  </div>
+
+  <nav class="footer-nav" aria-label="Redes sociales" data-i18n-aria-label="footer.socialLabel">
+    <h2 data-i18n="footer.socialTitle">Redes sociales</h2>
+    <ul class="footer-links footer-social-links">
+      <li>
+        <a
+          href="https://www.facebook.com/people/Automize-Solutions/61588897326307/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook de Automize Solutions">
+          Facebook
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.linkedin.com/company/automize-solutions/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn de Automize Solutions">
+          LinkedIn
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.instagram.com/automize._/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram de Automize Solutions">
+          Instagram
+        </a>
+      </li>
+      <li>
+        <span class="footer-link-disabled" aria-disabled="true">YouTube</span>
+      </li>
+    </ul>
+  </nav>
+
+  <nav class="footer-nav" aria-label="Información legal" data-i18n-aria-label="footer.legalLabel">
+    <h2 data-i18n="footer.legalTitle">Información legal</h2>
+    <ul class="footer-links footer-legal-links">
+      <li>
+        <span class="footer-link-disabled" aria-disabled="true">
+          <span data-i18n="footer.privacy">Privacidad</span>
+        </span>
+      </li>
+      <li>
+        <span class="footer-link-disabled" aria-disabled="true">
+          <span data-i18n="footer.terms">Términos</span>
+        </span>
+      </li>
+      <li>
+        <span class="footer-link-disabled" aria-disabled="true">
+          <span data-i18n="footer.legalNotice">Aviso legal</span>
+        </span>
+      </li>
+      <li>
+        <a href={contactHref} data-i18n="footer.commercialContact">Contacto comercial</a>
+      </li>
+    </ul>
+  </nav>
+
+  <p class="footer-copyright">
+    &copy; {currentYear} Automize Solutions. <span data-i18n="footer.rights">Todos los derechos reservados.</span>
+  </p>
+</footer>

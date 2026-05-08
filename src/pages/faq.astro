@@ -1,0 +1,82 @@
+---
+import ContactSection from "../components/ContactSection.astro";
+import FaqList from "../components/FaqList.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { landingConfig } from "../config/landing";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const faqs = [
+  {
+    question: "¿Necesito cambiar mis sistemas para trabajar con IA?",
+    answer: "No necesariamente. La mayoría de los pilotos parten integrando herramientas que la empresa ya usa.",
+  },
+  {
+    question: "¿Un agente reemplaza a una persona?",
+    answer: "No es la promesa. El foco está en reducir trabajo repetitivo, mejorar seguimiento y dejar a las personas donde hace falta criterio.",
+  },
+  {
+    question: "¿La IA puede ejecutar acciones sola?",
+    answer: "Sí, pero no en todo. En procesos sensibles dejamos aprobación humana o límites claros antes de ejecutar.",
+  },
+  {
+    question: "¿Esto sirve si hoy trabajamos con correo, WhatsApp y planillas?",
+    answer: "Sí. De hecho, muchos casos valiosos parten ahí.",
+  },
+  {
+    question: "¿Qué diferencia hay entre un chatbot y un agente?",
+    answer: "Un chatbot responde. Un agente además puede consultar contexto, usar herramientas y ejecutar pasos dentro de un proceso.",
+  },
+  {
+    question: "¿Qué pasa si la IA se equivoca?",
+    answer: "Por eso diseñamos reglas, trazabilidad y puntos de revisión. La idea no es ocultar errores, sino detectarlos y contenerlos.",
+  },
+  {
+    question: "¿Necesito tener mis documentos ordenados?",
+    answer: "No perfectos. Pero sí ayuda identificar cuáles son las fuentes confiables para responder o ejecutar mejor.",
+  },
+  {
+    question: "¿Cuándo conviene partir con un piloto?",
+    answer: "Cuando hay una tarea repetitiva, un cuello de botella visible y una forma clara de medir si el flujo mejoró.",
+  },
+  {
+    question: "¿Trabajan con sistemas multiagente?",
+    answer: "Solo si el proceso lo justifica. No lo usamos por moda.",
+  },
+  {
+    question: "¿Cómo controlo costos?",
+    answer: "Partiendo con alcance acotado, herramientas claras y supervisión sobre qué ejecuta la IA y qué no.",
+  },
+];
+---
+
+<BaseLayout
+  titleKey="meta.faq.title"
+  descriptionKey="meta.faq.description"
+  currentPath="/faq"
+>
+  <main class="page-main">
+    <section class="section page-intro-section">
+      <SectionIntro
+        eyebrow="FAQ"
+        title="Objeciones reales de clientes no técnicos antes de implementar IA"
+        body="Esta página responde dudas de adopción, control, riesgo y fit sin caer en promesas infladas ni jerga innecesaria."
+      />
+    </section>
+
+    <section class="section faq-section" aria-label="Preguntas frecuentes sobre Automize">
+      <div class="section-intro">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Control, integración, personas, costos y riesgo operativo</h2>
+        <p>La idea no es impresionar en una demo. Es ayudarle a tomar una decisión informada sobre dónde conviene partir.</p>
+      </div>
+      <FaqList items={faqs} />
+    </section>
+
+    <ContactSection
+      config={landingConfig}
+      source="automize-faq"
+      offer="faq-comercial"
+      compactOnMobile={true}
+    />
+  </main>
+</BaseLayout>

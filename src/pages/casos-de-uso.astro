@@ -1,0 +1,100 @@
+---
+import ContactSection from "../components/ContactSection.astro";
+import { landingConfig } from "../config/landing";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const cases = [
+  {
+    family: "Ventas",
+    title: "Triaje de leads",
+    pain: "Los contactos entran por varios canales y el seguimiento se vuelve desigual o tardío.",
+    action: "Clasifica oportunidades, prioriza contactos y deja preparado el siguiente paso comercial.",
+    control: "Un responsable valida el seguimiento cuando el proceso lo requiere.",
+  },
+  {
+    family: "Administración",
+    title: "Agente de facturación",
+    pain: "Los datos llegan por correo y alguien debe revisarlos, extraerlos y prepararlos para contabilidad.",
+    action: "Lee correos, extrae datos clave y deja listo el registro para el software contable.",
+    control: "La aprobación final queda en una persona antes de registrar o enviar.",
+  },
+  {
+    family: "Ventas",
+    title: "Asistente de ventas con memoria",
+    pain: "El equipo responde sin ver interacciones previas o repite preguntas ya resueltas.",
+    action: "Recupera contexto comercial, documentos relevantes e interacciones anteriores para preparar respuestas más precisas.",
+    control: "El vendedor decide qué enviar y cómo cerrar la conversación.",
+  },
+  {
+    family: "Operaciones",
+    title: "Monitor de procesos",
+    pain: "Nadie detecta a tiempo anomalías en stock, pedidos, pagos o seguimiento.",
+    action: "Observa datos operativos y alerta cuando aparece una desviación que requiere revisión.",
+    control: "El equipo decide la acción correctiva con información visible.",
+  },
+  {
+    family: "Soporte interno",
+    title: "Soporte con memoria corporativa",
+    pain: "Las mismas preguntas se responden una y otra vez buscando información en documentos sueltos.",
+    action: "Consulta documentación validada y entrega respuestas con contexto útil del negocio.",
+    control: "Las fuentes se definen y validan antes de usar la respuesta en operación.",
+  },
+];
+---
+
+<BaseLayout
+  titleKey="meta.cases.title"
+  descriptionKey="meta.cases.description"
+  currentPath="/casos-de-uso"
+>
+  <main class="page-main">
+    <section class="section page-intro-section">
+      <div class="section-intro">
+        <p class="eyebrow">Casos de uso</p>
+        <h1 class="page-title">Procesos donde la IA sí genera valor operativo</h1>
+        <p>
+          No mostramos conceptos abstractos. Mostramos procesos donde una automatización bien conectada reduce carga
+          manual y mejora seguimiento.
+        </p>
+      </div>
+    </section>
+
+    <section class="section use-cases-section">
+      <div class="use-case-grid">
+        {
+          cases.map((item, index) => (
+            <article class={`use-case-card use-case-card-${index + 1}`}>
+              <span class="use-case-number">{String(index + 1).padStart(2, "0")}</span>
+              <p class="eyebrow">{item.family}</p>
+              <h2>{item.title}</h2>
+              <dl>
+                <div>
+                  <dt>Problema</dt>
+                  <dd>{item.pain}</dd>
+                </div>
+                <div>
+                  <dt>Qué hace</dt>
+                  <dd>{item.action}</dd>
+                </div>
+                <div>
+                  <dt>Control</dt>
+                  <dd>{item.control}</dd>
+                </div>
+              </dl>
+              <a class="use-case-cta" href="/diagnostico#contacto" data-track-click={`automize_case_${index + 1}_cta`}>
+                Quiero evaluar un caso parecido
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <ContactSection
+      config={landingConfig}
+      source="automize-use-cases"
+      offer="casos-de-uso"
+      compactOnMobile={true}
+    />
+  </main>
+</BaseLayout>

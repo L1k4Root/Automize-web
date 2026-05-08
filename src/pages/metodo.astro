@@ -1,0 +1,95 @@
+---
+import CardGrid from "../components/CardGrid.astro";
+import ContactSection from "../components/ContactSection.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { landingConfig } from "../config/landing";
+import { methodSteps, principles, systemSteps } from "../data/automize";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  titleKey="meta.method.title"
+  descriptionKey="meta.method.description"
+  currentPath="/metodo"
+>
+  <main class="page-main">
+    <section class="section page-intro-section">
+      <SectionIntro
+        eyebrow="Método"
+        eyebrowKey="methodPage.eyebrow"
+        title="Cómo pasamos de un proceso desordenado a un flujo visible, operable y supervisado"
+        titleKey="methodPage.title"
+        body="Aquí vive la explicación detallada del proceso de trabajo, los puntos de control y la lógica de human-in-the-loop que no conviene dejar en el Home."
+        bodyKey="methodPage.body"
+      />
+    </section>
+
+    <section class="section method-section">
+      <div class="section-intro">
+        <p class="eyebrow" data-i18n="method.eyebrow">Método</p>
+        <h2 data-i18n="method.title">Del proceso desordenado a una versión inicial funcionando</h2>
+        <p data-i18n="method.body">
+          No llenamos la empresa de automatizaciones. Levantamos un proceso, lo dibujamos, armamos el tablero y probamos un flujo inicial con casos reales.
+        </p>
+      </div>
+      <div class="method-timeline" aria-label="Método de trabajo" data-i18n-aria-label="method.label">
+        {
+          methodSteps.map((step, index) => (
+            <article class="method-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3 data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</h3>
+              <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section system-section">
+      <div class="section-intro">
+        <p class="eyebrow" data-i18n="system.eyebrow">Solución Automize</p>
+        <h2 data-i18n="system.title">Reglas, alertas, responsables y registro antes que automatización opaca</h2>
+        <p data-i18n="system.body">
+          El valor no está en sumar más herramientas. Está en dejar un diagrama, tablero de estado, alertas, responsable y bitácora para que el equipo pueda operar el proceso.
+        </p>
+      </div>
+      <div class="system-map">
+        {
+          systemSteps.map((step) => (
+            <article class={`system-step ${step.tone}`}>
+              <span>{step.label}</span>
+              <div>
+                <h3 data-i18n={step.i18nKey ? `${step.i18nKey}.title` : undefined}>{step.title}</h3>
+                <p data-i18n={step.i18nKey ? `${step.i18nKey}.detail` : undefined}>{step.detail}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section automize-principles">
+      <div class="section-intro">
+        <p class="eyebrow" data-i18n="principles.eyebrow">Automatización con control</p>
+        <h2 data-i18n="principles.title">Human-in-the-loop donde el riesgo o la ambigüedad lo exigen</h2>
+        <p data-i18n="principles.body">
+          Cada flujo debe tener límites claros: qué se ejecuta solo, qué vuelve a revisión humana y cómo se detecta un error antes de que afecte al equipo.
+        </p>
+      </div>
+      <CardGrid
+        items={principles}
+        gridClass="step-grid"
+        cardClass="step-card"
+        ariaLabel="Diferenciadores de Automize"
+        ariaLabelKey="principles.label"
+      />
+    </section>
+
+    <ContactSection
+      config={landingConfig}
+      source="automize-method"
+      offer="workflow-method"
+      compactOnMobile={true}
+    />
+  </main>
+</BaseLayout>

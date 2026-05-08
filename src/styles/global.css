@@ -4522,3 +4522,47 @@ textarea:focus-visible {
     padding: 13px 13px 13px 44px;
   }
 }
+
+.nav-links a.is-active {
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.nav-links a.is-active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.page-main {
+  min-height: 100vh;
+}
+
+.page-intro-section {
+  padding-top: calc(var(--header-offset, 96px) + 2rem);
+}
+
+.page-title {
+  margin: 0;
+}
+
+.section-intro-compact {
+  margin-bottom: 1.5rem;
+}
+
+.use-case-groups {
+  display: grid;
+  gap: 3rem;
+}
+
+.use-case-group {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.services-preview-section .service-catalog,
+.use-case-groups-section .use-case-grid {
+  margin-top: 0;
+}
+
+.faq-preview-section .faq-list {
+  margin-top: 2rem;
+}

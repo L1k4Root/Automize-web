@@ -1,0 +1,93 @@
+---
+import CardGrid from "../components/CardGrid.astro";
+import ContactSection from "../components/ContactSection.astro";
+import { landingConfig } from "../config/landing";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const steps = [
+  {
+    tag: "Paso 1",
+    title: "Elegimos un proceso acotado",
+    detail: "Buscamos una tarea repetitiva, con impacto visible y criterios razonablemente claros.",
+  },
+  {
+    tag: "Paso 2",
+    title: "Diseñamos el flujo y sus límites",
+    detail: "Definimos qué información usa, qué herramientas toca, qué puede ejecutar y dónde debe pedir aprobación.",
+  },
+  {
+    tag: "Paso 3",
+    title: "Construimos un piloto útil",
+    detail: "Conectamos lo necesario para probar valor real sin sobrediseñar la solución.",
+  },
+  {
+    tag: "Paso 4",
+    title: "Medimos trazabilidad y control",
+    detail: "Revisamos qué hizo la IA, qué errores aparecen, dónde se frena y qué partes requieren más supervisión.",
+  },
+  {
+    tag: "Paso 5",
+    title: "Escalamos solo si vale la pena",
+    detail: "Si el piloto funciona, ampliamos alcance. Si no, corregimos o descartamos antes de complejizar la operación.",
+  },
+];
+
+const principles = [
+  {
+    tag: "Seguridad",
+    title: "La supervisión humana es una característica, no una debilidad",
+    detail: "En decisiones sensibles, aprobaciones, acciones con costo o cambios críticos, dejamos revisión humana explícita.",
+  },
+  {
+    tag: "Trazabilidad",
+    title: "Un agente sin observabilidad es un riesgo operativo",
+    detail: "La IA útil en producción debe dejar registro, contexto y puntos de control. Si no se puede auditar, no se puede gobernar bien.",
+  },
+  {
+    tag: "Arquitectura",
+    title: "La arquitectura importa más que el modelo",
+    detail: "Primero resolvemos integración, reglas, memoria y control. Después elegimos cuánta sofisticación realmente hace falta.",
+  },
+];
+---
+
+<BaseLayout
+  titleKey="meta.method.title"
+  descriptionKey="meta.method.description"
+  currentPath="/como-trabajamos"
+>
+  <main class="page-main">
+    <section class="section page-intro-section">
+      <div class="section-intro">
+        <p class="eyebrow">Cómo trabajamos</p>
+        <h1 class="page-title">Automatización incremental, supervisada y trazable</h1>
+        <p>
+          No partimos por arquitectura compleja. Partimos por un proceso que duele, una integración clara y una forma
+          segura de operar.
+        </p>
+      </div>
+    </section>
+
+    <section class="section method-section">
+      <CardGrid items={steps} gridClass="step-grid" cardClass="step-card" />
+    </section>
+
+    <section class="section automize-principles">
+      <div class="section-intro">
+        <p class="eyebrow">Control y criterio</p>
+        <h2>Primero pilotos acotados. Luego escalamiento.</h2>
+        <p>
+          La sofisticación debe nacer de la necesidad. No prometemos autonomía total cuando el proceso exige control.
+        </p>
+      </div>
+      <CardGrid items={principles} gridClass="step-grid" cardClass="step-card" />
+    </section>
+
+    <ContactSection
+      config={landingConfig}
+      source="automize-method"
+      offer="como-trabajamos"
+      compactOnMobile={true}
+    />
+  </main>
+</BaseLayout>

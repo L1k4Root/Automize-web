@@ -1,0 +1,37 @@
+---
+import type { UseCase } from "../data/automize";
+
+interface Props {
+  item: UseCase;
+  ctaHref?: string;
+  compact?: boolean;
+}
+
+const { item, ctaHref = "/diagnostico#contacto", compact = false } = Astro.props;
+---
+
+<article class="use-case-card" data-offer={item.offer}>
+  <h3 data-i18n={item.i18nKey ? `${item.i18nKey}.problem` : undefined}>{item.problem}</h3>
+  <dl>
+    <div>
+      <dt data-i18n="useCases.painLabel">Problema</dt>
+      <dd data-i18n={item.i18nKey ? `${item.i18nKey}.pain` : undefined}>{item.pain}</dd>
+    </div>
+    <div>
+      <dt data-i18n="useCases.signalLabel">Qué ve tu equipo</dt>
+      <dd data-i18n={item.i18nKey ? `${item.i18nKey}.signal` : undefined}>{item.signal}</dd>
+    </div>
+    <div>
+      <dt data-i18n="useCases.automationLabel">Qué queda funcionando</dt>
+      <dd data-i18n={item.i18nKey ? `${item.i18nKey}.automation` : undefined}>{item.automation}</dd>
+    </div>
+  </dl>
+  <p class="use-case-result" data-i18n={item.i18nKey ? `${item.i18nKey}.result` : undefined}>{item.result}</p>
+  {
+    !compact && (
+      <a class="use-case-cta" href={ctaHref} data-track-click={`automize_use_case_${item.offer}`} data-i18n={item.i18nKey ? `${item.i18nKey}.cta` : undefined}>
+        {item.ctaLabel}
+      </a>
+    )
+  }
+</article>
