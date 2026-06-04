@@ -1,6 +1,6 @@
 # Future Web Expansion
 
-Automize should grow from this landing into a small commercial website without losing the current operating thesis: automate repeated work without turning the client operation into a black box.
+Automize has grown from a single landing into a small static commercial website. Future expansion should keep the current operating thesis: automate repeated work without turning the client operation into a black box.
 
 ## Current Source of Truth
 
@@ -8,25 +8,37 @@ Automize should grow from this landing into a small commercial website without l
 - `src/data/i18n.ts`: visible ES/EN copy and form microcopy.
 - `src/pages/index.astro`: page composition and section order.
 - `src/components/LeadForm.astro`: lead intake UI.
+- `src/components/ContactSection.astro`: shared conversion section.
+- `src/layouts/BaseLayout.astro`: shared metadata, header, footer and script wiring.
 - `functions/api/contact.js`: server-side validation, honeypot, Resend delivery and redirect contract.
+- `tests/contact.test.mjs`: contact Function contract tests.
 
 Keep this split. Add pages by reusing the same data shapes before inventing a CMS.
 
+## Implemented Routes
+
+- `/diagnostico`: dedicated diagnostic offer page with deliverables, fit, constraints and expected inputs.
+- `/servicios`: concrete service offers for controlled automation.
+- `/casos-de-uso`: highlighted operational AI use cases.
+- `/casos`: grouped use-case library.
+- `/herramientas`: how Automize works with WhatsApp, Sheets, CRM, Notion, n8n, Make and AI providers.
+- `/agentes-ia`: supervised AI agent positioning.
+- `/metodo` and `/como-trabajamos`: process, controls, documentation and support model.
+- `/faq`: expanded objections and buying questions.
+
 ## Future Routes
 
-- `/casos`: deeper use-case library with one page per process family.
-- `/diagnostico`: dedicated diagnostic offer page with deliverables, fit, constraints and expected inputs.
-- `/metodo`: process, controls, documentation and support model.
-- `/herramientas`: how Automize works with WhatsApp, Sheets, CRM, Notion, n8n, Make and AI providers.
-- `/faq`: expanded objections and buying questions.
 - `/recursos`: practical guides for identifying automatable workflows.
+- Individual use-case detail pages if search demand or sales conversations justify them.
 
 ## Reusable Components
 
-- `UseCaseCard`: render `pain`, `signal`, `automation`, `result` and contextual CTA.
-- `OfferCard`: render ladder items such as diagnostic, first workflow and agent pilot.
-- `FaqList`: render grouped FAQ entries.
-- `ProcessSteps`: render diagnostic/mapping/build/testing/support flows.
+- `UseCaseCard`: implemented for reusable use-case cards.
+- `FaqList`: implemented for grouped FAQ entries.
+- `ContactSection`: implemented for shared lead-capture sections.
+- `SectionIntro`: implemented for consistent section headers.
+- Future `OfferCard`: render ladder items such as diagnostic, first workflow and agent pilot when duplication increases.
+- Future `ProcessSteps`: render diagnostic/mapping/build/testing/support flows when method pages need more structure.
 - `LeadForm`: support compact and full diagnostic modes without changing the backend contract.
 
 ## Future Diagnostic Flow

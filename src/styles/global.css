@@ -135,8 +135,10 @@ textarea {
 .brand-copy small {
   color: var(--muted);
   font-size: 0.68rem;
+  font-style: normal;
   font-weight: 760;
   letter-spacing: 0.05em;
+  opacity: 0.88;
   text-transform: uppercase;
 }
 
@@ -1355,14 +1357,24 @@ h1 {
 }
 
 .automize-hero-content {
-  width: min(760px, 100%);
+  justify-self: start;
+  width: min(640px, calc(100% - 96px));
   margin: 0;
+  margin-left: clamp(12px, 2vw, 36px);
   text-align: left;
 }
 
 .automize-hero-content h1,
 .automize-hero-content .hero-subtitle {
   margin-left: 0;
+}
+
+.automize-hero-content h1 {
+  max-width: 100%;
+}
+
+.automize-hero-content h1 span {
+  display: block;
 }
 
 .automize-hero-content .hero-actions {
@@ -3764,7 +3776,9 @@ textarea:focus-visible {
   }
 
   .automize-hero-content {
-    width: min(680px, 100%);
+    justify-self: center;
+    width: min(580px, calc(100% - 112px));
+    margin-left: clamp(8px, 2vw, 24px);
   }
 
   .flow-map {
@@ -4136,6 +4150,7 @@ textarea:focus-visible {
   }
 
   .automize-hero-content {
+    justify-self: center;
     width: min(330px, calc(100vw - 48px)) !important;
     max-width: calc(100vw - 48px) !important;
     min-width: 0;
@@ -4505,6 +4520,10 @@ textarea:focus-visible {
   .hero-mobile-flow {
     width: min(292px, calc(100vw - 28px)) !important;
     max-width: calc(100vw - 28px) !important;
+  }
+
+  .automize-hero-content {
+    justify-self: center;
   }
 
   .automize-hero-content h1 {

@@ -9,69 +9,54 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const solutionBlocks = [
   {
     tag: "01",
-    badge: "Piloto acotado",
-    title: "Agente operativo",
-    detail: "Automatiza una tarea concreta usando correo, CRM, planillas o sistemas internos, con supervisión cuando hace falta.",
-    result: "Una integración clara y un resultado verificable",
+    badge: "Visibilidad",
+    title: "Dashboards operativos",
+    detail: "Creamos paneles para ver estados, responsables, pendientes y alertas sin perseguir información por correo o planillas.",
+    result: "Control diario sobre lo que está pasando",
   },
   {
     tag: "02",
-    badge: "Contexto útil",
-    title: "Memoria corporativa inteligente",
-    detail: "La IA consulta documentos, manuales, procesos y datos internos para responder o preparar trabajo con mejor contexto.",
-    result: "Menos búsqueda manual y respuestas más consistentes",
+    badge: "Ejecución",
+    title: "Procesos recurrentes",
+    detail: "Ordenamos tareas que se repiten todas las semanas: reportes, solicitudes, seguimiento comercial, registros o aprobaciones.",
+    result: "Menos retrabajo y menos pasos invisibles",
   },
   {
     tag: "03",
-    badge: "Control operativo",
-    title: "Auditoría y blindaje de IA",
-    detail: "Revisamos confiabilidad, errores, trazabilidad, seguridad y costos en sistemas de IA que ya están en uso.",
-    result: "Más control antes de escalar automatizaciones",
+    badge: "Automatización",
+    title: "Sistemas automatizados",
+    detail: "Conectamos formularios, páginas web, integraciones y tareas programadas para que la operación avance con menos intervención manual.",
+    result: "Flujos funcionando con seguimiento claro",
   },
 ];
 
 const featuredCases = [
   {
-    question: "Triaje de leads",
-    answer: "Clasifica contactos entrantes, prioriza oportunidades y deja listo el siguiente paso comercial.",
+    question: "Implementación guiada de IA",
+    answer: "Instalamos y configuramos herramientas como Codex, Claude o Anthropic para tareas concretas del equipo, con una guía simple de uso.",
   },
   {
-    question: "Agente de facturación",
-    answer: "Revisa correos, extrae datos y prepara registros para contabilidad con validación humana final.",
+    question: "Asesoría de herramientas digitales",
+    answer: "Evaluamos qué herramientas conviene usar, cómo integrarlas al flujo actual y qué hábitos necesita el equipo para aprovecharlas.",
   },
   {
-    question: "Soporte con memoria",
-    answer: "Responde preguntas usando documentación interna validada y contexto relevante del negocio.",
-  },
-];
-
-const shortFaqs = [
-  {
-    question: "¿Esto reemplaza personas?",
-    answer: "No. Reduce trabajo repetitivo y deja a las personas en decisiones donde hace falta criterio.",
-  },
-  {
-    question: "¿Necesito cambiar mis sistemas?",
-    answer: "No. Partimos desde lo que ya usa su operación y agregamos complejidad solo cuando aporta valor.",
-  },
-  {
-    question: "¿La IA puede actuar sola?",
-    answer: "Solo cuando el riesgo lo permite. En acciones sensibles dejamos aprobación humana o límites claros.",
+    question: "Automatización de seguimiento",
+    answer: "Ordenamos leads, solicitudes o tickets para que cada caso tenga responsable, estado y próxima acción visible.",
   },
 ];
 
 const methodBlocks = [
   {
-    title: "Una tarea concreta",
-    detail: "Elegimos un proceso repetitivo con impacto visible en vez de partir con una solución demasiado amplia.",
+    title: "Entender",
+    detail: "Revisamos cómo funciona hoy el proceso, quién participa y dónde se pierde tiempo o seguimiento.",
   },
   {
-    title: "Una integración clara",
-    detail: "Conectamos la herramienta que realmente mueve el proceso: correo, CRM, planilla o sistema interno.",
+    title: "Diseñar",
+    detail: "Definimos una solución simple: flujo, herramientas, responsables, estados y puntos de control.",
   },
   {
-    title: "Un resultado verificable",
-    detail: "Probamos, medimos y ajustamos antes de ampliar alcance o complejidad.",
+    title: "Implementar",
+    detail: "Construimos, medimos y ajustamos antes de ampliar el alcance o sumar más complejidad.",
   },
 ];
 ---
@@ -85,47 +70,47 @@ const methodBlocks = [
 >
   <main>
     <section id="home" class="hero automize-hero">
-      <div class="automate-visual" aria-label="Mapa visual del proceso, estados y alertas" data-i18n-aria-label="hero.visualLabel">
+      <div class="automate-visual" aria-label="Mapa visual de solicitud, flujo, seguimiento y resultado" data-i18n-aria-label="hero.visualLabel">
         <img class="automation-emblem" src="/automize-icon.png" alt="" width="220" height="220" />
         <div class="flow-map">
           <span
             class="flow-node node-input"
-            aria-label="Entrada: datos, formularios, correos, planillas o eventos que inician el flujo"
+            aria-label="Solicitud: requerimientos, datos, formularios, correos o eventos que inician el flujo"
             tabindex="0"
-            data-tooltip="Datos, formularios, correos, planillas o eventos que inician el flujo"
+            data-tooltip="Requerimientos, datos, formularios, correos o eventos que inician el flujo"
             data-i18n="hero.node.input"
             data-i18n-aria-label="hero.node.inputLabel"
-            data-i18n-tooltip="hero.node.inputTooltip">Entrada</span
+            data-i18n-tooltip="hero.node.inputTooltip">Solicitud</span
           >
           <span class="flow-line line-one"></span>
           <span
             class="flow-node node-decision"
-            aria-label="Reglas: validación, clasificación o revisión humana según el riesgo"
+            aria-label="Flujo: pasos definidos, responsables y criterios para mover el proceso"
             tabindex="0"
-            data-tooltip="Validación, clasificación o revisión humana según el riesgo"
+            data-tooltip="Pasos definidos, responsables y criterios para mover el proceso"
             data-i18n="hero.node.decision"
             data-i18n-aria-label="hero.node.decisionLabel"
-            data-i18n-tooltip="hero.node.decisionTooltip">Reglas</span
+            data-i18n-tooltip="hero.node.decisionTooltip">Flujo</span
           >
           <span class="flow-line line-two"></span>
           <span
             class="flow-node node-output"
-            aria-label="Salida lista: CRM actualizado, alerta enviada, reporte creado o tarea asignada"
+            aria-label="Seguimiento: estado visible, alertas, responsable y próxima acción"
             tabindex="0"
-            data-tooltip="CRM actualizado, alerta enviada, reporte creado o tarea asignada"
+            data-tooltip="Estado visible, alertas, responsable y próxima acción"
             data-i18n="hero.node.output"
             data-i18n-aria-label="hero.node.outputLabel"
-            data-i18n-tooltip="hero.node.outputTooltip">Salida lista</span
+            data-i18n-tooltip="hero.node.outputTooltip">Seguimiento</span
           >
           <span class="flow-branch branch-alert"></span>
           <span
             class="flow-node node-review"
-            aria-label="Revisión: control humano para errores, datos incompletos o decisiones sensibles"
+            aria-label="Resultado: proceso trazable, salida lista y registro operativo"
             tabindex="0"
-            data-tooltip="Control humano para errores, datos incompletos o decisiones sensibles"
+            data-tooltip="Proceso trazable, salida lista y registro operativo"
             data-i18n="hero.node.review"
             data-i18n-aria-label="hero.node.reviewLabel"
-            data-i18n-tooltip="hero.node.reviewTooltip">Revisión</span
+            data-i18n-tooltip="hero.node.reviewTooltip">Resultado</span
           >
         </div>
         <div class="signal-stack">
@@ -141,12 +126,15 @@ const methodBlocks = [
       </div>
 
       <div class="hero-content automize-hero-content">
-        <p class="eyebrow">Automatización operativa con IA</p>
-        <h1>IA que no solo responde: ejecuta procesos bajo supervisión</h1>
+        <p class="eyebrow">Automatización para la operación diaria</p>
+        <h1>
+          <span>Automatización</span>
+          <span>y soluciones digitales</span>
+        </h1>
         <p class="hero-subtitle">
-          Conectamos correo, CRM, planillas y sistemas internos para reducir trabajo manual, mejorar seguimiento y dejar trazabilidad en procesos repetitivos.
+          Analizamos procesos repetitivos, identificamos cuellos de botella y construimos sistemas que mejoran la integración, reducen trabajo manual y permiten operar con mayor claridad.
         </p>
-        <div class="hero-mobile-flow" aria-label="Ruta del diagnóstico">
+        <div class="hero-mobile-flow" aria-label="Ruta de trabajo">
           {
             heroFlowSteps.map((step, index) => (
               <article class="hero-mobile-step">
@@ -169,25 +157,41 @@ const methodBlocks = [
         <div class="premium-strip" aria-label="Oferta resumida">
           <div class="premium-strip-header">
             <span>Propuesta de valor</span>
-            <strong>Convertimos procesos repetitivos en flujos asistidos por IA, conectados a sus herramientas actuales</strong>
-            <em>Con trazabilidad, control y criterio operativo</em>
+            <strong>Ordenamos procesos manuales con automatización, integración de herramientas y soluciones digitales</strong>
+            <em>Con trazabilidad, control y visibilidad para la ejecución diaria</em>
           </div>
           <ul class="premium-strip-points" aria-label="Puntos clave de la propuesta">
-            <li>No instalamos chats genéricos</li>
-            <li>Partimos con una tarea concreta y una integración clara</li>
-            <li>La supervisión humana se usa como seguridad, no como parche</li>
+            <li>Partimos desde el diagnóstico del proceso real</li>
+            <li>Conectamos sistemas y canales que la empresa ya usa</li>
+            <li>Medimos lo que integramos para detectar mejoras</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method-section method-preview-section">
+      <div class="section-intro">
+        <p class="eyebrow">Cómo partimos</p>
+        <h2>De un proceso manual a una solución operativa simple</h2>
+        <p>Primero entendemos el flujo real. Después diseñamos una solución concreta y medible antes de ampliar el alcance.</p>
+      </div>
+      <CardGrid items={methodBlocks} gridClass="step-grid" cardClass="step-card" />
+      <div class="section-cta section-cta-compact">
+        <p>La meta no es sumar herramientas por sumar. Es ordenar cómo se ejecuta el trabajo diario.</p>
+        <div class="section-cta-actions">
+          <a class="button button-secondary" href="/como-trabajamos" data-track-click="automize_home_method_cta">
+            Ver metodología
+          </a>
         </div>
       </div>
     </section>
 
     <section class="section section-tight">
       <div class="section-intro">
-        <p class="eyebrow">Problema principal</p>
-        <h2>El problema no es solo hacer tareas a mano. Es perder tiempo, seguimiento y visibilidad.</h2>
+        <p class="eyebrow">Diagnóstico operacional</p>
+        <h2>Diagnostico de procesos críticos</h2>
         <p>
-          Cuando un proceso depende de copiar datos, revisar correos, perseguir aprobaciones o recordar el siguiente paso,
-          aparecen atrasos, errores repetitivos y estados invisibles.
+          La primera etapa busca entender cómo se mueve el trabajo, dónde se pierde seguimiento y qué puntos conviene ordenar antes de implementar una solución.
         </p>
       </div>
       <div class="problem-flow" aria-label="Explicación visual del problema operativo">
@@ -208,9 +212,9 @@ const methodBlocks = [
     <section class="section services-section services-preview-section">
       <div class="services-header">
         <p class="eyebrow">Bloques de solución</p>
-        <h2>No vendemos IA en abstracto. Diseñamos sistemas de ejecución con control.</h2>
+        <h2>El problema no es el trabajo manual. Es perder control operativo.</h2>
         <p>
-          La IA útil no es la que impresiona en una demo, sino la que reduce carga operativa sin perder control.
+          Una operación necesita ver qué está pasando, qué se repite, qué está atrasado y qué puede ejecutarse con menos intervención manual.
         </p>
       </div>
       <div class="service-catalog">
@@ -240,9 +244,9 @@ const methodBlocks = [
 
     <section class="section use-cases-section">
       <div class="section-intro">
-        <p class="eyebrow">Casos destacados</p>
-        <h2>Procesos donde la IA sí aporta valor operativo</h2>
-        <p>No prometemos autonomía total. Diseñamos automatización incremental para tareas reales de negocio.</p>
+        <p class="eyebrow">Casos de uso</p>
+        <h2>Casos de uso especializado</h2>
+        <p>También apoyamos adopción de herramientas modernas cuando tienen un uso claro dentro de la operación.</p>
       </div>
       <div class="faq-list">
         <FaqList items={featuredCases} />
@@ -252,40 +256,6 @@ const methodBlocks = [
         <div class="section-cta-actions">
           <a class="button button-primary" href="/casos-de-uso" data-track-click="automize_home_cases_library_cta">
             Ver casos de uso
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section method-section method-preview-section">
-      <div class="section-intro">
-        <p class="eyebrow">Cómo partimos</p>
-        <h2>Start simple, iterate fast</h2>
-        <p>La sofisticación debe nacer de la necesidad, no del hype.</p>
-      </div>
-      <CardGrid items={methodBlocks} gridClass="step-grid" cardClass="step-card" />
-      <div class="section-cta section-cta-compact">
-        <p>Primero definimos el piloto. Después medimos trazabilidad, errores y valor real antes de escalar.</p>
-        <div class="section-cta-actions">
-          <a class="button button-secondary" href="/como-trabajamos" data-track-click="automize_home_method_cta">
-            Cómo trabajamos
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section faq-section faq-preview-section" aria-label="Preguntas frecuentes sobre Automize">
-      <div class="section-intro">
-        <p class="eyebrow">FAQ breve</p>
-        <h2>Objeciones normales antes de pedir diagnóstico</h2>
-        <p>Respondemos primero lo que más pesa en una decisión de negocio.</p>
-      </div>
-      <FaqList items={shortFaqs} />
-      <div class="section-cta section-cta-compact">
-        <p>Si necesita revisar objeciones más específicas sobre control, costo o adopción, la FAQ completa quedó separada.</p>
-        <div class="section-cta-actions">
-          <a class="button button-secondary" href="/faq" data-track-click="automize_home_faq_cta">
-            Ver FAQ completa
           </a>
         </div>
       </div>

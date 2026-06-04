@@ -73,20 +73,20 @@ export type FaqItem = {
 export const heroSignals: FlowSignal[] = [
   {
     i18nKey: "hero.signal.input",
-    label: "Entrada",
-    value: "solicitud repetida",
+    label: "Solicitud",
+    value: "entrada registrada",
     tone: "manual",
   },
   {
     i18nKey: "hero.signal.risk",
-    label: "Riesgo",
-    value: "estado invisible",
+    label: "Flujo",
+    value: "responsable y estado",
     tone: "risk",
   },
   {
     i18nKey: "hero.signal.output",
-    label: "Salida",
-    value: "persona asignada y alerta",
+    label: "Resultado",
+    value: "seguimiento trazable",
     tone: "ready",
   },
 ];
@@ -94,38 +94,38 @@ export const heroSignals: FlowSignal[] = [
 export const heroFlowSteps: HeroFlowStep[] = [
   {
     i18nKey: "hero.flow.diagnostic",
-    title: "Levantamiento",
-    detail: "Elegimos el proceso que más tiempo o control está quitando",
+    title: "Diagnóstico",
+    detail: "Entendemos el proceso, sus responsables y puntos de pérdida",
   },
   {
     i18nKey: "hero.flow.build",
-    title: "Diagrama y tablero",
-    detail: "Dejamos estados, responsables, alertas y revisión humana",
+    title: "Diseño",
+    detail: "Definimos flujo, estados, herramientas y seguimiento",
   },
   {
     i18nKey: "hero.flow.growth",
-    title: "Flujo inicial",
-    detail: "Probamos una versión funcionando con casos reales",
+    title: "Implementación",
+    detail: "Construimos una solución operable y medible",
   },
 ];
 
 export const problemFlow: ProblemFlowItem[] = [
   {
     i18nKey: "problemFlow.scattered",
-    label: "Entrada dispersa",
-    detail: "WhatsApp, correo, formularios y planillas abren tareas sin una bandeja clara.",
+    label: "Flujo actual",
+    detail: "Revisamos cómo entra la información, quién participa y qué pasos se repiten en la operación.",
     tone: "leak",
   },
   {
     i18nKey: "problemFlow.manual",
-    label: "Traspaso manual",
-    detail: "Alguien copia datos, pregunta por estado y empuja aprobaciones a mano.",
+    label: "Variables críticas",
+    detail: "Identificamos cuellos de botella, puntos de error, tiempos muertos y dependencias manuales.",
     tone: "delay",
   },
   {
     i18nKey: "problemFlow.control",
-    label: "Control perdido",
-    detail: "No queda claro quién toma el caso, qué falta, qué venció ni dónde se atascó.",
+    label: "Oportunidades",
+    detail: "Definimos qué conviene automatizar, integrar o dejar visible antes de construir la solución.",
     tone: "control",
   },
 ];
@@ -295,10 +295,17 @@ export const services: ContentCard[] = [
     i18nKey: "services.diagnostic",
     tag: "01",
     badge: "Entrada recomendada",
-    title: "Starter Pack Operativo",
-    detail: "Revisamos un proceso repetido y dejamos claro qué se puede ordenar primero.",
+    title: "Diagnóstico de Automatización",
+    detail: "Antes de implementar herramientas y automatizaciones, identificamos dónde realmente existe una oportunidad de mejora.",
     fit: "Para partir con un entregable concreto antes de tocar sistemas o pedir accesos.",
-    includes: ["Informe de diagnóstico", "Cuellos de botella", "Diagrama del proceso actual", "Mapa del workflow propuesto"],
+    includes: [
+      "Proceso crítico a analizar",
+      "Mapa del flujo actual",
+      "Cuellos de botella",
+      "Riesgos operacionales",
+      "Oportunidades de automatización",
+      "Recomendación de solución",
+    ],
     result: "Lanzamiento: USD 600",
   },
   {
@@ -324,11 +331,11 @@ export const services: ContentCard[] = [
   {
     i18nKey: "services.agent",
     tag: "04",
-    badge: "IA acotada",
-    title: "Piloto de asistencia operativa",
-    detail: "Probamos IA en una tarea concreta: clasificar, resumir, extraer o preparar información con límites claros.",
+    badge: "Apoyo digital",
+    title: "Asistencia operativa acotada",
+    detail: "Probamos una mejora concreta para clasificar, resumir, extraer o preparar información con límites claros.",
     fit: "Para correos, documentos, tickets, solicitudes y reportes.",
-    includes: ["Asistente acotado a una tarea", "Reglas", "Pruebas", "Revisión humana cuando corresponde"],
+    includes: ["Solución acotada a una tarea", "Reglas", "Pruebas", "Revisión humana cuando corresponde"],
     result: "Duración: 10-15 días hábiles",
   },
 ];
@@ -410,7 +417,7 @@ export const scopeIncludes: ContentCard[] = [
   { i18nKey: "scope.include.1", title: "Revisamos procesos manuales o repetitivos", detail: "" },
   { i18nKey: "scope.include.2", title: "Diseño de workflows simples con diagrama", detail: "" },
   { i18nKey: "scope.include.3", title: "Conectamos planillas, formularios, correo, CRM, WhatsApp o Notion cuando el proceso lo necesita", detail: "" },
-  { i18nKey: "scope.include.4", title: "Aplicamos IA solo cuando ayuda a clasificar, resumir o preparar información", detail: "" },
+  { i18nKey: "scope.include.4", title: "Aplicamos apoyo digital solo cuando ayuda a clasificar, resumir o preparar información", detail: "" },
   { i18nKey: "scope.include.5", title: "Dejamos responsables, estados, alertas y tablero de seguimiento", detail: "" },
   { i18nKey: "scope.include.6", title: "Documentamos el flujo y la bitácora operativa", detail: "" },
   { i18nKey: "scope.include.7", title: "Proponemos mejoras rápidas detectadas y siguientes pasos", detail: "" },
@@ -464,7 +471,7 @@ export const principles: ContentCard[] = [
     i18nKey: "principles.operation",
     tag: "Operación",
     title: "El equipo entiende el flujo",
-    detail: "El flujo queda documentado con diagrama, tablero y bitácora para que no dependa de una caja negra ni de una persona externa.",
+    detail: "El flujo queda documentado con diagrama, tablero y bitácora para que el equipo pueda operar, revisar y mejorar con claridad.",
   },
 ];
 

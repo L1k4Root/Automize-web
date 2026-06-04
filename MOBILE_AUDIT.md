@@ -4,9 +4,11 @@ Fecha: 2026-04-29
 Entorno auditado: `http://127.0.0.1:4324/` desde el checkout actual de `projects/automize/web`  
 Viewports usados: `390x844` y `320x844` con Chrome DevTools Protocol
 
+Actualizacion documental: 2026-06-04. El sitio actual ya incluye paginas internas comerciales y tests de la Function de contacto. La evidencia visual de esta auditoria sigue siendo la registrada el 2026-04-29; no se agrego nueva captura en esta actualizacion.
+
 ## Estado general
 
-La version movil es funcional y visualmente consistente, pero todavia no esta optimizada para retener y convertir. Como cliente interesado en automatizar procesos, entiendo la categoria del servicio, pero no compraria todavia sin resolver tres fricciones: el primer viewport queda dominado por el header, la propuesta inicial suena generica y falta prueba concreta de impacto antes de pedir el contacto.
+La version movil auditada era funcional y visualmente consistente, pero todavia no estaba optimizada para retener y convertir. Despues de la implementacion del 2026-04-29, se resolvieron o mitigaron las fricciones principales en `390x844`: header demasiado alto, CTA inconsistente, hero generico, orden de apps y falta de prueba de impacto. Queda pendiente repetir la verificacion visual en `320x844`.
 
 ## Implementacion aplicada
 
@@ -38,6 +40,12 @@ Estado: cambios aplicados sobre la landing actual y verificados en `390x844`.
   - `/private/tmp/automize-mobile-audit-390/contacto-form.png`
 
 Pendiente de re-verificacion: repetir captura post-cambio en `320x844`. El entorno bloqueo esa segunda ejecucion por limite de aprobacion, asi que no se registra como verificada.
+
+## Estado actual de documentacion
+
+- `README.md` y `AGENTS.md` registran el sitio como proyecto comercial estatico, no solo landing de una pagina.
+- `PENDING.md` mantiene como activo solo la re-verificacion `320x844` y la confirmacion de captura real en Cloudflare Pages.
+- `tests/contact.test.mjs` cubre el contrato principal de la Function de contacto.
 
 ## Evidencia tecnica
 

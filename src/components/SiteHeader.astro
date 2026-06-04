@@ -18,11 +18,11 @@ const { currentPath, ctaHref } = Astro.props;
 
 const navItems: NavItem[] = [
   { href: "/", key: "nav.home", label: languageCopy.es["nav.home"] },
-  { href: "/servicios", key: "nav.services", label: languageCopy.es["nav.services"] },
-  { href: "/agentes-ia", key: "nav.agents", label: languageCopy.es["nav.agents"] },
   { href: "/casos-de-uso", key: "nav.useCases", label: languageCopy.es["nav.useCases"] },
+  { href: "/servicios", key: "nav.services", label: languageCopy.es["nav.services"] },
   { href: "/como-trabajamos", key: "nav.method", label: languageCopy.es["nav.method"] },
   { href: "/faq", key: "nav.faq", label: languageCopy.es["nav.faq"] },
+  { href: currentPath === "/" ? "#contacto" : "/diagnostico#contacto", key: "nav.contact", label: languageCopy.es["nav.contact"] },
 ];
 
 const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigured" : "cta.headerUnconfigured";
@@ -36,7 +36,7 @@ const headerCtaLabel = landingConfig.isLeadCaptureConfigured
     <img class="brand-mark" src="/automize-icon.png" alt="" width="48" height="48" />
     <span class="brand-copy">
       <strong>Automize</strong>
-      <small data-i18n="brand.subtitle">Diagnóstico operativo</small>
+      <small data-i18n="brand.subtitle">Consultoría en automatización</small>
     </span>
   </a>
   <nav class="nav-links" aria-label="Navegación principal" data-i18n-aria-label="nav.label">

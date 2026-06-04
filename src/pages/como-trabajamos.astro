@@ -13,7 +13,7 @@ const steps = [
   {
     tag: "Paso 2",
     title: "Diseñamos el flujo y sus límites",
-    detail: "Definimos qué información usa, qué herramientas toca, qué puede ejecutar y dónde debe pedir aprobación.",
+    detail: "Definimos qué información usa, qué herramientas toca, qué estados necesita y dónde debe pedir aprobación.",
   },
   {
     tag: "Paso 3",
@@ -23,7 +23,7 @@ const steps = [
   {
     tag: "Paso 4",
     title: "Medimos trazabilidad y control",
-    detail: "Revisamos qué hizo la IA, qué errores aparecen, dónde se frena y qué partes requieren más supervisión.",
+    detail: "Revisamos qué ocurrió en el flujo, qué errores aparecen, dónde se frena y qué partes requieren más supervisión.",
   },
   {
     tag: "Paso 5",
@@ -40,8 +40,8 @@ const principles = [
   },
   {
     tag: "Trazabilidad",
-    title: "Un agente sin observabilidad es un riesgo operativo",
-    detail: "La IA útil en producción debe dejar registro, contexto y puntos de control. Si no se puede auditar, no se puede gobernar bien.",
+    title: "Un flujo sin observabilidad es un riesgo operativo",
+    detail: "Una solución en producción debe dejar registro, contexto y puntos de control. Si no se puede auditar, no se puede gobernar bien.",
   },
   {
     tag: "Arquitectura",
@@ -77,7 +77,7 @@ const principles = [
         <p class="eyebrow">Control y criterio</p>
         <h2>Primero pilotos acotados. Luego escalamiento.</h2>
         <p>
-          La sofisticación debe nacer de la necesidad. No prometemos autonomía total cuando el proceso exige control.
+          La sofisticación debe nacer de la necesidad. No automatizamos decisiones críticas cuando el proceso exige control.
         </p>
       </div>
       <CardGrid items={principles} gridClass="step-grid" cardClass="step-card" />

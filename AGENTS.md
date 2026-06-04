@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-This is the standalone Astro landing for `Automize`, a premium workflow automation brand. Its job is to convert manual work, scattered data, approvals, and repeated operational tasks into controlled workflow-automation leads.
+This is the standalone Astro commercial site for `Automize`, a premium workflow automation brand. Its job is to convert manual work, scattered data, approvals, and repeated operational tasks into controlled workflow-automation leads.
 
-Treat the product direction as iterative improvement. Future work should refine the current landing, copy, mobile behavior, and conversion flow instead of replacing the existing structure without a clear reason.
+Treat the product direction as iterative improvement. Future work should refine the current pages, copy, mobile behavior, and conversion flow instead of replacing the existing structure without a clear reason.
 
 ## Current Structure
 
@@ -20,15 +20,32 @@ Treat the product direction as iterative improvement. Future work should refine 
 ├── src/
 │   ├── components/
 │   │   ├── CardGrid.astro
+│   │   ├── ContactSection.astro
+│   │   ├── FaqList.astro
 │   │   ├── LanguageSwitch.astro
-│   │   └── LeadForm.astro
+│   │   ├── LeadForm.astro
+│   │   ├── SectionIntro.astro
+│   │   ├── SiteFooter.astro
+│   │   ├── SiteHeader.astro
+│   │   └── UseCaseCard.astro
 │   ├── config/
 │   │   └── landing.ts
 │   ├── data/
 │   │   ├── automize.ts
 │   │   └── i18n.ts
+│   ├── layouts/
+│   │   └── BaseLayout.astro
 │   ├── pages/
+│   │   ├── agentes-ia.astro
+│   │   ├── casos-de-uso.astro
+│   │   ├── casos.astro
+│   │   ├── como-trabajamos.astro
+│   │   ├── diagnostico.astro
+│   │   ├── faq.astro
 │   │   ├── gracias.astro
+│   │   ├── herramientas.astro
+│   │   ├── metodo.astro
+│   │   ├── servicios.astro
 │   │   └── index.astro
 │   ├── scripts/
 │   │   ├── analytics.ts
@@ -38,6 +55,8 @@ Treat the product direction as iterative improvement. Future work should refine 
 │   │   └── navigation.ts
 │   └── styles/
 │       └── global.css
+├── tests/
+│   └── contact.test.mjs
 └── package.json
 ```
 
@@ -48,6 +67,7 @@ pnpm install
 pnpm run dev
 pnpm run build
 pnpm run preview
+pnpm test
 ```
 
 Use Node `22.13.0` from `.nvmrc`. If the ambient shell uses an older Node version, Astro 6 will fail before build.
@@ -65,6 +85,7 @@ Within the parent MetricLogic repo, this project lives at `projects/automize/web
 - The lead form fields are `name`, `email`, `company`, `industry`, `symptom`, `tools`, `impact`, `source`, `offer`, and honeypot `company_fax`.
 - The bilingual layer is static-first: Spanish HTML by default, client-side switch for English.
 - Navigation behavior lives in `src/scripts/navigation.ts`: anchor scrolling accounts for sticky header height, click tracking emits analytics events, and the header toggles `is-scrolled` after the user has moved beyond the first part of the viewport.
+- Contact Function tests live in `tests/contact.test.mjs` and cover validation, fail-closed behavior, honeypot behavior, optional fields and email rendering.
 
 ## Code Rules
 
@@ -75,7 +96,7 @@ Within the parent MetricLogic repo, this project lives at `projects/automize/web
 - Keep form behavior production-safe: no fake success when capture is unconfigured.
 - Do not log full lead email addresses or secrets. Use request IDs and non-sensitive metadata.
 - Preserve the Cloudflare Pages setup: root `projects/automize/web`, build command `pnpm build`, output `dist`, Node `22.13.0`.
-- Preserve the current improvement path: polish the existing Automize landing, do not restart the page or rename core contracts casually.
+- Preserve the current improvement path: polish the existing Automize site, do not restart the page set or rename core contracts casually.
 
 ## Copy Direction
 
@@ -86,7 +107,7 @@ Within the parent MetricLogic repo, this project lives at `projects/automize/web
 ## UX Direction
 
 - The desktop header is sticky and becomes a rounded floating bar after scroll. Keep that transition subtle: it should feel elegant, not like a new component suddenly appears.
-- Mobile header behavior is still pending refinement. The intended experience is a compact, readable, non-invasive header that does not cover the hero, keeps the brand and main CTA clear, and moves into a rounded floating state only when it helps orientation.
+- Mobile header behavior has been compacted and validated at `390x844`; repeat visual QA at `320x844` before treating it as fully closed.
 - The integration strip should sell continuity across the tools the client already uses. Avoid copy that sounds purely technical or like a list of logos.
 - Do not claim the form is live unless `PUBLIC_LEAD_FORM_ACTION` is configured.
 
@@ -96,6 +117,12 @@ Minimum check after code changes:
 
 ```bash
 pnpm build
+```
+
+When contact capture behavior changes, also run:
+
+```bash
+pnpm test
 ```
 
 If lead-capture logic changes, also check:

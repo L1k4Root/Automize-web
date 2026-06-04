@@ -1,6 +1,6 @@
-# Automize Landing
+# Automize Web
 
-Landing estatica independiente para `Automize`, enfocada en automatizacion de procesos, IA, integraciones y workflows operables.
+Sitio comercial estatico independiente para `Automize`, enfocado en automatizacion de procesos, IA, integraciones y workflows operables.
 
 El trabajo pendiente de esta web vive en `PENDING.md`.
 
@@ -11,6 +11,7 @@ El trabajo pendiente de esta web vive en `PENDING.md`.
 - Cloudflare Pages para hosting
 - Cloudflare Pages Functions para `POST /api/contact`
 - Resend como proveedor de email transaccional del lead
+- Node test runner para pruebas unitarias de la Function de contacto
 
 Node esperado:
 
@@ -34,15 +35,32 @@ El repo incluye `.nvmrc` con `22.13.0`. Si el shell usa una version menor, Astro
 ├── src/
 │   ├── components/
 │   │   ├── CardGrid.astro
+│   │   ├── ContactSection.astro
+│   │   ├── FaqList.astro
 │   │   ├── LanguageSwitch.astro
-│   │   └── LeadForm.astro
+│   │   ├── LeadForm.astro
+│   │   ├── SectionIntro.astro
+│   │   ├── SiteFooter.astro
+│   │   ├── SiteHeader.astro
+│   │   └── UseCaseCard.astro
 │   ├── config/
 │   │   └── landing.ts
 │   ├── data/
 │   │   ├── automize.ts
 │   │   └── i18n.ts
+│   ├── layouts/
+│   │   └── BaseLayout.astro
 │   ├── pages/
+│   │   ├── agentes-ia.astro
+│   │   ├── casos-de-uso.astro
+│   │   ├── casos.astro
+│   │   ├── como-trabajamos.astro
+│   │   ├── diagnostico.astro
+│   │   ├── faq.astro
 │   │   ├── gracias.astro
+│   │   ├── herramientas.astro
+│   │   ├── metodo.astro
+│   │   ├── servicios.astro
 │   │   └── index.astro
 │   ├── scripts/
 │   │   ├── analytics.ts
@@ -52,8 +70,23 @@ El repo incluye `.nvmrc` con `22.13.0`. Si el shell usa una version menor, Astro
 │   │   └── navigation.ts
 │   └── styles/
 │       └── global.css
+├── tests/
+│   └── contact.test.mjs
 └── package.json
 ```
+
+## Rutas actuales
+
+- `/`: home comercial con hero, problema, bloques de solucion, casos, metodo, FAQ y contacto.
+- `/diagnostico`: pagina dedicada al diagnostico inicial y formulario.
+- `/servicios`: ofertas concretas para automatizar sin perder control.
+- `/casos-de-uso`: casos destacados de uso operativo de IA.
+- `/casos`: biblioteca agrupada de familias de casos.
+- `/herramientas`: integraciones y herramientas usadas como medio operativo.
+- `/agentes-ia`: propuesta sobre agentes IA supervisados.
+- `/metodo` y `/como-trabajamos`: metodo de trabajo incremental, supervisado y trazable.
+- `/faq`: objeciones y preguntas frecuentes.
+- `/gracias`: destino post-envio exitoso o honeypot.
 
 ## Comandos
 
@@ -81,6 +114,12 @@ Preview Astro:
 pnpm preview
 ```
 
+Tests de la Function de contacto:
+
+```bash
+pnpm test
+```
+
 Si tu shell no esta usando Node `22.13.0`, usa temporalmente:
 
 ```bash
@@ -106,6 +145,7 @@ Contrato en codigo:
 - `src/components/LeadForm.astro` renderiza `action="#"` si la captura no esta configurada
 - `src/scripts/lead-form.ts` valida required fields, bloquea doble submit y maneja errores JSON de la Function
 - Campos enviados: `name`, `email`, `company`, `industry`, `symptom`, `tools`, `impact`, `source`, `offer` y honeypot `company_fax`
+- `tests/contact.test.mjs` cubre validacion, payload movil reducido, omision de campos opcionales, fail-closed y honeypot
 
 ## Captura de leads
 
@@ -175,13 +215,14 @@ La landing debe hablar en el lenguaje operativo de cada area:
 
 El hero actual reduce el mensaje a `Automatizacion, IA y workflows`. El bloque de integraciones vende continuidad entre apps: el trabajo debe avanzar sin depender de copiar, perseguir o recordar manualmente. La seccion de problemas debe mantenerse concreta y orientada a procesos automatizables, no a automatizacion generica.
 
-## UX actual
+## Estado actual
 
 - Header sticky con estado `is-scrolled` al bajar la pagina.
 - En desktop, el header pasa a una barra flotante con margen lateral, bordes redondeados, sombra y fondo mas solido.
 - La navegacion por anclas calcula offset en base a la altura real del header.
 - El carrusel de integraciones mezcla iconos remotos y assets locales definidos en `src/data/automize.ts`.
-- La version movil todavia requiere refinamiento visual del header; no debe marcarse como cerrada hasta validar que se vea elegante y no tape el hero.
+- La version movil fue compactada y validada en `390x844`; queda pendiente repetir verificacion visual en `320x844`.
+- El home ya enlaza a paginas internas comerciales, por lo que el proyecto debe tratarse como sitio comercial estatico, no solo como landing de una pagina.
 
 ## Analytics
 
@@ -221,8 +262,8 @@ Cada push a GitHub redeploya el proyecto si Pages esta conectado al repo.
 ## Decisiones cerradas
 
 - Automize se publica como landing independiente, no como subruta de Fluxora.
-- El hook comercial visible queda como `Desde USD 900`.
+- Automize se mantiene independiente de Fluxora, pero dentro del parent MetricLogic su ruta operativa es `projects/automize/web`.
 - El formulario debe fallar cerrado cuando no existe `PUBLIC_LEAD_FORM_ACTION`.
 - La captura real usa Cloudflare Pages Functions y Resend.
 - El selector bilingue es client-side para mantener el sitio estatico simple.
-- La mejora del proyecto debe continuar como refinamiento progresivo de la landing actual.
+- La mejora del proyecto debe continuar como refinamiento progresivo del sitio actual.
