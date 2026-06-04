@@ -2,11 +2,7 @@
 
 Landing estatica independiente para `Automize`, enfocada en automatizacion de procesos, IA, integraciones y workflows operables.
 
-No es una subruta de Fluxora: este proyecto tiene su propio Astro app, metadata, assets, formulario, Function de contacto y build.
-
-La direccion actual no es reemplazar la landing, sino mejorarla por capas: copy comercial, comportamiento responsive, formulario operativo y una experiencia mas elegante sobre la estructura existente.
-
-El trabajo pendiente de esta web vive en `PENDING.md`. Dentro de `MetricLogic`, este repo queda ubicado en `projects/automize/web/`.
+El trabajo pendiente de esta web vive en `PENDING.md`.
 
 ## Stack
 

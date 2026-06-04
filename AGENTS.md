@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is the standalone Astro landing for `Automize`, a premium workflow automation brand. It is not a Fluxora route or shared subproject. Its job is to convert manual work, scattered data, approvals, and repeated operational tasks into controlled workflow-automation leads.
+This is the standalone Astro landing for `Automize`, a premium workflow automation brand. Its job is to convert manual work, scattered data, approvals, and repeated operational tasks into controlled workflow-automation leads.
 
 Treat the product direction as iterative improvement. Future work should refine the current landing, copy, mobile behavior, and conversion flow instead of replacing the existing structure without a clear reason.
 
@@ -45,9 +45,9 @@ Treat the product direction as iterative improvement. Future work should refine 
 
 ```bash
 pnpm install
-pnpm dev
-pnpm build
-pnpm preview
+pnpm run dev
+pnpm run build
+pnpm run preview
 ```
 
 Use Node `22.13.0` from `.nvmrc`. If the ambient shell uses an older Node version, Astro 6 will fail before build.
