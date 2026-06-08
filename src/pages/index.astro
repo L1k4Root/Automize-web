@@ -3,7 +3,7 @@ import CardGrid from "../components/CardGrid.astro";
 import ContactSection from "../components/ContactSection.astro";
 import FaqList from "../components/FaqList.astro";
 import { landingConfig } from "../config/landing";
-import { heroFlowSteps, heroSignals, problemFlow } from "../data/automize";
+import { heroFlowSteps, problemFlow } from "../data/automize";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const solutionBlocks = [
@@ -11,22 +11,22 @@ const solutionBlocks = [
     tag: "01",
     badge: "Visibilidad",
     title: "Dashboards operativos",
-    detail: "Creamos paneles para ver estados, responsables, pendientes y alertas sin perseguir información por correo o planillas.",
-    result: "Control diario sobre lo que está pasando",
+    detail: "Estados, responsables, pendientes y alertas en un tablero simple para dejar de perseguir información por correo o planillas.",
+    result: "Estado visible para decidir cada día",
   },
   {
     tag: "02",
     badge: "Ejecución",
     title: "Procesos recurrentes",
-    detail: "Ordenamos tareas que se repiten todas las semanas: reportes, solicitudes, seguimiento comercial, registros o aprobaciones.",
-    result: "Menos retrabajo y menos pasos invisibles",
+    detail: "Reportes, solicitudes, seguimiento comercial, registros o aprobaciones con pasos claros y próxima acción definida.",
+    result: "Menos retrabajo y menos pendientes invisibles",
   },
   {
     tag: "03",
     badge: "Automatización",
     title: "Sistemas automatizados",
-    detail: "Conectamos formularios, páginas web, integraciones y tareas programadas para que la operación avance con menos intervención manual.",
-    result: "Flujos funcionando con seguimiento claro",
+    detail: "Formularios, páginas web, integraciones y tareas programadas conectadas al flujo operativo real del equipo.",
+    result: "Flujos funcionando con registro y seguimiento",
   },
 ];
 
@@ -47,15 +47,15 @@ const featuredCases = [
 
 const methodBlocks = [
   {
-    title: "Entender",
-    detail: "Revisamos cómo funciona hoy el proceso, quién participa y dónde se pierde tiempo o seguimiento.",
+    title: "Diagnóstico",
+    detail: "Entendemos cómo funciona el proceso real, dónde se pierde tiempo, seguimiento o control.",
   },
   {
-    title: "Diseñar",
-    detail: "Definimos una solución simple: flujo, herramientas, responsables, estados y puntos de control.",
+    title: "Propuesta de solución",
+    detail: "Diseñamos el flujo, herramientas, responsables, estados y puntos de control que conviene construir.",
   },
   {
-    title: "Implementar",
+    title: "Implementación",
     detail: "Construimos, medimos y ajustamos antes de ampliar el alcance o sumar más complejidad.",
   },
 ];
@@ -71,69 +71,47 @@ const methodBlocks = [
   <main>
     <section id="home" class="hero automize-hero">
       <div class="automate-visual" aria-label="Mapa visual de solicitud, flujo, seguimiento y resultado" data-i18n-aria-label="hero.visualLabel">
-        <img class="automation-emblem" src="/automize-icon.png" alt="" width="220" height="220" />
-        <div class="flow-map">
-          <span
-            class="flow-node node-input"
-            aria-label="Solicitud: requerimientos, datos, formularios, correos o eventos que inician el flujo"
-            tabindex="0"
-            data-tooltip="Requerimientos, datos, formularios, correos o eventos que inician el flujo"
-            data-i18n="hero.node.input"
-            data-i18n-aria-label="hero.node.inputLabel"
-            data-i18n-tooltip="hero.node.inputTooltip">Solicitud</span
-          >
-          <span class="flow-line line-one"></span>
-          <span
-            class="flow-node node-decision"
-            aria-label="Flujo: pasos definidos, responsables y criterios para mover el proceso"
-            tabindex="0"
-            data-tooltip="Pasos definidos, responsables y criterios para mover el proceso"
-            data-i18n="hero.node.decision"
-            data-i18n-aria-label="hero.node.decisionLabel"
-            data-i18n-tooltip="hero.node.decisionTooltip">Flujo</span
-          >
-          <span class="flow-line line-two"></span>
-          <span
-            class="flow-node node-output"
-            aria-label="Seguimiento: estado visible, alertas, responsable y próxima acción"
-            tabindex="0"
-            data-tooltip="Estado visible, alertas, responsable y próxima acción"
-            data-i18n="hero.node.output"
-            data-i18n-aria-label="hero.node.outputLabel"
-            data-i18n-tooltip="hero.node.outputTooltip">Seguimiento</span
-          >
-          <span class="flow-branch branch-alert"></span>
-          <span
-            class="flow-node node-review"
-            aria-label="Resultado: proceso trazable, salida lista y registro operativo"
-            tabindex="0"
-            data-tooltip="Proceso trazable, salida lista y registro operativo"
-            data-i18n="hero.node.review"
-            data-i18n-aria-label="hero.node.reviewLabel"
-            data-i18n-tooltip="hero.node.reviewTooltip">Resultado</span
-          >
-        </div>
-        <div class="signal-stack">
-          {
-            heroSignals.map((signal) => (
-              <div class={`automation-signal ${signal.tone}`}>
-                <span data-i18n={signal.i18nKey ? `${signal.i18nKey}.label` : undefined}>{signal.label}</span>
-                <strong data-i18n={signal.i18nKey ? `${signal.i18nKey}.value` : undefined}>{signal.value}</strong>
-              </div>
-            ))
-          }
+        <div class="flow-map" aria-hidden="true">
+          <div class="flow-map-header">
+            <span>Flujo operativo</span>
+            <strong>Solicitud registrada</strong>
+          </div>
+          <div class="flow-lane">
+            <span class="flow-node node-input" data-i18n="hero.node.input">Entrada</span>
+            <span class="flow-node node-decision" data-i18n="hero.node.decision">Orden</span>
+            <span class="flow-node node-output" data-i18n="hero.node.output">Seguimiento</span>
+            <span class="flow-pulse" aria-hidden="true"></span>
+          </div>
+          <div class="flow-control">
+            <img class="automation-emblem" src="/automize-icon.png" alt="" width="96" height="96" />
+            <div>
+              <span data-i18n="hero.node.review">Control</span>
+              <strong>estado, responsable y próxima acción</strong>
+            </div>
+          </div>
+          <div class="signal-stack">
+            <div class="automation-signal manual">
+              <span>Entrada</span>
+              <strong>datos recibidos</strong>
+            </div>
+            <div class="automation-signal risk">
+              <span>Flujo</span>
+              <strong>reglas y responsables</strong>
+            </div>
+            <div class="automation-signal ready">
+              <span>Salida</span>
+              <strong>seguimiento trazable</strong>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="hero-content automize-hero-content">
-        <p class="eyebrow">Automatización para la operación diaria</p>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Procesos conectados. Menos trabajo manual.</p>
         <h1>
           <span>Automatización</span>
           <span>y soluciones digitales</span>
         </h1>
-        <p class="hero-subtitle">
-          Analizamos procesos repetitivos, identificamos cuellos de botella y construimos sistemas que mejoran la integración, reducen trabajo manual y permiten operar con mayor claridad.
-        </p>
         <div class="hero-mobile-flow" aria-label="Ruta de trabajo">
           {
             heroFlowSteps.map((step, index) => (
@@ -154,30 +132,18 @@ const methodBlocks = [
           </a>
         </div>
         <p class="hero-commitment">Menos trabajo manual. Más seguimiento. Más control sobre la operación.</p>
-        <div class="premium-strip" aria-label="Oferta resumida">
-          <div class="premium-strip-header">
-            <span>Propuesta de valor</span>
-            <strong>Ordenamos procesos manuales con automatización, integración de herramientas y soluciones digitales</strong>
-            <em>Con trazabilidad, control y visibilidad para la ejecución diaria</em>
-          </div>
-          <ul class="premium-strip-points" aria-label="Puntos clave de la propuesta">
-            <li>Partimos desde el diagnóstico del proceso real</li>
-            <li>Conectamos sistemas y canales que la empresa ya usa</li>
-            <li>Medimos lo que integramos para detectar mejoras</li>
-          </ul>
-        </div>
       </div>
     </section>
 
     <section class="section method-section method-preview-section">
       <div class="section-intro">
         <p class="eyebrow">Cómo partimos</p>
-        <h2>De un proceso manual a una solución operativa simple</h2>
-        <p>Primero entendemos el flujo real. Después diseñamos una solución concreta y medible antes de ampliar el alcance.</p>
+        <h2>Diagnóstico, propuesta e implementación en un flujo claro</h2>
+        <p>Partimos por el proceso real, definimos una solución concreta y la probamos antes de ampliar el alcance.</p>
       </div>
-      <CardGrid items={methodBlocks} gridClass="step-grid" cardClass="step-card" />
+      <CardGrid items={methodBlocks} gridClass="step-grid home-step-grid" cardClass="step-card" numbered={true} />
       <div class="section-cta section-cta-compact">
-        <p>La meta no es sumar herramientas por sumar. Es ordenar cómo se ejecuta el trabajo diario.</p>
+        <p>La meta es que el trabajo quede con dueño, estado, alerta y registro sin agregar complejidad innecesaria.</p>
         <div class="section-cta-actions">
           <a class="button button-secondary" href="/como-trabajamos" data-track-click="automize_home_method_cta">
             Ver metodología
@@ -189,7 +155,7 @@ const methodBlocks = [
     <section class="section section-tight">
       <div class="section-intro">
         <p class="eyebrow">Diagnóstico operacional</p>
-        <h2>Diagnostico de procesos críticos</h2>
+        <h2>Diagnóstico de procesos críticos</h2>
         <p>
           La primera etapa busca entender cómo se mueve el trabajo, dónde se pierde seguimiento y qué puntos conviene ordenar antes de implementar una solución.
         </p>
@@ -212,25 +178,48 @@ const methodBlocks = [
     <section class="section services-section services-preview-section">
       <div class="services-header">
         <p class="eyebrow">Bloques de solución</p>
-        <h2>El problema no es el trabajo manual. Es perder control operativo.</h2>
+        <h2>Menos trabajo manual. Más control operativo.</h2>
         <p>
-          Una operación necesita ver qué está pasando, qué se repite, qué está atrasado y qué puede ejecutarse con menos intervención manual.
+          Ordenamos procesos, seguimiento y ejecución para que el equipo vea qué está pasando y qué debe avanzar.
         </p>
       </div>
-      <div class="service-catalog">
-        {
-          solutionBlocks.map((service, index) => (
-            <article class={`service-card service-card-${index + 1}`}>
-              <div class="service-card-topline">
-                <span>{service.tag}</span>
-                <em class="service-badge">{service.badge}</em>
-              </div>
-              <h3>{service.title}</h3>
-              <p>{service.detail}</p>
-              <strong>{service.result}</strong>
-            </article>
-          ))
-        }
+      <div class="home-solution-layout">
+        <div class="service-catalog">
+          {
+            solutionBlocks.map((service, index) => (
+              <article class={`service-card service-card-${index + 1}`}>
+                <div class="service-card-topline">
+                  <span>{service.tag}</span>
+                  <em class="service-badge">{service.badge}</em>
+                </div>
+                <h3>{service.title}</h3>
+                <p>{service.detail}</p>
+                <strong>{service.result}</strong>
+              </article>
+            ))
+          }
+        </div>
+        <aside class="operations-board" aria-label="Visual de tablero operativo">
+          <div class="operations-board-header">
+            <span>Tablero operativo</span>
+            <strong>Control diario</strong>
+          </div>
+          <div class="operations-board-row is-active">
+            <span>Entrada</span>
+            <strong>Solicitud recibida</strong>
+            <em>Asignada</em>
+          </div>
+          <div class="operations-board-row">
+            <span>Flujo</span>
+            <strong>Responsable + SLA</strong>
+            <em>En curso</em>
+          </div>
+          <div class="operations-board-row">
+            <span>Salida</span>
+            <strong>Registro y alerta</strong>
+            <em>Visible</em>
+          </div>
+        </aside>
       </div>
       <div class="section-cta section-cta-compact">
         <p>Revise las ofertas concretas y vea dónde conviene partir según el tipo de proceso.</p>
@@ -266,6 +255,8 @@ const methodBlocks = [
       source="automize-home"
       offer="diagnostico-operativo"
       compactOnMobile={true}
+      variant="home"
+      compactFields={true}
     />
   </main>
 </BaseLayout>

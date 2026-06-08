@@ -6,6 +6,7 @@ interface Props {
   source?: string;
   offer?: string;
   compactOnMobile?: boolean;
+  compactFields?: boolean;
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   source = "automize-landing",
   offer = "workflow-automation-review",
   compactOnMobile = false,
+  compactFields = false,
 } = Astro.props;
 const formAction = config.isLeadCaptureConfigured ? config.leadFormAction : "#";
 const buttonLabel = "Enviar proceso para revisión";
@@ -24,7 +26,11 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
 ---
 
 <form
-  class:list={["lead-form", compactOnMobile && "lead-form-compact-mobile"]}
+  class:list={[
+    "lead-form",
+    compactOnMobile && "lead-form-compact-mobile",
+    compactFields && "lead-form-compact-fields",
+  ]}
   action={formAction}
   method="post"
   data-lead-form
@@ -59,7 +65,7 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
     <input name="company" type="text" autocomplete="organization" placeholder="Nombre de la empresa" data-i18n-placeholder="form.companyPlaceholder" required />
   </label>
 
-  <label class="form-field-optional">
+  <label class="form-field-optional form-field-industry">
     <span data-i18n="form.industryLabel">Rubro</span>
     <input name="industry" type="text" autocomplete="organization-title" placeholder="Ej: inmobiliaria, clínica, agencia, B2B" data-i18n-placeholder="form.industryPlaceholder" />
   </label>
@@ -74,16 +80,16 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
       required></textarea>
   </label>
 
-  <label class="form-field-optional">
+  <label class="form-field-optional form-field-tools">
     <span data-i18n="form.toolsLabel">¿Qué herramientas usan hoy?</span>
     <textarea
       name="tools"
-      rows="3"
+      rows="2"
       placeholder="Ej: WhatsApp, email, Google Sheets, CRM, Notion, agenda o formularios"
       data-i18n-placeholder="form.toolsPlaceholder"></textarea>
   </label>
 
-  <label class="form-field-optional">
+  <label class="form-field-optional form-field-impact">
     <span data-i18n="form.impactLabel">¿Qué pasa si ese proceso falla o se atrasa?</span>
     <textarea
       name="impact"

@@ -99,7 +99,7 @@ export const heroFlowSteps: HeroFlowStep[] = [
   },
   {
     i18nKey: "hero.flow.build",
-    title: "Diseño",
+    title: "Propuesta",
     detail: "Definimos flujo, estados, herramientas y seguimiento",
   },
   {

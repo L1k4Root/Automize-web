@@ -7,6 +7,8 @@ interface Props {
   source?: string;
   offer?: string;
   compactOnMobile?: boolean;
+  variant?: "default" | "home";
+  compactFields?: boolean;
 }
 
 const {
@@ -14,23 +16,22 @@ const {
   source = "automize-landing",
   offer = "workflow-automation-review",
   compactOnMobile = true,
+  variant = "default",
+  compactFields = false,
 } = Astro.props;
 ---
 
-<section id="contacto" class="contact-section automize-contact">
+<section id="contacto" class:list={["contact-section", "automize-contact", variant === "home" && "contact-section-home"]}>
   <div class="contact-copy">
     <p class="eyebrow" data-i18n="contact.eyebrow">Siguiente paso</p>
     <h2 data-i18n="contact.title">Diagnóstico de Automatización</h2>
     <p data-i18n="contact.body">
-      Antes de implementar herramientas y automatizaciones, identificamos dónde realmente existe una oportunidad de mejora.
+      Revisamos un proceso concreto y respondemos con el flujo, riesgos y primer alcance que conviene ordenar.
     </p>
     <ul class="contact-points">
-      <li data-i18n="contact.point.process">Proceso crítico a analizar</li>
-      <li data-i18n="contact.point.map">Mapa del flujo actual</li>
-      <li data-i18n="contact.point.bottlenecks">Cuellos de botella</li>
-      <li data-i18n="contact.point.risks">Riesgos operacionales</li>
-      <li data-i18n="contact.point.opportunities">Oportunidades de automatización</li>
-      <li data-i18n="contact.point.recommendation">Recomendación de solución</li>
+      <li data-i18n="contact.point.process">Qué proceso conviene ordenar primero</li>
+      <li data-i18n="contact.point.map">Flujo, responsables, estados y puntos de control</li>
+      <li data-i18n="contact.point.recommendation">Primer alcance implementable sin sobrecargar al equipo</li>
     </ul>
     <a
       class="inline-link contact-email-cta"
@@ -45,5 +46,6 @@ const {
     source={source}
     offer={offer}
     compactOnMobile={compactOnMobile}
+    compactFields={compactFields}
   />
 </section>
