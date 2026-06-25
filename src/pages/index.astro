@@ -1,64 +1,11 @@
 ---
-import CardGrid from "../components/CardGrid.astro";
 import ContactSection from "../components/ContactSection.astro";
-import FaqList from "../components/FaqList.astro";
+import HomeClientsSection from "../components/home/HomeClientsSection.astro";
+import HomeExplainSection from "../components/home/HomeExplainSection.astro";
+import HomeHero from "../components/home/HomeHero.astro";
+import HomeServicesSection from "../components/home/HomeServicesSection.astro";
 import { landingConfig } from "../config/landing";
-import { heroFlowSteps, problemFlow } from "../data/automize";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const solutionBlocks = [
-  {
-    tag: "01",
-    badge: "Visibilidad",
-    title: "Dashboards operativos",
-    detail: "Estados, responsables, pendientes y alertas en un tablero simple para dejar de perseguir información por correo o planillas.",
-    result: "Estado visible para decidir cada día",
-  },
-  {
-    tag: "02",
-    badge: "Ejecución",
-    title: "Procesos recurrentes",
-    detail: "Reportes, solicitudes, seguimiento comercial, registros o aprobaciones con pasos claros y próxima acción definida.",
-    result: "Menos retrabajo y menos pendientes invisibles",
-  },
-  {
-    tag: "03",
-    badge: "Automatización",
-    title: "Sistemas automatizados",
-    detail: "Formularios, páginas web, integraciones y tareas programadas conectadas al flujo operativo real del equipo.",
-    result: "Flujos funcionando con registro y seguimiento",
-  },
-];
-
-const featuredCases = [
-  {
-    question: "Implementación guiada de IA",
-    answer: "Instalamos y configuramos herramientas como Codex, Claude o Anthropic para tareas concretas del equipo, con una guía simple de uso.",
-  },
-  {
-    question: "Asesoría de herramientas digitales",
-    answer: "Evaluamos qué herramientas conviene usar, cómo integrarlas al flujo actual y qué hábitos necesita el equipo para aprovecharlas.",
-  },
-  {
-    question: "Automatización de seguimiento",
-    answer: "Ordenamos leads, solicitudes o tickets para que cada caso tenga responsable, estado y próxima acción visible.",
-  },
-];
-
-const methodBlocks = [
-  {
-    title: "Diagnóstico",
-    detail: "Entendemos cómo funciona el proceso real, dónde se pierde tiempo, seguimiento o control.",
-  },
-  {
-    title: "Propuesta de solución",
-    detail: "Diseñamos el flujo, herramientas, responsables, estados y puntos de control que conviene construir.",
-  },
-  {
-    title: "Implementación",
-    detail: "Construimos, medimos y ajustamos antes de ampliar el alcance o sumar más complejidad.",
-  },
-];
 ---
 
 <BaseLayout
@@ -68,192 +15,16 @@ const methodBlocks = [
   ctaHref="#contacto"
   footerContactHref="#contacto"
 >
-  <main>
-    <section id="home" class="hero automize-hero">
-      <div class="automate-visual" aria-label="Mapa visual de solicitud, flujo, seguimiento y resultado" data-i18n-aria-label="hero.visualLabel">
-        <div class="flow-map" aria-hidden="true">
-          <div class="flow-map-header">
-            <span>Flujo operativo</span>
-            <strong>Solicitud registrada</strong>
-          </div>
-          <div class="flow-lane">
-            <span class="flow-node node-input" data-i18n="hero.node.input">Entrada</span>
-            <span class="flow-node node-decision" data-i18n="hero.node.decision">Orden</span>
-            <span class="flow-node node-output" data-i18n="hero.node.output">Seguimiento</span>
-            <span class="flow-pulse" aria-hidden="true"></span>
-          </div>
-          <div class="flow-control">
-            <img class="automation-emblem" src="/automize-icon.png" alt="" width="96" height="96" />
-            <div>
-              <span data-i18n="hero.node.review">Control</span>
-              <strong>estado, responsable y próxima acción</strong>
-            </div>
-          </div>
-          <div class="signal-stack">
-            <div class="automation-signal manual">
-              <span>Entrada</span>
-              <strong>datos recibidos</strong>
-            </div>
-            <div class="automation-signal risk">
-              <span>Flujo</span>
-              <strong>reglas y responsables</strong>
-            </div>
-            <div class="automation-signal ready">
-              <span>Salida</span>
-              <strong>seguimiento trazable</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-content automize-hero-content">
-        <p class="eyebrow" data-i18n="hero.eyebrow">Procesos conectados. Menos trabajo manual.</p>
-        <h1>
-          <span>Automatización</span>
-          <span>y soluciones digitales</span>
-        </h1>
-        <div class="hero-mobile-flow" aria-label="Ruta de trabajo">
-          {
-            heroFlowSteps.map((step, index) => (
-              <article class="hero-mobile-step">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{step.title}</strong>
-                <p>{step.detail}</p>
-              </article>
-            ))
-          }
-        </div>
-        <div class="hero-actions" aria-label="Acciones principales">
-          <a class="button button-primary" href="/diagnostico#contacto" data-track-click="automize_home_diagnostic_cta">
-            Solicitar diagnóstico
-          </a>
-          <a class="button button-secondary" href="/casos-de-uso" data-track-click="automize_home_cases_cta">
-            Ver casos de uso
-          </a>
-        </div>
-        <p class="hero-commitment">Menos trabajo manual. Más seguimiento. Más control sobre la operación.</p>
-      </div>
-    </section>
-
-    <section class="section method-section method-preview-section">
-      <div class="section-intro">
-        <p class="eyebrow">Cómo partimos</p>
-        <h2>Diagnóstico, propuesta e implementación en un flujo claro</h2>
-        <p>Partimos por el proceso real, definimos una solución concreta y la probamos antes de ampliar el alcance.</p>
-      </div>
-      <CardGrid items={methodBlocks} gridClass="step-grid home-step-grid" cardClass="step-card" numbered={true} />
-      <div class="section-cta section-cta-compact">
-        <p>La meta es que el trabajo quede con dueño, estado, alerta y registro sin agregar complejidad innecesaria.</p>
-        <div class="section-cta-actions">
-          <a class="button button-secondary" href="/como-trabajamos" data-track-click="automize_home_method_cta">
-            Ver metodología
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-tight">
-      <div class="section-intro">
-        <p class="eyebrow">Diagnóstico operacional</p>
-        <h2>Diagnóstico de procesos críticos</h2>
-        <p>
-          La primera etapa busca entender cómo se mueve el trabajo, dónde se pierde seguimiento y qué puntos conviene ordenar antes de implementar una solución.
-        </p>
-      </div>
-      <div class="problem-flow" aria-label="Explicación visual del problema operativo">
-        {
-          problemFlow.map((item, index) => (
-            <article class={`problem-flow-step ${item.tone}`}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{item.label}</h3>
-                <p>{item.detail}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="section services-section services-preview-section">
-      <div class="services-header">
-        <p class="eyebrow">Bloques de solución</p>
-        <h2>Menos trabajo manual. Más control operativo.</h2>
-        <p>
-          Ordenamos procesos, seguimiento y ejecución para que el equipo vea qué está pasando y qué debe avanzar.
-        </p>
-      </div>
-      <div class="home-solution-layout">
-        <div class="service-catalog">
-          {
-            solutionBlocks.map((service, index) => (
-              <article class={`service-card service-card-${index + 1}`}>
-                <div class="service-card-topline">
-                  <span>{service.tag}</span>
-                  <em class="service-badge">{service.badge}</em>
-                </div>
-                <h3>{service.title}</h3>
-                <p>{service.detail}</p>
-                <strong>{service.result}</strong>
-              </article>
-            ))
-          }
-        </div>
-        <aside class="operations-board" aria-label="Visual de tablero operativo">
-          <div class="operations-board-header">
-            <span>Tablero operativo</span>
-            <strong>Control diario</strong>
-          </div>
-          <div class="operations-board-row is-active">
-            <span>Entrada</span>
-            <strong>Solicitud recibida</strong>
-            <em>Asignada</em>
-          </div>
-          <div class="operations-board-row">
-            <span>Flujo</span>
-            <strong>Responsable + SLA</strong>
-            <em>En curso</em>
-          </div>
-          <div class="operations-board-row">
-            <span>Salida</span>
-            <strong>Registro y alerta</strong>
-            <em>Visible</em>
-          </div>
-        </aside>
-      </div>
-      <div class="section-cta section-cta-compact">
-        <p>Revise las ofertas concretas y vea dónde conviene partir según el tipo de proceso.</p>
-        <div class="section-cta-actions">
-          <a class="button button-primary" href="/servicios" data-track-click="automize_home_services_cta">
-            Ver servicios
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section use-cases-section">
-      <div class="section-intro">
-        <p class="eyebrow">Casos de uso</p>
-        <h2>Casos de uso especializado</h2>
-        <p>También apoyamos adopción de herramientas modernas cuando tienen un uso claro dentro de la operación.</p>
-      </div>
-      <div class="faq-list">
-        <FaqList items={featuredCases} />
-      </div>
-      <div class="section-cta section-cta-compact">
-        <p>Si su operación se parece a uno de estos casos, vale la pena revisar la biblioteca completa.</p>
-        <div class="section-cta-actions">
-          <a class="button button-primary" href="/casos-de-uso" data-track-click="automize_home_cases_library_cta">
-            Ver casos de uso
-          </a>
-        </div>
-      </div>
-    </section>
+  <main class="home-redesign">
+    <HomeHero />
+    <HomeExplainSection />
+    <HomeServicesSection />
+    <HomeClientsSection />
 
     <ContactSection
       config={landingConfig}
       source="automize-home"
-      offer="diagnostico-operativo"
+      offer="solucion-digital"
       compactOnMobile={true}
       variant="home"
       compactFields={true}

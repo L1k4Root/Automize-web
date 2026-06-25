@@ -269,7 +269,7 @@ export const integrationLogos: IntegrationLogo[] = [
     name: "Codex",
     mark: "Cx",
     tone: "ai",
-    logoUrl: "/codex-macos-template.png",
+    logoUrl: "/automize-icon.png",
     logoAlt: "Codex para macOS",
   },
   {

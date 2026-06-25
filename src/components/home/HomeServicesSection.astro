@@ -1,0 +1,84 @@
+---
+import Icon from "../Icon.astro";
+
+const services = [
+  {
+    icon: "globe",
+    badge: "Para captar clientes",
+    title: "Implementación de sitio web",
+    detail: "Sitio claro, responsive y conectado a formulario, WhatsApp o correo.",
+    bullets: ["Sitios corporativos", "Landing pages", "Formularios", "Integración con WhatsApp o email"],
+  },
+  {
+    icon: "mail",
+    badge: "Para activar contactos",
+    title: "Email marketing y campañas digitales",
+    detail: "Correos, formularios y flujos simples para comunicar o activar contactos.",
+    bullets: ["Mailing", "Segmentación básica", "Formularios", "Medición"],
+  },
+  {
+    icon: "repeat",
+    badge: "Para reducir trabajo manual",
+    title: "Automatizaciones y flujos internos",
+    detail: "Alertas, reportes y tareas recurrentes para ordenar el trabajo interno.",
+    bullets: ["Alertas", "Reportes", "Responsables", "Tareas recurrentes"],
+  },
+  {
+    icon: "code",
+    badge: "Para casos específicos",
+    title: "Soluciones digitales a medida",
+    detail: "Una solución específica cuando el problema no calza con una plantilla.",
+    bullets: ["Levantamiento del proceso", "Prototipo", "Implementación", "Mejora continua"],
+  },
+] as const;
+---
+
+<section id="servicios" class="section home-services-section">
+  <div class="section-intro section-intro-wide">
+    <p class="eyebrow" data-i18n="home.services.eyebrow">SERVICIOS</p>
+    <h2 data-i18n="home.services.title">Soluciones digitales para procesos reales</h2>
+    <p data-i18n="home.services.body">
+      No todos los negocios necesitan lo mismo. Podemos partir desde una solución concreta o diseñar un flujo a medida según el problema que quieras resolver.
+    </p>
+  </div>
+
+  <div class="service-grid">
+    {
+      services.map((service) => (
+        <details class="home-service-card">
+          <summary>
+            <div class="service-card-topline">
+              <span class="service-icon-frame">
+                <Icon name={service.icon} />
+              </span>
+              <span class="service-badge">{service.badge}</span>
+            </div>
+            <div class="service-summary-copy">
+              <h3>{service.title}</h3>
+            </div>
+            <span class="service-toggle" aria-hidden="true">
+              <span></span>
+              <span></span>
+            </span>
+          </summary>
+          <div class="service-card-body">
+            <p class="service-detail">{service.detail}</p>
+            <span>Ideal para</span>
+            <ul>
+              {service.bullets.map((bullet) => <li>{bullet}</li>)}
+            </ul>
+          </div>
+        </details>
+      ))
+    }
+  </div>
+
+  <div class="section-cta section-cta-compact">
+    <div class="section-cta-actions">
+      <a class="button button-primary service-cta-button" href="#contacto" data-track-click="automize_home_solution_cta">
+        <span>Conversemos tu solución</span>
+        <Icon name="arrow-right" />
+      </a>
+    </div>
+  </div>
+</section>

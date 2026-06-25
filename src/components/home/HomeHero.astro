@@ -1,0 +1,26 @@
+---
+import Icon from "../Icon.astro";
+import HeroDiagram from "./HeroDiagram.astro";
+---
+
+<section id="home" class="hero automize-hero">
+  <div class="hero-content automize-hero-content">
+    <p class="eyebrow" data-i18n="hero.eyebrow">DIGITALIZACIÓN OPERACIONAL</p>
+    <h1 data-i18n="hero.title">Automatización y soluciones digitales</h1>
+    <p class="hero-subtitle" data-i18n="hero.subtitle">
+      Diseñamos sistemas, sitios, flujos y herramientas digitales para ordenar procesos reales, reducir trabajo manual y dar más control a tu operación.
+    </p>
+    <div class="hero-actions" aria-label="Acciones principales">
+      <a class="button button-primary" href="#contacto" data-track-click="automize_home_meeting_cta">
+        <span data-i18n="hero.primaryCta">Agendar reunión</span>
+        <Icon name="arrow-right" />
+      </a>
+      <a class="button button-secondary" href="#servicios" data-track-click="automize_home_services_cta">
+        <span data-i18n="hero.secondaryCta">Ver servicios</span>
+        <Icon name="arrow-right" />
+      </a>
+    </div>
+  </div>
+
+  <HeroDiagram />
+</section>

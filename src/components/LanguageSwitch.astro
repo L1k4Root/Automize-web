@@ -21,19 +21,22 @@ const options: LanguageOption[] = [
 ];
 ---
 
-<div class="language-switch" role="group" aria-label="Idioma" data-language-switch data-i18n-aria-label="language.group">
-  {
-    options.map((option) => (
-      <button
-        class:list={["language-option", option.initialActive && "is-active"]}
-        type="button"
-        data-language-option={option.code}
-        aria-pressed={String(Boolean(option.initialActive))}
-        aria-label={option.shortLabel}
-        data-i18n-aria-label={option.labelKey}
-      >
-        {option.shortLabel}
-      </button>
-    ))
-  }
+<div class="language-switch" aria-label="Idioma" data-language-switch data-i18n-aria-label="language.group">
+  <div class="language-menu language-menu-inline" role="listbox" aria-label="Idioma" data-language-menu data-i18n-aria-label="language.group">
+    {
+      options.map((option) => (
+        <button
+          class:list={["language-option", option.initialActive && "is-active"]}
+          type="button"
+          role="option"
+          data-language-option={option.code}
+          data-language-short-label={option.shortLabel}
+          aria-selected={String(Boolean(option.initialActive))}
+          data-i18n-aria-label={option.labelKey}
+        >
+          {option.shortLabel}
+        </button>
+      ))
+    }
+  </div>
 </div>

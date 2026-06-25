@@ -1,0 +1,43 @@
+---
+import Icon from "../Icon.astro";
+
+const whatWeDo = [
+  {
+    icon: "search",
+    title: "Entendemos el proceso",
+    detail: "Vemos cómo trabaja hoy tu equipo, dónde se pierde información y qué tareas se repiten.",
+  },
+  {
+    icon: "pen-tool",
+    title: "Diseñamos la solución",
+    detail: "Definimos qué conviene construir: sitio, formulario, dashboard, automatización, integración o flujo interno.",
+  },
+  {
+    icon: "settings",
+    title: "Implementamos y ajustamos",
+    detail: "Construimos una primera versión funcional, la probamos contigo y la mejoramos según el uso real.",
+  },
+] as const;
+---
+
+<section id="sobre-nosotros" class="section home-explain-section">
+  <div class="section-intro section-intro-wide">
+    <p class="eyebrow" data-i18n="home.what.eyebrow">SOBRE NOSOTROS</p>
+    <h2 data-i18n="home.what.title">Convertimos procesos desordenados en soluciones digitales simples</h2>
+    <p data-i18n="home.what.body">
+      Si tu operación depende de correos, WhatsApp, planillas, tareas repetidas o información que solo algunas personas manejan, diseñamos una solución digital para ordenar el flujo, dejar responsabilidades claras y reducir trabajo manual.
+    </p>
+  </div>
+
+  <div class="minimal-card-grid minimal-card-grid-3">
+    {
+      whatWeDo.map((item) => (
+        <article class="minimal-card">
+          <Icon name={item.icon} />
+          <h3>{item.title}</h3>
+          <p>{item.detail}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

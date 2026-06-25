@@ -89,10 +89,14 @@ const applyFormCopy = (language: SupportedLanguage) => {
 };
 
 const syncLanguageControls = (language: SupportedLanguage) => {
+  document.querySelectorAll<HTMLElement>("[data-language-current]").forEach((element) => {
+    element.textContent = language.toUpperCase();
+  });
+
   document.querySelectorAll<HTMLButtonElement>("[data-language-option]").forEach((button) => {
     const isActive = button.dataset.languageOption === language;
     button.classList.toggle("is-active", isActive);
-    button.setAttribute("aria-pressed", String(isActive));
+    button.setAttribute("aria-selected", String(isActive));
   });
 };
 
@@ -135,9 +139,57 @@ const readLanguageCopy = (): LanguageCopy => {
 export const initLanguageSwitcher = () => {
   languageCopy = readLanguageCopy();
 
+  document.querySelectorAll<HTMLElement>("[data-language-switch]").forEach((switcher) => {
+    const trigger = switcher.querySelector<HTMLButtonElement>("[data-language-trigger]");
+    const menu = switcher.querySelector<HTMLElement>("[data-language-menu]");
+
+    if (!trigger || !menu) return;
+
+    const closeMenu = () => {
+      menu.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+    };
+
+    const openMenu = () => {
+      menu.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+    };
+
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (menu.hidden) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    });
+
+    switcher.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+        trigger.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!switcher.contains(event.target as Node)) {
+        closeMenu();
+      }
+    });
+  });
+
   document.querySelectorAll<HTMLButtonElement>("[data-language-option]").forEach((button) => {
     button.addEventListener("click", () => {
       const nextLanguage = button.dataset.languageOption;
+      const switcher = button.closest<HTMLElement>("[data-language-switch]");
+      const trigger = switcher?.querySelector<HTMLButtonElement>("[data-language-trigger]");
+      const menu = switcher?.querySelector<HTMLElement>("[data-language-menu]");
+
+      if (trigger && menu) {
+        menu.hidden = true;
+        trigger.setAttribute("aria-expanded", "false");
+      }
+
       if (!isSupportedLanguage(nextLanguage) || nextLanguage === activeLanguage) return;
       applyLanguage(nextLanguage);
     });

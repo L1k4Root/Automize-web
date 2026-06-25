@@ -51,51 +51,27 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
   </div>
 
   <label>
-    <span data-i18n="form.nameLabel">Nombre</span>
+    <span class="field-label"><span data-i18n="form.nameLabel">Nombre</span><strong class="required-mark" aria-hidden="true">*</strong></span>
     <input name="name" type="text" autocomplete="name" placeholder="Tu nombre" data-i18n-placeholder="form.namePlaceholder" required />
   </label>
 
   <label>
-    <span data-i18n="form.emailLabel">Email</span>
+    <span class="field-label"><span data-i18n="form.emailLabel">Email</span><strong class="required-mark" aria-hidden="true">*</strong></span>
     <input name="email" type="email" autocomplete="email" placeholder="nombre@empresa.cl" data-i18n-placeholder="form.emailPlaceholder" required />
   </label>
 
   <label>
-    <span data-i18n="form.companyLabel">Empresa</span>
+    <span class="field-label"><span data-i18n="form.companyLabel">Empresa</span><strong class="required-mark" aria-hidden="true">*</strong></span>
     <input name="company" type="text" autocomplete="organization" placeholder="Nombre de la empresa" data-i18n-placeholder="form.companyPlaceholder" required />
   </label>
 
-  <label class="form-field-optional form-field-industry">
-    <span data-i18n="form.industryLabel">Rubro</span>
-    <input name="industry" type="text" autocomplete="organization-title" placeholder="Ej: inmobiliaria, clínica, agencia, B2B" data-i18n-placeholder="form.industryPlaceholder" />
-  </label>
-
   <label>
-    <span data-i18n="form.symptomLabel">¿Qué proceso quieres ordenar?</span>
+    <span data-i18n="form.symptomLabel">Cuéntanos brevemente qué necesitas</span>
     <textarea
       name="symptom"
       rows="4"
-      placeholder="Ej: seguimiento comercial, agenda, reportes, solicitudes internas o documentos repetitivos"
-      data-i18n-placeholder="form.symptomPlaceholder"
-      required></textarea>
-  </label>
-
-  <label class="form-field-optional form-field-tools">
-    <span data-i18n="form.toolsLabel">¿Qué herramientas usan hoy?</span>
-    <textarea
-      name="tools"
-      rows="2"
-      placeholder="Ej: WhatsApp, email, Google Sheets, CRM, Notion, agenda o formularios"
-      data-i18n-placeholder="form.toolsPlaceholder"></textarea>
-  </label>
-
-  <label class="form-field-optional form-field-impact">
-    <span data-i18n="form.impactLabel">¿Qué pasa si ese proceso falla o se atrasa?</span>
-    <textarea
-      name="impact"
-      rows="3"
-      placeholder="Ej: se pierden leads, se atrasan respuestas, aumenta el retrabajo o nadie ve el estado"
-      data-i18n-placeholder="form.impactPlaceholder"></textarea>
+      placeholder="Ej: queremos ordenar la captación de clientes, agendar llamadas o automatizar una tarea repetida"
+      data-i18n-placeholder="form.symptomPlaceholder"></textarea>
   </label>
 
   <button class="button button-primary form-button" type="submit">

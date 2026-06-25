@@ -2,7 +2,7 @@
 
 ## Activo
 
-- Revalidar visualmente el header movil en `320x844`.
+- Revalidar manualmente el header movil en `320x844`; existe captura headless simple, pero falta QA en navegador/in-app.
 - Confirmar la configuracion real de captura en Cloudflare Pages antes de evaluar conversion de produccion.
 
 ## Criterio esperado
@@ -16,5 +16,5 @@
 ## Estado conocido
 
 - Header movil compactado y validado en `390x844` segun `MOBILE_AUDIT.md`.
-- Pendiente especifico: repetir evidencia en `320x844`.
+- Evidencia parcial: captura headless simple en `320x844`; pendiente repetir en navegador real/in-app.
 - Tests de contacto disponibles con `pnpm test`.

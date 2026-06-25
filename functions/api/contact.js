@@ -60,7 +60,7 @@ export const readLeadPayload = (formData) => ({
 });
 
 export const validateLeadPayload = (payload) => {
-  if (!payload.name || !payload.email || !payload.company || !payload.symptom) {
+  if (!payload.name || !payload.email || !payload.company) {
     return "Faltan campos obligatorios.";
   }
 
@@ -112,7 +112,7 @@ export const renderHtmlBody = ({ name, email, company, industry, symptom, tools,
     `<p><strong>Nombre:</strong> ${escapeHtml(name)}</p>`,
     `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
     `<p><strong>Empresa:</strong> ${escapeHtml(company)}</p>`,
-    `<p><strong>Proceso a ordenar:</strong><br>${escapeHtml(symptom).replace(/\n/g, "<br>")}</p>`,
+    ...renderOptionalHtmlField("Mensaje", symptom),
     ...renderOptionalHtmlField("Rubro", industry),
     ...renderOptionalHtmlField("Herramientas actuales", tools),
     ...renderOptionalHtmlField("Impacto si falla o se atrasa", impact),
@@ -129,9 +129,7 @@ export const renderTextBody = ({ name, email, company, industry, symptom, tools,
     `Empresa: ${company}`,
     `Source: ${source}`,
     `Offer: ${offer}`,
-    "",
-    "Proceso a ordenar:",
-    symptom,
+    ...renderOptionalTextField("Mensaje", symptom),
     ...renderOptionalTextField("Rubro", industry),
     ...renderOptionalTextField("Herramientas actuales", tools),
     ...renderOptionalTextField("Impacto si falla o se atrasa", impact),

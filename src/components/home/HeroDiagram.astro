@@ -1,0 +1,104 @@
+---
+import Icon from "../Icon.astro";
+
+const processInputs = [
+  { icon: "asset", src: "/icons/whatsapp.svg", label: "WhatsApp" },
+  { icon: "asset", src: "/icons/outlook.svg", label: "Correos" },
+  { icon: "asset", src: "/icons/excel.svg", label: "Planillas Excel" },
+  { icon: "asset", src: "/icons/google-forms.svg", label: "Formularios" },
+] as const;
+
+const processOutputs = [
+  { icon: "bell", label: "Alertas priorizadas" },
+  { icon: "square-check", label: "Tareas automáticas" },
+  { icon: "bar-chart", label: "Dashboard en tiempo real" },
+  { icon: "trending-up", label: "Seguimiento comercial" },
+] as const;
+---
+
+<div class="automate-visual" aria-label="Sistema digital Automize" data-i18n-aria-label="hero.visualLabel">
+  <div class="digital-system-panel" aria-hidden="true">
+    <div class="digital-system-header">
+      <span>Proceso de Digitalización</span>
+      <em><span></span>Active</em>
+    </div>
+
+    <div class="digital-system-flow">
+      <svg class="system-connector-svg" viewBox="0 0 920 360" preserveAspectRatio="none" aria-hidden="true">
+        <path class="connector-line connector-left connector-top" d="M300 78 C340 78 372 150 426 180" pathLength="100" />
+        <path class="connector-line connector-left connector-mid" d="M300 142 C344 142 377 166 426 180" pathLength="100" />
+        <path class="connector-line connector-left connector-mid" d="M300 222 C344 222 377 194 426 180" pathLength="100" />
+        <path class="connector-line connector-left connector-bottom" d="M300 292 C340 292 372 210 426 180" pathLength="100" />
+        <path class="connector-comet connector-comet-left connector-comet-one" d="M300 78 C340 78 372 150 426 180" pathLength="100" />
+        <path class="connector-comet connector-comet-left connector-comet-two" d="M300 142 C344 142 377 166 426 180" pathLength="100" />
+        <path class="connector-comet connector-comet-left connector-comet-three" d="M300 222 C344 222 377 194 426 180" pathLength="100" />
+        <path class="connector-comet connector-comet-left connector-comet-four" d="M300 292 C340 292 372 210 426 180" pathLength="100" />
+
+        <path class="connector-line connector-right connector-top" d="M584 180 C622 148 635 84 664 78" pathLength="100" />
+        <path class="connector-line connector-right connector-mid" d="M584 180 C620 166 636 145 664 142" pathLength="100" />
+        <path class="connector-line connector-right connector-mid" d="M584 180 C620 194 636 219 664 222" pathLength="100" />
+        <path class="connector-line connector-right connector-bottom" d="M584 180 C622 212 635 286 664 292" pathLength="100" />
+        <path class="connector-comet connector-comet-right connector-comet-one" d="M584 180 C622 148 635 84 664 78" pathLength="100" />
+        <path class="connector-comet connector-comet-right connector-comet-two" d="M584 180 C620 166 636 145 664 142" pathLength="100" />
+        <path class="connector-comet connector-comet-right connector-comet-three" d="M584 180 C620 194 636 219 664 222" pathLength="100" />
+        <path class="connector-comet connector-comet-right connector-comet-four" d="M584 180 C622 212 635 286 664 292" pathLength="100" />
+
+        <circle class="connector-dot connector-anchor" cx="426" cy="180" r="5" />
+        <circle class="connector-dot connector-anchor" cx="584" cy="180" r="5" />
+        <circle class="connector-dot connector-node connector-node-one" cx="300" cy="78" r="3.4" />
+        <circle class="connector-dot connector-node connector-node-two" cx="300" cy="142" r="3.4" />
+        <circle class="connector-dot connector-node connector-node-three" cx="300" cy="222" r="3.4" />
+        <circle class="connector-dot connector-node connector-node-four" cx="300" cy="292" r="3.4" />
+        <circle class="connector-dot connector-node connector-node-one" cx="664" cy="78" r="4" />
+        <circle class="connector-dot connector-node connector-node-two" cx="664" cy="142" r="4" />
+        <circle class="connector-dot connector-node connector-node-three" cx="664" cy="222" r="4" />
+        <circle class="connector-dot connector-node connector-node-four" cx="664" cy="292" r="4" />
+      </svg>
+
+      <div class="flow-chip flow-chip-left-top">mensaje</div>
+      <div class="flow-chip flow-chip-left-mid">correo</div>
+      <div class="flow-chip flow-chip-left-low">excel</div>
+      <div class="flow-chip flow-chip-left-bottom">formulario</div>
+      <div class="flow-chip flow-chip-right-top">alerta</div>
+      <div class="flow-chip flow-chip-right-mid">tarea</div>
+      <div class="flow-chip flow-chip-right-low">dashboard</div>
+      <div class="flow-chip flow-chip-right-bottom">seguimiento</div>
+
+      <div class="system-group system-group-input">
+        <span class="system-label">Flujo actual</span>
+        <ul class="system-item-list">
+          {
+            processInputs.map((item) => (
+              <li>
+                {"src" in item ? <img class="icon icon-asset" src={item.src} alt="" width="44" height="44" /> : <Icon name={item.icon} />}
+                <span>{item.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="system-core">
+        <div class="system-core-mark">
+          <img src="/automize-icon.png" alt="" width="96" height="96" />
+        </div>
+        <strong>Automize</strong>
+        <p>Captura <span>·</span> Ordena <span>·</span> Acciona</p>
+      </div>
+
+      <div class="system-group system-group-result">
+        <span class="system-label">Flujo digitalizado</span>
+        <ul class="system-item-list">
+          {
+            processOutputs.map((item) => (
+              <li>
+                <Icon name={item.icon} />
+                <span>{item.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

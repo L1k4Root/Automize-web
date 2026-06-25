@@ -13,7 +13,6 @@ const baseFields = {
   name: "Ana Perez",
   email: "ana@empresa.cl",
   company: "Empresa Demo",
-  symptom: "Los leads de WhatsApp quedan sin seguimiento.",
 };
 
 const createRequest = (fields) => {
@@ -39,10 +38,11 @@ afterEach(() => {
 });
 
 describe("lead payload validation", () => {
-  it("accepts the reduced mobile payload without fake optional fields", () => {
+  it("accepts the publication payload without optional fields", () => {
     assert.equal(validateLeadPayload({
       ...baseFields,
       industry: "",
+      symptom: "",
       tools: "",
       impact: "",
       source: "automize-landing",
@@ -53,8 +53,9 @@ describe("lead payload validation", () => {
   it("rejects missing required fields", () => {
     assert.equal(validateLeadPayload({
       ...baseFields,
-      symptom: "",
+      company: "",
       industry: "",
+      symptom: "",
       tools: "",
       impact: "",
       source: "automize-landing",
@@ -67,6 +68,7 @@ describe("lead payload validation", () => {
       ...baseFields,
       email: "ana",
       industry: "",
+      symptom: "",
       tools: "",
       impact: "",
       source: "automize-landing",
@@ -80,6 +82,7 @@ describe("lead email rendering", () => {
     const payload = {
       ...baseFields,
       industry: "",
+      symptom: "",
       tools: "",
       impact: "",
       source: "automize-landing",
@@ -87,13 +90,14 @@ describe("lead email rendering", () => {
     };
 
     assert.equal(renderHtmlBody(payload).includes("Rubro"), false);
+    assert.equal(renderHtmlBody(payload).includes("Mensaje"), false);
     assert.equal(renderTextBody(payload).includes("Herramientas actuales"), false);
     assert.equal(renderTextBody(payload).includes("undefined"), false);
   });
 });
 
 describe("contact function", () => {
-  it("delivers reduced mobile payloads and redirects to thanks", async () => {
+  it("delivers publication payloads and redirects to thanks", async () => {
     let outboundPayload;
     globalThis.fetch = async (_url, init) => {
       outboundPayload = JSON.parse(init.body);
@@ -113,6 +117,7 @@ describe("contact function", () => {
     assert.equal(response.headers.get("location"), "https://automize.test/gracias");
     assert.equal(outboundPayload.reply_to, "ana@empresa.cl");
     assert.equal(outboundPayload.html.includes("Rubro"), false);
+    assert.equal(outboundPayload.html.includes("Mensaje"), false);
   });
 
   it("keeps the fail-closed path when email delivery is not configured", async () => {

@@ -1,0 +1,52 @@
+---
+const clients = [
+  {
+    name: "Full Commerce",
+    label: "Operación comercial",
+    logo: "/clients/fullcommerce-mark.svg",
+    logoClass: "client-logo-fullcommerce",
+  },
+  {
+    name: "Bright Alliance",
+    label: "Servicios legales",
+    logo: "/clients/bright-alliance-white.svg",
+    logoClass: "client-logo-bright",
+  },
+  {
+    name: "Arquitectura Terrazo",
+    label: "Arquitectura y proyectos",
+    logo: "/clients/terrazo-icon.avif",
+    logoClass: "client-logo-terrazo",
+  },
+] as const;
+---
+
+<section id="clientes" class="section client-section">
+  <div class="section-intro section-intro-wide">
+    <p class="eyebrow" data-i18n="home.clients.eyebrow">CLIENTES Y PROYECTOS</p>
+    <h2 data-i18n="home.clients.title">Empresas y proyectos donde hemos construido soluciones digitales</h2>
+    <p data-i18n="home.clients.body">
+      Hemos trabajado en sitios, campañas, automatizaciones, flujos comerciales y herramientas internas para operaciones reales.
+    </p>
+  </div>
+
+  <div class="client-marquee" aria-label="Clientes y proyectos">
+    <div class="client-track">
+      {[0, 1].map((group) => (
+        <div class="client-group" aria-hidden={group === 1 ? "true" : "false"}>
+          {clients.map((client) => (
+            <article class="client-card">
+              <span class="client-logo-frame">
+                <img class={client.logoClass} src={client.logo} alt="" loading="lazy" />
+              </span>
+              <span class="client-copy">
+                <strong>{client.name}</strong>
+                <small>{client.label}</small>
+              </span>
+            </article>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

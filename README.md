@@ -31,18 +31,27 @@ El repo incluye `.nvmrc` con `22.13.0`. Si el shell usa una version menor, Astro
 │       └── contact.js
 ├── public/
 │   ├── automize-icon.png
-│   └── codex-macos-template.png
+│   ├── icons/
+│   │   └── excel.svg
+│   └── logo-BaChile-azul.svg
 ├── src/
 │   ├── components/
 │   │   ├── CardGrid.astro
 │   │   ├── ContactSection.astro
 │   │   ├── FaqList.astro
+│   │   ├── Icon.astro
 │   │   ├── LanguageSwitch.astro
 │   │   ├── LeadForm.astro
 │   │   ├── SectionIntro.astro
 │   │   ├── SiteFooter.astro
 │   │   ├── SiteHeader.astro
-│   │   └── UseCaseCard.astro
+│   │   ├── UseCaseCard.astro
+│   │   └── home/
+│   │       ├── HeroDiagram.astro
+│   │       ├── HomeClientsSection.astro
+│   │       ├── HomeExplainSection.astro
+│   │       ├── HomeHero.astro
+│   │       └── HomeServicesSection.astro
 │   ├── config/
 │   │   └── landing.ts
 │   ├── data/
@@ -77,7 +86,7 @@ El repo incluye `.nvmrc` con `22.13.0`. Si el shell usa una version menor, Astro
 
 ## Rutas actuales
 
-- `/`: home comercial con hero, problema, bloques de solucion, casos, metodo, FAQ y contacto.
+- `/`: home comercial modularizada con hero, diagrama de digitalizacion, explicacion, servicios, clientes y contacto.
 - `/diagnostico`: pagina dedicada al diagnostico inicial y formulario.
 - `/servicios`: ofertas concretas para automatizar sin perder control.
 - `/casos-de-uso`: casos destacados de uso operativo de IA.
@@ -144,8 +153,10 @@ Contrato en codigo:
 - `src/config/landing.ts` lee las variables `PUBLIC_*`
 - `src/components/LeadForm.astro` renderiza `action="#"` si la captura no esta configurada
 - `src/scripts/lead-form.ts` valida required fields, bloquea doble submit y maneja errores JSON de la Function
-- Campos enviados: `name`, `email`, `company`, `industry`, `symptom`, `tools`, `impact`, `source`, `offer` y honeypot `company_fax`
-- `tests/contact.test.mjs` cubre validacion, payload movil reducido, omision de campos opcionales, fail-closed y honeypot
+- Campos visibles del formulario principal: `name`, `email`, `company` como obligatorios y `symptom` como mensaje opcional
+- La Function acepta tambien los opcionales historicos `industry`, `tools` e `impact` para no romper integraciones antiguas
+- Campos enviados: `name`, `email`, `company`, `symptom`, `source`, `offer` y honeypot `company_fax`
+- `tests/contact.test.mjs` cubre validacion, payload de publicacion, omision de campos opcionales, fail-closed y honeypot
 
 ## Captura de leads
 
@@ -203,25 +214,27 @@ Se puede forzar ingles con:
 Mensaje central:
 
 ```txt
-Transformamos el trabajo tedioso en procesos automatizados utilizando soluciones de inteligencia artificial.
+Automize ordena procesos reales con automatizacion y soluciones digitales para reducir trabajo manual, aumentar control operativo y dejar trazabilidad.
 ```
 
 La landing debe hablar en el lenguaje operativo de cada area:
 
 - Ventas: leads, cotizaciones, CRM, seguimiento y proxima tarea comercial.
 - Soporte: tickets, prioridad, SLA, responsable y estado.
-- Administracion: reportes, cobranza, planillas, conciliacion y validacion.
+- Administracion: reportes, cobranza, planillas Excel, conciliacion y validacion.
 - Legal / RR. HH.: contratos, aprobaciones, permisos, onboarding, vencimientos y registro.
 
-El hero actual reduce el mensaje a `Automatizacion, IA y workflows`. El bloque de integraciones vende continuidad entre apps: el trabajo debe avanzar sin depender de copiar, perseguir o recordar manualmente. La seccion de problemas debe mantenerse concreta y orientada a procesos automatizables, no a automatizacion generica.
+El hero actual compara visualmente `Flujo actual` contra `Flujo digitalizado`. El diagrama vive en `src/components/home/HeroDiagram.astro`; los cambios de texto o nodos del flujo deben partir ahi antes de tocar estilos globales. El bloque visual debe mantenerse sobrio, editable y orientado a procesos de negocio, no a branding AI-first.
 
 ## Estado actual
 
 - Header sticky con estado `is-scrolled` al bajar la pagina.
-- En desktop, el header pasa a una barra flotante con margen lateral, bordes redondeados, sombra y fondo mas solido.
+- En desktop, el header pasa a una barra flotante con margen lateral, bordes redondeados, sombra y fondo mas solido, manteniendo la navegacion centrada.
 - La navegacion por anclas calcula offset en base a la altura real del header.
+- La navegacion principal de la home usa `Inicio`, `Servicios`, `Sobre nosotros`, `Clientes` y `Contacto`; `Sobre nosotros` apunta a `#sobre-nosotros`.
 - El carrusel de integraciones mezcla iconos remotos y assets locales definidos en `src/data/automize.ts`.
-- La version movil fue compactada y validada en `390x844`; queda pendiente repetir verificacion visual en `320x844`.
+- La home esta separada por secciones en `src/components/home/` para que el hero, explicacion, servicios y clientes se puedan editar sin crecer `src/pages/index.astro`.
+- La version movil fue compactada y validada en `390x844`; se hizo captura headless simple en `320x844`, pero sigue siendo recomendable repetir QA manual/in-app en ese ancho.
 - El home ya enlaza a paginas internas comerciales, por lo que el proyecto debe tratarse como sitio comercial estatico, no solo como landing de una pagina.
 
 ## Analytics

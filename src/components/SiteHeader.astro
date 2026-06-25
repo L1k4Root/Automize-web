@@ -16,13 +16,15 @@ interface Props {
 
 const { currentPath, ctaHref } = Astro.props;
 
+const homeHref = currentPath === "/" ? "#home" : "/";
+const sectionHref = (hash: string) => (currentPath === "/" ? hash : `/${hash}`);
+
 const navItems: NavItem[] = [
-  { href: "/", key: "nav.home", label: languageCopy.es["nav.home"] },
-  { href: "/casos-de-uso", key: "nav.useCases", label: languageCopy.es["nav.useCases"] },
-  { href: "/servicios", key: "nav.services", label: languageCopy.es["nav.services"] },
-  { href: "/como-trabajamos", key: "nav.method", label: languageCopy.es["nav.method"] },
-  { href: "/faq", key: "nav.faq", label: languageCopy.es["nav.faq"] },
-  { href: currentPath === "/" ? "#contacto" : "/diagnostico#contacto", key: "nav.contact", label: languageCopy.es["nav.contact"] },
+  { href: homeHref, key: "nav.home", label: languageCopy.es["nav.home"] },
+  { href: sectionHref("#servicios"), key: "nav.services", label: languageCopy.es["nav.services"] },
+  { href: sectionHref("#sobre-nosotros"), key: "nav.about", label: languageCopy.es["nav.about"] },
+  { href: sectionHref("#clientes"), key: "nav.clients", label: languageCopy.es["nav.clients"] },
+  { href: currentPath === "/" ? "#contacto" : ctaHref, key: "nav.contact", label: languageCopy.es["nav.contact"] },
 ];
 
 const headerCtaKey = landingConfig.isLeadCaptureConfigured ? "cta.headerConfigured" : "cta.headerUnconfigured";
@@ -36,22 +38,22 @@ const headerCtaLabel = landingConfig.isLeadCaptureConfigured
     <img class="brand-mark" src="/automize-icon.png" alt="" width="48" height="48" />
     <span class="brand-copy">
       <strong>Automize</strong>
-      <small data-i18n="brand.subtitle">Consultoría en automatización</small>
+      <small data-i18n="brand.subtitle">SOLUCIONES DIGITALES</small>
     </span>
   </a>
   <nav class="nav-links" aria-label="Navegación principal" data-i18n-aria-label="nav.label">
     {
       navItems.map((item) => (
-        <a class:list={[currentPath === item.href && "is-active"]} href={item.href} data-i18n={item.key}>
+        <a class:list={[(currentPath === item.href || (currentPath === "/" && item.key === "nav.home")) && "is-active"]} href={item.href} data-i18n={item.key}>
           {item.label}
         </a>
       ))
     }
   </nav>
   <div class="header-actions">
-    <LanguageSwitch />
     <a class="header-cta" href={ctaHref} data-track-click="automize_header_cta" data-i18n={headerCtaKey}>
       {headerCtaLabel}
     </a>
+    <LanguageSwitch />
   </div>
 </header>
