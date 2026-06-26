@@ -1,0 +1,122 @@
+---
+import ContactSection from "../../components/ContactSection.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import HeroDiagram from "../../components/home/HeroDiagram.astro";
+import HomeExplainSection from "../../components/home/HomeExplainSection.astro";
+import HomeHero from "../../components/home/HomeHero.astro";
+import HomeServicesSection from "../../components/home/HomeServicesSection.astro";
+import { landingConfig } from "../../config/landing";
+import DevPreviewLayout from "../../layouts/DevPreviewLayout.astro";
+
+const previewSectionIds = [
+  "header",
+  "footer",
+  "hero",
+  "sobre-nosotros",
+  "servicios",
+  "contacto",
+  "hero-diagram",
+] as const;
+
+const previewLabels = {
+  header: "Header",
+  footer: "Footer",
+  hero: "Hero",
+  "sobre-nosotros": "Sobre nosotros",
+  servicios: "Servicios",
+  contacto: "Contacto",
+  "hero-diagram": "Diagrama del hero",
+} as const;
+
+export function getStaticPaths() {
+  if (import.meta.env.PROD) return [];
+
+  return [
+    { params: { section: "header" }, props: { label: "Header" } },
+    { params: { section: "footer" }, props: { label: "Footer" } },
+    { params: { section: "hero" }, props: { label: "Hero" } },
+    { params: { section: "sobre-nosotros" }, props: { label: "Sobre nosotros" } },
+    { params: { section: "servicios" }, props: { label: "Servicios" } },
+    { params: { section: "contacto" }, props: { label: "Contacto" } },
+    { params: { section: "hero-diagram" }, props: { label: "Diagrama del hero" } },
+  ];
+}
+
+type PreviewSection = (typeof previewSectionIds)[number];
+
+interface Props {
+  label: string;
+}
+
+const section = Astro.params.section as PreviewSection;
+const label = previewLabels[section] ?? Astro.props.label;
+const currentYear = new Date().getFullYear();
+---
+
+<DevPreviewLayout title={`Automize dev preview: ${label}`}>
+  {
+    section === "header" && (
+      <main class="dev-preview-stage dev-preview-stage-header">
+        <SiteHeader currentPath="/" ctaHref="#contacto" />
+      </main>
+    )
+  }
+
+  {
+    section === "footer" && (
+      <main class="dev-preview-stage dev-preview-stage-footer">
+        <SiteFooter currentYear={currentYear} contactHref="#contacto" />
+      </main>
+    )
+  }
+
+  {
+    section === "hero" && (
+      <main class="dev-preview-stage home-redesign">
+        <HomeHero />
+      </main>
+    )
+  }
+
+  {
+    section === "sobre-nosotros" && (
+      <main class="dev-preview-stage dev-preview-stage-section home-redesign">
+        <HomeExplainSection />
+      </main>
+    )
+  }
+
+  {
+    section === "servicios" && (
+      <main class="dev-preview-stage dev-preview-stage-section home-redesign">
+        <HomeServicesSection />
+      </main>
+    )
+  }
+
+  {
+    section === "contacto" && (
+      <main class="dev-preview-stage dev-preview-stage-section home-redesign">
+        <ContactSection
+          config={landingConfig}
+          source="automize-dev-preview"
+          offer="solucion-digital"
+          compactOnMobile={true}
+          variant="home"
+          compactFields={true}
+        />
+      </main>
+    )
+  }
+
+  {
+    section === "hero-diagram" && (
+      <main class="dev-preview-stage dev-preview-stage-section home-redesign">
+        <section class="hero automize-hero dev-hero-diagram-only" aria-label="Preview del diagrama del hero">
+          <HeroDiagram />
+        </section>
+      </main>
+    )
+  }
+</DevPreviewLayout>

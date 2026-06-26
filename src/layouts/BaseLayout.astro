@@ -24,6 +24,43 @@ const currentYear = new Date().getFullYear();
 const languagePayload = JSON.stringify(languageCopy).replace(/</g, "\\u003c");
 const fallbackTitle = languageCopy.es[titleKey] ?? languageCopy.es["meta.title"];
 const fallbackDescription = languageCopy.es[descriptionKey] ?? languageCopy.es["meta.description"];
+const siteUrl = Astro.site ?? new URL("https://automize.cl");
+const canonicalPath = currentPath === "/" || currentPath.endsWith("/") ? currentPath : `${currentPath}/`;
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const ogImageUrl = new URL("/automize-icon.png", siteUrl).toString();
+const seoKeywords = [
+  "paginas web para negocios",
+  "paginas web para pymes",
+  "diseno web en Chile",
+  "tienda online para pymes",
+  "email marketing para pymes",
+  "campanas digitales para negocios",
+  "automatizacion de procesos para pymes",
+  "automatizar tareas repetitivas",
+  "automatizar Excel",
+  "integracion de sistemas",
+  "software a medida para pymes",
+  "sistemas internos para empresas",
+  "dashboards para empresas",
+  "soluciones digitales a medida",
+].join(", ");
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Automize",
+  url: siteUrl.toString(),
+  logo: ogImageUrl,
+  email: "contacto@automize.cl",
+  areaServed: "CL",
+  description: fallbackDescription,
+  serviceType: [
+    "Diseño web para negocios y pymes",
+    "Email marketing y campañas digitales",
+    "Automatización de procesos",
+    "Integración de sistemas",
+    "Software a medida y dashboards para empresas",
+  ],
+}).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -32,17 +69,26 @@ const fallbackDescription = languageCopy.es[descriptionKey] ?? languageCopy.es["
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={fallbackDescription} data-i18n-content={descriptionKey} />
+    <meta name="keywords" content={seoKeywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/png" href="/automize-icon.png" />
     <link rel="apple-touch-icon" href="/automize-icon.png" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Automize" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fallbackTitle} data-i18n-content={titleKey} />
     <meta property="og:description" content={fallbackDescription} data-i18n-content={descriptionKey} />
-    <meta property="og:image" content="/automize-icon.png" />
+    <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fallbackTitle} data-i18n-content={titleKey} />
     <meta name="twitter:description" content={fallbackDescription} data-i18n-content={descriptionKey} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="theme-color" content="#07110f" />
     <title>{fallbackTitle}</title>
+    <script type="application/ld+json" set:html={structuredData}></script>
   </head>
   <body class="automize-page">
     <SiteHeader currentPath={currentPath} ctaHref={ctaHref} />

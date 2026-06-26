@@ -3,32 +3,97 @@ import Icon from "../Icon.astro";
 
 const services = [
   {
+    number: "01",
     icon: "globe",
-    badge: "Para captar clientes",
-    title: "Implementación de sitio web",
-    detail: "Sitio claro, responsive y conectado a formulario, WhatsApp o correo.",
-    bullets: ["Sitios corporativos", "Landing pages", "Formularios", "Integración con WhatsApp o email"],
+    badge: "Presencia y comunicación",
+    title: "Páginas web para negocios",
+    summary:
+      "Obtén tu sitio web para presentar tu oferta, recibir consultas y conectar formularios, WhatsApp o correo desde un solo flujo.",
+    workflow: [
+      { label: "Página web", icon: "globe" },
+      { label: "Formulario", icon: "file-text" },
+      { label: "Mail", icon: "mail" },
+      { label: "Seguimiento", icon: "trending-up" },
+    ],
+    detail:
+      "Diseñamos tu presencia digital para que una persona entienda tu oferta, deje sus datos y tu equipo pueda dar seguimiento.",
+    idealItems: [
+      "Negocios que necesitan verse profesionales",
+      "Pymes que reciben consultas por WhatsApp o correo",
+      "Equipos que quieren ordenar la captación inicial",
+    ],
+    deliverables: ["Estructura comercial de la página", "Formulario, WhatsApp o correo conectado", "Base SEO y medición inicial"],
+    maintenance: "Ajustes, nuevas secciones y mejoras según campañas o consultas reales",
   },
   {
+    number: "02",
     icon: "mail",
-    badge: "Para activar contactos",
+    badge: "Activación comercial",
     title: "Email marketing y campañas digitales",
-    detail: "Correos, formularios y flujos simples para comunicar o activar contactos.",
-    bullets: ["Mailing", "Segmentación básica", "Formularios", "Medición"],
+    summary:
+      "Obtén campañas simples para activar tu base de contactos, comunicar ofertas y medir qué mensajes generan respuesta.",
+    workflow: [
+      { label: "Base de contactos", icon: "route" },
+      { label: "Campaña", icon: "mail" },
+      { label: "Respuesta", icon: "repeat" },
+      { label: "Medición", icon: "bar-chart" },
+    ],
+    detail:
+      "Convertimos contactos dispersos en campañas simples de ejecutar, revisar y mejorar sin depender de improvisación.",
+    idealItems: [
+      "Negocios con contactos sin seguimiento",
+      "Pymes que necesitan comunicar promociones o novedades",
+      "Equipos comerciales que quieren medir respuesta",
+    ],
+    deliverables: ["Segmentación inicial", "Piezas o correos de campaña", "Formulario o flujo de respuesta", "Medición básica"],
+    maintenance: "Nuevas campañas, ajustes de mensajes y revisión de métricas",
   },
   {
+    number: "03",
     icon: "repeat",
-    badge: "Para reducir trabajo manual",
-    title: "Automatizaciones y flujos internos",
-    detail: "Alertas, reportes y tareas recurrentes para ordenar el trabajo interno.",
-    bullets: ["Alertas", "Reportes", "Responsables", "Tareas recurrentes"],
+    badge: "Menos trabajo manual",
+    title: "Automatización de procesos",
+    summary:
+      "Obtén workflows para reducir tareas repetidas, asignar responsables y dejar estados visibles sin depender de memoria o planillas sueltas.",
+    workflow: [
+      { label: "Solicitud", icon: "file-spreadsheet" },
+      { label: "Regla", icon: "route" },
+      { label: "Responsable", icon: "check-circle" },
+      { label: "Alerta", icon: "bell" },
+    ],
+    detail:
+      "Diseñamos el flujo antes de automatizar: entradas, reglas, responsables, alertas y estados que el equipo pueda controlar.",
+    idealItems: [
+      "Equipos que repiten tareas manuales",
+      "Operaciones con responsables poco claros",
+      "Pymes que necesitan alertas y seguimiento",
+    ],
+    deliverables: ["Mapa del flujo", "Reglas de automatización", "Responsables y estados", "Alertas o tareas conectadas"],
+    maintenance: "Ajuste de reglas, nuevos pasos y optimización del flujo",
+    featured: true,
   },
   {
+    number: "04",
     icon: "code",
-    badge: "Para casos específicos",
-    title: "Soluciones digitales a medida",
-    detail: "Una solución específica cuando el problema no calza con una plantilla.",
-    bullets: ["Levantamiento del proceso", "Prototipo", "Implementación", "Mejora continua"],
+    badge: "Integración a medida",
+    title: "Software e integraciones",
+    summary:
+      "Obtén una solución a medida para conectar herramientas, validar datos y crear reportes cuando una plantilla no alcanza.",
+    workflow: [
+      { label: "Sistema A", icon: "settings" },
+      { label: "Validación", icon: "square-check" },
+      { label: "Sistema B", icon: "code" },
+      { label: "Reporte", icon: "bar-chart" },
+    ],
+    detail:
+      "Construimos piezas a medida cuando el problema necesita conectar sistemas, validar datos o crear una vista operacional propia.",
+    idealItems: [
+      "Empresas con sistemas que no conversan",
+      "Equipos que copian datos entre herramientas",
+      "Operaciones que necesitan dashboards o sistemas internos",
+    ],
+    deliverables: ["Levantamiento del caso", "Integración o módulo a medida", "Validaciones básicas", "Reporte o vista operativa"],
+    maintenance: "Soporte evolutivo, nuevas integraciones y mejoras por uso real",
   },
 ] as const;
 ---
@@ -36,37 +101,67 @@ const services = [
 <section id="servicios" class="section home-services-section">
   <div class="section-intro section-intro-wide">
     <p class="eyebrow" data-i18n="home.services.eyebrow">SERVICIOS</p>
-    <h2 data-i18n="home.services.title">Soluciones digitales para procesos reales</h2>
+    <h2 data-i18n="home.services.title">Servicios digitales para ordenar, captar y automatizar</h2>
     <p data-i18n="home.services.body">
-      No todos los negocios necesitan lo mismo. Podemos partir desde una solución concreta o diseñar un flujo a medida según el problema que quieras resolver.
+      Diseñamos soluciones digitales según el problema real: captar consultas, activar contactos, reducir trabajo manual o conectar sistemas. Primero ordenamos el flujo; después construimos.
     </p>
   </div>
 
   <div class="service-grid">
     {
       services.map((service) => (
-        <details class="home-service-card">
+        <details class:list={["home-service-card", service.featured && "home-service-card-featured"]}>
           <summary>
-            <div class="service-card-topline">
-              <span class="service-icon-frame">
-                <Icon name={service.icon} />
+            <div class="service-card-head">
+              <span class="service-module-id">
+                <span class="service-number">{service.number}</span>
+                <span class="service-module-icon" aria-hidden="true">
+                  <Icon name={service.icon} />
+                </span>
               </span>
               <span class="service-badge">{service.badge}</span>
             </div>
-            <div class="service-summary-copy">
+            <div class="service-title-row">
               <h3>{service.title}</h3>
+              <span class="service-toggle" aria-hidden="true"></span>
             </div>
-            <span class="service-toggle" aria-hidden="true">
-              <span></span>
-              <span></span>
-            </span>
+            <p class="service-summary">{service.summary}</p>
           </summary>
           <div class="service-card-body">
-            <p class="service-detail">{service.detail}</p>
-            <span>Ideal para</span>
-            <ul>
-              {service.bullets.map((bullet) => <li>{bullet}</li>)}
-            </ul>
+            <div class="service-card-body-inner">
+              <p class="service-detail">{service.detail}</p>
+              <ol class="service-workflow" aria-label={`Flujo resumido para ${service.title}`}>
+                {service.workflow.map((step, index) => (
+                  <li class:list={["service-workflow-step", index === 1 && "is-active"]}>
+                    <span class="service-workflow-node" aria-hidden="true">
+                      <Icon name={step.icon} />
+                    </span>
+                    <span class="service-workflow-label">{step.label}</span>
+                  </li>
+                ))}
+              </ol>
+              <div class="service-meta-grid">
+                <section class="service-info-panel service-info-panel-ideal">
+                  <span>Ideal para</span>
+                  <ul class="service-info-list">
+                    {service.idealItems.map((item) => <li>{item}</li>)}
+                  </ul>
+                </section>
+                <section class="service-info-panel service-info-panel-deliverables">
+                  <span>Qué te entregamos</span>
+                  <ul class="service-info-list">
+                    {service.deliverables.map((item) => <li>{item}</li>)}
+                  </ul>
+                </section>
+                <section class="service-info-panel service-info-panel-maintenance">
+                  <span>Mantención y mejora</span>
+                  <p>{service.maintenance}</p>
+                </section>
+              </div>
+              <a class="service-card-cta" href="/#contacto" data-track-click="automize_service_card_cta">
+                Cotizar este módulo
+              </a>
+            </div>
           </div>
         </details>
       ))
@@ -75,7 +170,7 @@ const services = [
 
   <div class="section-cta section-cta-compact">
     <div class="section-cta-actions">
-      <a class="button button-primary service-cta-button" href="#contacto" data-track-click="automize_home_solution_cta">
+      <a class="button button-primary service-cta-button" href="/#contacto" data-track-click="automize_home_solution_cta">
         <span>Conversemos tu solución</span>
         <Icon name="arrow-right" />
       </a>

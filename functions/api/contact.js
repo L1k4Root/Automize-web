@@ -1,6 +1,7 @@
 const MAX_NAME_LENGTH = 120;
 const MAX_EMAIL_LENGTH = 160;
 const MAX_COMPANY_LENGTH = 160;
+const MAX_SERVICE_TYPE_LENGTH = 120;
 const MAX_INDUSTRY_LENGTH = 120;
 const MAX_SYMPTOM_LENGTH = 3000;
 const MAX_TOOLS_LENGTH = 2000;
@@ -15,6 +16,7 @@ const FIELD_LIMITS = {
   name: MAX_NAME_LENGTH,
   email: MAX_EMAIL_LENGTH,
   company: MAX_COMPANY_LENGTH,
+  serviceType: MAX_SERVICE_TYPE_LENGTH,
   industry: MAX_INDUSTRY_LENGTH,
   symptom: MAX_SYMPTOM_LENGTH,
   tools: MAX_TOOLS_LENGTH,
@@ -51,6 +53,7 @@ export const readLeadPayload = (formData) => ({
   name: trimField(formData.get("name")),
   email: trimField(formData.get("email")),
   company: trimField(formData.get("company")),
+  serviceType: trimField(formData.get("service_type")),
   industry: trimField(formData.get("industry")),
   symptom: trimField(formData.get("symptom")),
   tools: trimField(formData.get("tools")),
@@ -74,6 +77,10 @@ export const validateLeadPayload = (payload) => {
 
   if (payload.company.length > FIELD_LIMITS.company) {
     return "El nombre de la empresa es demasiado largo.";
+  }
+
+  if ((payload.serviceType || "").length > FIELD_LIMITS.serviceType) {
+    return "El tipo de servicio es demasiado largo.";
   }
 
   if (payload.industry.length > FIELD_LIMITS.industry) {
@@ -106,12 +113,13 @@ const renderOptionalHtmlField = (label, value) =>
 
 const renderOptionalTextField = (label, value) => (value ? ["", `${label}:`, value] : []);
 
-export const renderHtmlBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
+export const renderHtmlBody = ({ name, email, company, serviceType, industry, symptom, tools, impact, source, offer }) =>
   [
     "<h2>Nuevo lead desde Automize</h2>",
     `<p><strong>Nombre:</strong> ${escapeHtml(name)}</p>`,
     `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
     `<p><strong>Empresa:</strong> ${escapeHtml(company)}</p>`,
+    ...renderOptionalHtmlField("Servicio a cotizar", serviceType),
     ...renderOptionalHtmlField("Mensaje", symptom),
     ...renderOptionalHtmlField("Rubro", industry),
     ...renderOptionalHtmlField("Herramientas actuales", tools),
@@ -120,7 +128,7 @@ export const renderHtmlBody = ({ name, email, company, industry, symptom, tools,
     `<p><strong>Offer:</strong> ${escapeHtml(offer)}</p>`,
   ].join("");
 
-export const renderTextBody = ({ name, email, company, industry, symptom, tools, impact, source, offer }) =>
+export const renderTextBody = ({ name, email, company, serviceType, industry, symptom, tools, impact, source, offer }) =>
   [
     "Nuevo lead desde Automize",
     "",
@@ -129,6 +137,7 @@ export const renderTextBody = ({ name, email, company, industry, symptom, tools,
     `Empresa: ${company}`,
     `Source: ${source}`,
     `Offer: ${offer}`,
+    ...renderOptionalTextField("Servicio a cotizar", serviceType),
     ...renderOptionalTextField("Mensaje", symptom),
     ...renderOptionalTextField("Rubro", industry),
     ...renderOptionalTextField("Herramientas actuales", tools),

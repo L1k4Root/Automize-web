@@ -66,6 +66,18 @@ const formNoteKey = config.isLeadCaptureConfigured ? "form.noteConfigured" : "fo
   </label>
 
   <label>
+    <span data-i18n="form.serviceTypeLabel">Tipo de servicio a cotizar</span>
+    <select name="service_type" data-i18n-aria-label="form.serviceTypeLabel" aria-label="Tipo de servicio a cotizar">
+      <option value="" data-i18n="form.serviceTypePlaceholder">Selecciona una opción</option>
+      <option value="pagina-web" data-i18n="form.serviceTypeWebsite">Página web</option>
+      <option value="email-marketing" data-i18n="form.serviceTypeEmail">Email marketing</option>
+      <option value="automatizacion-procesos" data-i18n="form.serviceTypeAutomation">Automatización de procesos</option>
+      <option value="software-medida" data-i18n="form.serviceTypeSoftware">Software a medida o integración</option>
+      <option value="otro" data-i18n="form.serviceTypeOther">Otro</option>
+    </select>
+  </label>
+
+  <label>
     <span data-i18n="form.symptomLabel">Cuéntanos brevemente qué necesitas</span>
     <textarea
       name="symptom"

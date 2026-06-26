@@ -41,6 +41,7 @@ describe("lead payload validation", () => {
   it("accepts the publication payload without optional fields", () => {
     assert.equal(validateLeadPayload({
       ...baseFields,
+      serviceType: "",
       industry: "",
       symptom: "",
       tools: "",
@@ -54,6 +55,7 @@ describe("lead payload validation", () => {
     assert.equal(validateLeadPayload({
       ...baseFields,
       company: "",
+      serviceType: "",
       industry: "",
       symptom: "",
       tools: "",
@@ -67,6 +69,7 @@ describe("lead payload validation", () => {
     assert.equal(validateLeadPayload({
       ...baseFields,
       email: "ana",
+      serviceType: "",
       industry: "",
       symptom: "",
       tools: "",
@@ -81,6 +84,7 @@ describe("lead email rendering", () => {
   it("omits blank optional fields from email bodies", () => {
     const payload = {
       ...baseFields,
+      serviceType: "",
       industry: "",
       symptom: "",
       tools: "",
@@ -90,6 +94,7 @@ describe("lead email rendering", () => {
     };
 
     assert.equal(renderHtmlBody(payload).includes("Rubro"), false);
+    assert.equal(renderHtmlBody(payload).includes("Servicio a cotizar"), false);
     assert.equal(renderHtmlBody(payload).includes("Mensaje"), false);
     assert.equal(renderTextBody(payload).includes("Herramientas actuales"), false);
     assert.equal(renderTextBody(payload).includes("undefined"), false);
@@ -118,6 +123,31 @@ describe("contact function", () => {
     assert.equal(outboundPayload.reply_to, "ana@empresa.cl");
     assert.equal(outboundPayload.html.includes("Rubro"), false);
     assert.equal(outboundPayload.html.includes("Mensaje"), false);
+  });
+
+  it("includes the selected service type when present", async () => {
+    let outboundPayload;
+    globalThis.fetch = async (_url, init) => {
+      outboundPayload = JSON.parse(init.body);
+      return new Response(JSON.stringify({ id: "email_456" }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      });
+    };
+
+    const response = await postLead({
+      ...baseFields,
+      service_type: "automatizacion-procesos",
+    }, {
+      RESEND_API_KEY: "test-key",
+      CONTACT_TO_EMAIL: "contacto@automize.cl",
+      CONTACT_FROM_EMAIL: "Automize <leads@automize.cl>",
+    });
+
+    assert.equal(response.status, 303);
+    assert.equal(outboundPayload.html.includes("Servicio a cotizar"), true);
+    assert.equal(outboundPayload.html.includes("automatizacion-procesos"), true);
+    assert.equal(outboundPayload.text.includes("Servicio a cotizar"), true);
   });
 
   it("keeps the fail-closed path when email delivery is not configured", async () => {

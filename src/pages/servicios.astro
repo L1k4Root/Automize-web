@@ -6,10 +6,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const services = [
   {
     badge: "Oferta 01",
-    title: "Automatización de proceso operativo",
+    title: "Automatización de procesos para pymes",
     detail:
-      "Diseñamos un flujo conectado a correo, CRM, planillas o sistemas internos para ordenar una tarea concreta y repetitiva.",
-    fit: "Para tareas donde hoy se revisa, copia, clasifica o prepara información de forma manual.",
+      "Diseñamos un flujo conectado a correo, CRM, Excel, planillas o sistemas internos para ordenar una tarea concreta y repetitiva.",
+    fit: "Para tareas donde hoy se revisa, copia, clasifica o prepara información de forma manual y conviene automatizar sin perder control.",
     includes: [
       "Definición del caso de uso",
       "Conexión con herramientas clave",
@@ -20,21 +20,21 @@ const services = [
   },
   {
     badge: "Oferta 02",
-    title: "Base operativa de conocimiento",
+    title: "Sistemas internos y dashboards para empresas",
     detail:
-      "Ordenamos documentos, manuales, procesos, respuestas frecuentes y datos internos para que el equipo encuentre contexto útil más rápido.",
-    fit: "Para soporte, ventas, operaciones o administración cuando el equipo pierde tiempo buscando contexto.",
+      "Ordenamos documentos, datos, reportes y procesos internos para que el equipo encuentre información útil y vea el estado de la operación.",
+    fit: "Para soporte, ventas, operaciones o administración cuando el equipo pierde tiempo buscando contexto o armando reportes a mano.",
     includes: [
       "Selección de fuentes confiables",
-      "Consulta con contexto interno",
-      "Respuestas más consistentes",
-      "Límites sobre qué información usar",
+      "Tablero o vista operativa",
+      "Criterios de actualización",
+      "Límites sobre qué información mostrar",
     ],
-    result: "Menos búsqueda manual y menos respuestas improvisadas",
+    result: "Menos búsqueda manual y más visibilidad del estado",
   },
   {
     badge: "Oferta 03",
-    title: "Auditoría de automatización y control",
+    title: "Integración de sistemas y soluciones digitales a medida",
     detail:
       "Revisamos flujos, integraciones y soluciones digitales existentes para detectar fallas de trazabilidad, costos, seguridad y puntos de ruptura.",
     fit: "Para empresas que ya automatizaron parte de su operación y necesitan entender mejor sus riesgos antes de escalar.",
@@ -50,8 +50,8 @@ const services = [
 ---
 
 <BaseLayout
-  titleKey="meta.diagnostic.title"
-  descriptionKey="meta.diagnostic.description"
+  titleKey="meta.services.title"
+  descriptionKey="meta.services.description"
   currentPath="/servicios"
   ctaHref="/diagnostico#contacto"
   footerContactHref="/diagnostico#contacto"
@@ -60,10 +60,10 @@ const services = [
     <section class="section page-intro-section">
       <div class="section-intro">
         <p class="eyebrow">Servicios</p>
-        <h1 class="page-title">Servicios concretos para automatizar mejor sin perder control</h1>
+        <h1 class="page-title">Servicios digitales para pymes: web, campañas, automatización y sistemas internos</h1>
         <p>
-          Ofertas pensadas para resolver una tarea repetitiva, ordenar una fuente de información o revisar una solución digital
-          que hoy opera sin suficiente trazabilidad.
+          Ofertas pensadas para crear páginas web para negocios, activar campañas digitales, automatizar tareas repetitivas,
+          ordenar planillas, conectar sistemas y construir soluciones digitales a medida.
         </p>
       </div>
     </section>
@@ -89,7 +89,7 @@ const services = [
         }
       </div>
       <div class="section-cta section-cta-compact">
-        <p>Partimos con una tarea concreta, una integración clara y un resultado verificable.</p>
+        <p>Partimos con una tarea concreta, una integración clara y un resultado verificable para tu negocio.</p>
         <div class="section-cta-actions">
           <a class="button button-primary" href="/diagnostico#contacto" data-track-click="automize_services_diagnostic_cta">
             Agendar reunión

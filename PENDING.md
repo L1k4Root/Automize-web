@@ -18,3 +18,4 @@
 - Header movil compactado y validado en `390x844` segun `MOBILE_AUDIT.md`.
 - Evidencia parcial: captura headless simple en `320x844`; pendiente repetir en navegador real/in-app.
 - Tests de contacto disponibles con `pnpm test`.
+- Previews internos de componentes disponibles solo en dev bajo `/dev-preview/{header,footer,hero,sobre-nosotros,servicios,contacto,hero-diagram}`; `getStaticPaths()` devuelve vacio en produccion para no generar esas rutas en `dist`.

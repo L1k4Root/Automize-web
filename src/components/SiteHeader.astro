@@ -21,8 +21,8 @@ const sectionHref = (hash: string) => (currentPath === "/" ? hash : `/${hash}`);
 
 const navItems: NavItem[] = [
   { href: homeHref, key: "nav.home", label: languageCopy.es["nav.home"] },
-  { href: sectionHref("#servicios"), key: "nav.services", label: languageCopy.es["nav.services"] },
   { href: sectionHref("#sobre-nosotros"), key: "nav.about", label: languageCopy.es["nav.about"] },
+  { href: sectionHref("#servicios"), key: "nav.services", label: languageCopy.es["nav.services"] },
   { href: sectionHref("#clientes"), key: "nav.clients", label: languageCopy.es["nav.clients"] },
   { href: currentPath === "/" ? "#contacto" : ctaHref, key: "nav.contact", label: languageCopy.es["nav.contact"] },
 ];

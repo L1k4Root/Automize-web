@@ -4,19 +4,16 @@ const clients = [
     name: "Full Commerce",
     label: "Operación comercial",
     logo: "/clients/fullcommerce-mark.svg",
-    logoClass: "client-logo-fullcommerce",
   },
   {
     name: "Bright Alliance",
     label: "Servicios legales",
     logo: "/clients/bright-alliance-white.svg",
-    logoClass: "client-logo-bright",
   },
   {
     name: "Arquitectura Terrazo",
     label: "Arquitectura y proyectos",
     logo: "/clients/terrazo-icon.avif",
-    logoClass: "client-logo-terrazo",
   },
 ] as const;
 ---
@@ -37,7 +34,7 @@ const clients = [
           {clients.map((client) => (
             <article class="client-card">
               <span class="client-logo-frame">
-                <img class={client.logoClass} src={client.logo} alt="" loading="lazy" />
+                <img src={client.logo} alt="" loading="lazy" />
               </span>
               <span class="client-copy">
                 <strong>{client.name}</strong>
